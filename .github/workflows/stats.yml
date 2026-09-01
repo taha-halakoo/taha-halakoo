@@ -2,11 +2,13 @@ name: Refresh stats panel
 
 # Regenerates assets/stats.svg from live GitHub data.
 #
-# NOTE: the "shipped privately" figure comes from restrictedContributionsCount,
-# which the GraphQL API only returns to a token authenticated as the user. The
-# default GITHUB_TOKEN is a repo-scoped installation token and will report 0.
-# Add a classic PAT with `repo` scope as the STATS_TOKEN secret to keep that
-# number accurate; without it the panel still builds, just undercounting.
+# Requires a STATS_TOKEN secret: a classic PAT with `repo` scope.
+#
+# The default GITHUB_TOKEN is a repo-scoped installation token that cannot
+# enumerate the owner's private repositories, so repository count, star count
+# and language distribution would all be computed from public repos only
+# (verified: 25 repos reported as 5, 20 stars as 5). This job fails fast rather
+# than publishing those numbers.
 
 on:
   schedule:
@@ -29,9 +31,19 @@ jobs:
         with:
           python-version: '3.12'
 
+      - name: Require STATS_TOKEN
+        run: |
+          if [ -z "${{ secrets.STATS_TOKEN }}" ]; then
+            echo "::error::STATS_TOKEN is not set. The default GITHUB_TOKEN cannot enumerate"
+            echo "::error::private repositories, so repo count, stars and language mix would"
+            echo "::error::be computed from public repos only (25 repos -> 5, 20 stars -> 5)."
+            echo "::error::Create a classic PAT with 'repo' scope and add it as the STATS_TOKEN secret."
+            exit 1
+          fi
+
       - name: Generate stats panel
         env:
-          GITHUB_TOKEN: ${{ secrets.STATS_TOKEN || secrets.GITHUB_TOKEN }}
+          GITHUB_TOKEN: ${{ secrets.STATS_TOKEN }}
           GH_USER: ${{ github.repository_owner }}
         run: python scripts/gen_stats.py
 
