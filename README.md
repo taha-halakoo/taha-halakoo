@@ -77,6 +77,10 @@ contractor's access has to be revoked before the audit.
 is more useful than any blog post about secure deletion. Most of the hard problems have
 been thought about carefully by someone else first.
 
+<div align="center">
+<img src="assets/method.svg" alt="How I work a failure — reproduce, isolate, falsify, fix, verify" width="100%">
+</div>
+
 ---
 
 ## What the biomedical degree is actually for
@@ -169,20 +173,42 @@ me in the corridor.
 
 ## Currently
 
-Getting Vault-OS onto Linux and macOS. Reading more about formal verification than I can
-yet apply. Learning where the limits of local inference actually are, as opposed to where
-the benchmarks say they are.
+Getting Vault-OS onto Linux and macOS, and the Ecosystem clients onto everything else.
+
+<div align="center">
+<img src="assets/focus.svg" alt="Shipping status across Windows, Linux, macOS, Android and iOS" width="100%">
+</div>
 
 Open to conversations about sovereign AI infrastructure, secure systems, and anything at
 the seam between hardware and software.
+
+---
+
+## Signal
 
 <div align="center">
 
 <img src="assets/stats.svg" alt="GitHub activity — commits, private share, repositories, stars and language distribution" width="100%">
 
-<sub>Generated daily by <a href="scripts/gen_stats.py">a script in this repo</a> rather than a third-party widget —
-the usual ones rate-limit, run out of quota, and eventually stop rendering.
-Fitting, for someone who builds things that don't phone home.</sub>
+<br>
+
+<img src="assets/contrib.svg" alt="Contribution heatmap over the last twelve months" width="100%">
+
+<br>
+
+<img src="assets/velocity.svg" alt="Contributions per month over the last year" width="100%">
+
+</div>
+
+The shape of that last chart is the honest version of my CV. Nothing much until early 2026,
+then Vault-OS. I would rather show you the ramp, including the flat part at the start, than
+claim I have been doing this for a decade.
+
+<div align="center">
+
+<sub>All three panels are generated daily by <a href="scripts/gen_stats.py">a script in this repo</a> rather than a
+third-party widget — the usual ones rate-limit, run out of quota, and eventually stop
+rendering. Fitting, for someone who builds things that don't phone home.</sub>
 
 </div>
 
