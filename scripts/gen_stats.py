@@ -1,28 +1,29 @@
 #!/usr/bin/env python3
 """Generate the README data panels from live GitHub data.
 
-Writes assets/stats.svg, assets/contrib.svg and assets/velocity.svg.
+Writes a wide and a narrow variant of each of stats, contrib, velocity and
+rhythm. The narrow ones exist because an SVG rendered as <img> scales as a
+picture and its text does not reflow: at 1000px wide this type landed at 2.5px
+in a phone's 293px README column.
 
-Self-hosted replacement for the usual third-party README widgets, which
-rate-limit, run out of quota, and eventually 402. Run by
-.github/workflows/stats.yml, which requires a STATS_TOKEN secret: the default
-GITHUB_TOKEN cannot enumerate private repositories and would silently report
+Requires STATS_TOKEN (a classic PAT with `repo` scope). The default
+GITHUB_TOKEN cannot enumerate private repositories and would report
 public-only figures.
 """
 import collections
 import datetime
 import json
 import os
+import sys
 import urllib.request
+
+sys.path.insert(0, os.path.dirname(os.path.abspath(__file__)))
+from diagrams import (S, head, tail, sect, fade, card, t,  # noqa: E402
+                      GRID, DIM, TEXT, AMBER, GREEN, MUTE, MONO)
 
 USER = os.environ.get("GH_USER", "taha-halakoo")
 TOKEN = os.environ["GITHUB_TOKEN"]
-
-BG, GRID, DIM, TEXT, AMBER, GREEN = (
-    "#07070A", "#FFC93C", "#5F6672", "#E4E6EB", "#FFC93C", "#3FB950")
 HEAT = ["#131318", "#4A3A0E", "#8A6A0A", "#C99A12", "#FFC93C"]
-MONO = "ui-monospace,Menlo,monospace"
-NL = chr(10)
 
 QUERY = """
 {
@@ -54,9 +55,7 @@ def fetch():
     req = urllib.request.Request(
         "https://api.github.com/graphql",
         data=json.dumps({"query": QUERY}).encode(),
-        headers={"Authorization": "bearer " + TOKEN,
-                 "Content-Type": "application/json"},
-    )
+        headers={"Authorization": "bearer " + TOKEN, "Content-Type": "application/json"})
     with urllib.request.urlopen(req) as r:
         payload = json.load(r)
     if "errors" in payload:
@@ -64,35 +63,28 @@ def fetch():
     return payload["data"]["user"]
 
 
-def esc(s):
-    return s.replace("&", "&amp;").replace("<", "&lt;").replace(">", "&gt;")
+def tile(s, x, y, w, h, val, label, colour, delay):
+    return (f'<g opacity="0">{fade(delay, 0.5)}{card(s, x, y, w, h, GRID, 0.16)}'
+            f'{t(x+14, y+h-28, val, s.num, colour, weight=700)}'
+            f'{t(x+14, y+h-9, label, s.det, DIM, ls=1.3)}</g>')
 
 
-def frame(w, h, label, uid):
-    """Card background, grid and section label shared by every panel."""
-    return [
-        f'<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 {w} {h}" width="{w}" '
-        f'height="{h}" role="img" aria-label="{esc(label)}">',
-        f'<defs><pattern id="g{uid}" width="26" height="26" patternUnits="userSpaceOnUse">'
-        f'<path d="M26 0H0V26" fill="none" stroke="{GRID}" stroke-opacity="0.045"/></pattern>'
-        f'<clipPath id="c{uid}"><rect width="{w}" height="{h}" rx="14"/></clipPath></defs>',
-        f'<g clip-path="url(#c{uid})"><rect width="{w}" height="{h}" fill="{BG}"/>',
-        f'<rect width="{w}" height="{h}" fill="url(#g{uid})"/>',
-    ]
+def langbar(s, p, top, col, tot, y):
+    x = float(s.pad)
+    for name, size in top:
+        w = size / tot * s.inner
+        p.append(f'<rect x="{x:.1f}" y="{y}" width="0" height="14" fill="{col[name]}">'
+                 f'<animate attributeName="width" from="0" to="{w:.1f}" dur="0.9s" '
+                 f'begin="0.5s" fill="freeze"/></rect>')
+        x += w
 
 
-def close(w, h):
-    return [f'<rect x="0.5" y="0.5" width="{w-1}" height="{h-1}" rx="14" fill="none" '
-            f'stroke="{GRID}" stroke-opacity="0.14"/></g></svg>']
+# ------------------------------------------------------------------------ stats
 
-
-# --------------------------------------------------------------------------- stats
-
-def build_stats(d):
+def build_stats(s, d):
     c = d["contributionsCollection"]
-    pub, priv = c["totalCommitContributions"], c["restrictedContributionsCount"]
-    total = pub + priv
-    pct = round(priv * 100 / total) if total else 0
+    total = c["totalCommitContributions"] + c["restrictedContributionsCount"]
+    pct = round(c["restrictedContributionsCount"] * 100 / total) if total else 0
     repos = d["repositories"]["totalCount"]
     stars = sum(n["stargazerCount"] for n in d["repositories"]["nodes"])
 
@@ -102,182 +94,173 @@ def build_stats(d):
             lang[e["node"]["name"]] += e["size"]
             col[e["node"]["name"]] = e["node"]["color"] or "#8B949E"
     tot = sum(lang.values()) or 1
-    top = lang.most_common(6)
+    top = lang.most_common(4 if s.n else 6)
 
-    p = frame(1000, 250, "GitHub activity for %s" % USER, "s")
-    p.append(f'<text x="34" y="34" font-family="{MONO}" font-size="12" fill="{AMBER}" '
-             f'letter-spacing="2.6">SIGNAL &#183; LAST 12 MONTHS</text>')
+    vals = [(f"{total:,}", "COMMITS 12MO" if s.n else "COMMITS / 12 MO", AMBER),
+            (f"{pct}%", "PRIVATE" if s.n else "SHIPPED PRIVATELY", GREEN),
+            (f"{repos}", "REPOS" if s.n else "REPOSITORIES", TEXT),
+            (f"{stars}", "STARS" if s.n else "STARS EARNED", TEXT)]
 
-    for i, (val, label, colr) in enumerate([
-            (f"{total:,}", "COMMITS / 12 MO", AMBER),
-            (f"{pct}%", "SHIPPED PRIVATELY", GREEN),
-            (f"{repos}", "REPOSITORIES", TEXT),
-            (f"{stars}", "STARS EARNED", TEXT)]):
-        x = 34 + i * 238
-        p.append(f'<g opacity="0"><animate attributeName="opacity" values="0;1" '
-                 f'begin="{i*0.14:.2f}s" dur="0.5s" fill="freeze"/>'
-                 f'<rect x="{x}" y="54" width="222" height="86" rx="8" fill="#0E1116" '
-                 f'stroke="{GRID}" stroke-opacity="0.16"/>'
-                 f'<text x="{x+18}" y="106" font-family="{MONO}" font-size="34" '
-                 f'font-weight="700" fill="{colr}">{val}</text>'
-                 f'<text x="{x+18}" y="127" font-family="{MONO}" font-size="10.5" '
-                 f'fill="{DIM}" letter-spacing="1.7">{label}</text></g>')
+    if s.n:
+        tw, th = (s.inner - 10) / 2, 72
+        gy = 42 + 2 * (th + 10) + 30
+        h = gy + 36 + ((len(top) + 1) // 2) * 22 + 8
+        p = head(s, h, "GitHub activity for %s" % USER, "st")
+        p.append(sect(s, 26, "SIGNAL · 12 MONTHS"))
+        for i, (v, l, c2) in enumerate(vals):
+            p.append(tile(s, s.pad + (i % 2) * (tw + 10), 42 + (i // 2) * (th + 10),
+                          tw, th, v, l, c2, 0.1 * i))
+        p.append(t(s.pad, gy - 10, "LANGUAGE DISTRIBUTION", s.det, DIM, ls=1.6))
+        langbar(s, p, top, col, tot, gy)
+        for i, (name, size) in enumerate(top):
+            lx = s.pad + (i % 2) * (s.inner / 2)
+            ly = gy + 36 + (i // 2) * 22
+            p.append(f'<circle cx="{lx+4}" cy="{ly-4}" r="4" fill="{col[name]}"/>')
+            p.append(t(lx + 14, ly, f"{name} {size*100/tot:.0f}%", s.det, MUTE))
+        return "\n".join(p + tail(s, h)), h
 
-    p.append(f'<text x="34" y="176" font-family="{MONO}" font-size="11" fill="{DIM}" '
-             f'letter-spacing="2.2">LANGUAGE DISTRIBUTION</text>')
-    x = 34.0
+    tw, th = (s.inner - 3 * 12) / 4, 80
+    gy = 44 + th + 36
+    h = gy + 58
+    p = head(s, h, "GitHub activity for %s" % USER, "st")
+    p.append(sect(s, 28, "SIGNAL · LAST 12 MONTHS"))
+    for i, (v, l, c2) in enumerate(vals):
+        p.append(tile(s, s.pad + i * (tw + 12), 44, tw, th, v, l, c2, 0.12 * i))
+    p.append(t(s.pad, gy - 10, "LANGUAGE DISTRIBUTION", s.det, DIM, ls=1.6))
+    langbar(s, p, top, col, tot, gy)
+    lx = s.pad
     for name, size in top:
-        w = size / tot * 932
-        p.append(f'<rect x="{x:.1f}" y="188" width="0" height="14" fill="{col[name]}">'
-                 f'<animate attributeName="width" from="0" to="{w:.1f}" dur="0.9s" '
-                 f'begin="0.5s" fill="freeze"/></rect>')
-        x += w + 2
-    lx = 34
-    for name, size in top:
-        p.append(f'<circle cx="{lx+4}" cy="224" r="4" fill="{col[name]}"/>'
-                 f'<text x="{lx+15}" y="228" font-family="{MONO}" font-size="11" '
-                 f'fill="#8B929E">{esc(name)} {size*100/tot:.1f}%</text>')
-        lx += 22 + len(name) * 6.6 + 42
-    return "\n".join(p + close(1000, 250))
+        label = f"{name} {size*100/tot:.1f}%"
+        p.append(f'<circle cx="{lx+4}" cy="{gy+36}" r="4.2" fill="{col[name]}"/>')
+        p.append(t(lx + 14, gy + 40, label, s.det, MUTE))
+        lx += 28 + len(label) * s.det * 0.605
+    return "\n".join(p + tail(s, h)), h
 
 
-# ------------------------------------------------------------------------ contrib
+# ---------------------------------------------------------------------- contrib
 
-def build_contrib(d):
+def build_contrib(s, d):
     cal = d["contributionsCollection"]["contributionCalendar"]
     weeks = cal["weeks"]
-    peak = max((day["contributionCount"]
-                for w in weeks for day in w["contributionDays"]), default=0) or 1
-    # thresholds on the non-zero distribution so one huge day cannot flatten the scale
-    nz = sorted(day["contributionCount"] for w in weeks
-                for day in w["contributionDays"] if day["contributionCount"] > 0)
+    peak = max((x["contributionCount"] for w in weeks for x in w["contributionDays"]), default=0) or 1
+    nz = sorted(x["contributionCount"] for w in weeks for x in w["contributionDays"]
+                if x["contributionCount"] > 0)
+
     def q(f):
         return nz[int(len(nz) * f)] if nz else 1
     t1, t2, t3 = q(0.25), q(0.55), q(0.85)
 
-    def level(n):
-        if n == 0:
-            return 0
-        if n <= t1:
-            return 1
-        if n <= t2:
-            return 2
-        if n <= t3:
-            return 3
-        return 4
+    def lv(n):
+        return 0 if n == 0 else (1 if n <= t1 else (2 if n <= t2 else (3 if n <= t3 else 4)))
 
-    cell, gap, x0, y0 = 13, 3, 46, 68
-    p = frame(1000, 232, "Contribution heatmap for %s" % USER, "h")
-    p.append(f'<text x="34" y="34" font-family="{MONO}" font-size="12" fill="{AMBER}" '
-             f'letter-spacing="2.6">CONTRIBUTION HEATMAP &#183; '
-             f'{cal["totalContributions"]:,} IN 12 MONTHS</text>')
+    x0 = s.pad + (0 if s.n else 36)
+    step = (s.W - s.pad - x0) / len(weeks)
+    gap = 1 if s.n else 3
+    cell = max(2.5, step - gap)
+    y0 = 60 if s.n else 70
+    grid_h = 7 * (cell + gap)
+    h = round(y0 + grid_h + (60 if s.n else 44))
 
-    # month ruler
-    seen = set()
+    p = head(s, h, "Contribution heatmap for %s" % USER, "ct")
+    p.append(sect(s, 26 if s.n else 28,
+                  f"HEATMAP · {cal['totalContributions']:,} IN 12 MONTHS" if s.n
+                  else f"CONTRIBUTION HEATMAP · {cal['totalContributions']:,} IN 12 MONTHS"))
+    seen, shown, every = set(), 0, (3 if s.n else 1)
     for wi, w in enumerate(weeks):
         first = w["contributionDays"][0]["date"]
-        mon = first[:7]
-        if mon not in seen and int(first[8:]) <= 7:
-            seen.add(mon)
-            label = datetime.date(int(first[:4]), int(first[5:7]), 1).strftime("%b")
-            p.append(f'<text x="{x0 + wi*(cell+gap)}" y="58" font-family="{MONO}" '
-                     f'font-size="9.5" fill="{DIM}">{label}</text>')
-
-    for i, dl in enumerate(["Mon", "Wed", "Fri"]):
-        p.append(f'<text x="34" y="{y0 + (i*2+1)*(cell+gap) + 10}" font-family="{MONO}" '
-                 f'font-size="9" fill="{DIM}" text-anchor="end">{dl}</text>')
-
-    # one animate per week keeps the file small; the stagger reads as a fill wave
+        if first[:7] not in seen and int(first[8:]) <= 7:
+            seen.add(first[:7])
+            if shown % every == 0:
+                lab = datetime.date(int(first[:4]), int(first[5:7]), 1).strftime("%b")
+                p.append(t(x0 + wi * step, y0 - 9, lab, s.det, DIM))
+            shown += 1
+    if not s.n:
+        for i, dl in enumerate(["Mon", "Wed", "Fri"]):
+            p.append(t(x0 - 9, y0 + (i * 2 + 1) * (cell + gap) + 10, dl, s.det, DIM, anchor="end"))
     for wi, w in enumerate(weeks):
-        x = x0 + wi * (cell + gap)
-        p.append(f'<g opacity="0"><animate attributeName="opacity" from="0" to="1" '
-                 f'begin="{wi*0.028:.2f}s" dur="0.35s" fill="freeze"/>')
+        x = x0 + wi * step
+        p.append(f'<g opacity="0">{fade(wi * 0.024, 0.35)}')
         for day in w["contributionDays"]:
             y = y0 + day["weekday"] * (cell + gap)
-            lv = level(day["contributionCount"])
-            p.append(f'<rect x="{x}" y="{y}" width="{cell}" height="{cell}" rx="2.5" '
-                     f'fill="{HEAT[lv]}"/>')
+            p.append(f'<rect x="{x:.1f}" y="{y:.1f}" width="{cell:.1f}" height="{cell:.1f}" '
+                     f'rx="{min(2.5, cell/3):.1f}" fill="{HEAT[lv(day["contributionCount"])]}"/>')
         p.append('</g>')
 
-    p.append(f'<text x="{x0}" y="212" font-family="{MONO}" font-size="10" fill="{DIM}">'
-             f'peak day &#183; {peak} contributions</text>')
-    lx = 790
-    p.append(f'<text x="{lx-12}" y="212" font-family="{MONO}" font-size="10" '
-             f'fill="{DIM}" text-anchor="end">less</text>')
+    fy = y0 + grid_h + 26
+    p.append(t(s.pad, fy, f"peak day · {peak} contributions", s.det, DIM))
+    if s.n:
+        ly, lx = fy + 26, s.pad
+    else:
+        ly, lx = fy, s.W - s.pad - 5 * 18 - 84
+    p.append(t(lx, ly, "less", s.det, DIM))
+    bx = lx + 38
     for i, c in enumerate(HEAT):
-        p.append(f'<rect x="{lx + i*18}" y="202" width="13" height="13" rx="2.5" fill="{c}"/>')
-    p.append(f'<text x="{lx + 5*18 + 4}" y="212" font-family="{MONO}" font-size="10" '
-             f'fill="{DIM}">more</text>')
-    return "\n".join(p + close(1000, 232))
+        p.append(f'<rect x="{bx + i*18}" y="{ly-11}" width="14" height="14" rx="2.5" fill="{c}"/>')
+    p.append(t(bx + 5 * 18 + 6, ly, "more", s.det, DIM))
+    return "\n".join(p + tail(s, h)), h
 
 
-# ----------------------------------------------------------------------- velocity
+# --------------------------------------------------------------------- velocity
 
-def build_velocity(d):
+def build_velocity(s, d):
     cal = d["contributionsCollection"]["contributionCalendar"]
-    by_month = collections.OrderedDict()
+    by = collections.OrderedDict()
     for w in cal["weeks"]:
         for day in w["contributionDays"]:
-            by_month[day["date"][:7]] = by_month.get(day["date"][:7], 0) + day["contributionCount"]
-    months = list(by_month.items())[-13:]
+            k = day["date"][:7]
+            by[k] = by.get(k, 0) + day["contributionCount"]
+    months = list(by.items())[-13:]
     peak = max(v for _, v in months) or 1
-
-    W, H, base, top = 1000, 270, 214, 74
-    p = frame(W, H, "Monthly contribution volume for %s" % USER, "v")
-    p.append(f'<text x="34" y="34" font-family="{MONO}" font-size="12" fill="{AMBER}" '
-             f'letter-spacing="2.6">VELOCITY &#183; CONTRIBUTIONS PER MONTH</text>')
-
-    for frac in (0.25, 0.5, 0.75, 1.0):
-        y = base - frac * (base - top)
-        p.append(f'<line x1="60" y1="{y:.1f}" x2="966" y2="{y:.1f}" stroke="{GRID}" '
-                 f'stroke-opacity="0.07"/>'
-                 f'<text x="52" y="{y+4:.1f}" font-family="{MONO}" font-size="9" '
-                 f'fill="{DIM}" text-anchor="end">{int(peak*frac)}</text>')
-
-    n = len(months)
-    slot = 906 / n
-    bw = min(46, slot - 10)
     this_month = datetime.date.today().strftime("%Y-%m")
+
+    top = 64 if s.n else 74
+    base = top + (150 if s.n else 152)
+    h = base + 56
+    p = head(s, h, "Monthly contribution volume for %s" % USER, "vl")
+    p.append(sect(s, 26 if s.n else 28,
+                  "VELOCITY · PER MONTH" if s.n else "VELOCITY · CONTRIBUTIONS PER MONTH"))
+
+    gx = s.pad + (34 if s.n else 46)
+    gw = s.W - s.pad - gx
+    for frac in (0.5, 1.0):
+        y = base - frac * (base - top)
+        p.append(f'<line x1="{gx}" y1="{y:.1f}" x2="{s.W-s.pad}" y2="{y:.1f}" stroke="{GRID}" stroke-opacity="0.08"/>')
+        p.append(t(gx - 7, y + 4, str(int(peak * frac)), s.det, DIM, anchor="end"))
+
+    slot = gw / len(months)
+    bw = min(40, slot - (3 if s.n else 8))
     for i, (mon, val) in enumerate(months):
-        partial = mon == this_month
-        x = 60 + i * slot + (slot - bw) / 2
-        h = (val / peak) * (base - top)
-        is_peak = val == peak
-        fill = AMBER if is_peak else "#8A6A0A"
-        p.append(f'<rect x="{x:.1f}" y="{base}" width="{bw:.1f}" height="0" rx="3" fill="{fill}">'
-                 f'<animate attributeName="height" from="0" to="{h:.1f}" dur="0.7s" '
-                 f'begin="{0.2+i*0.06:.2f}s" fill="freeze"/>'
-                 f'<animate attributeName="y" from="{base}" to="{base-h:.1f}" dur="0.7s" '
-                 f'begin="{0.2+i*0.06:.2f}s" fill="freeze"/></rect>')
-        label = datetime.date(int(mon[:4]), int(mon[5:7]), 1).strftime("%b")
-        p.append(f'<text x="{x+bw/2:.1f}" y="{base+18}" font-family="{MONO}" font-size="9.5" '
-                 f'fill="{DIM}" text-anchor="middle">{label}</text>')
+        x = gx + i * slot + (slot - bw) / 2
+        bh = (val / peak) * (base - top)
+        partial, is_peak = mon == this_month, val == peak
+        extra = ' fill-opacity="0.35" stroke="#8A6A0A" stroke-dasharray="3 3"' if partial else ''
+        p.append(f'<rect x="{x:.1f}" y="{base}" width="{bw:.1f}" height="0" rx="3" '
+                 f'fill="{AMBER if is_peak else "#8A6A0A"}"{extra}>'
+                 f'<animate attributeName="height" from="0" to="{bh:.1f}" dur="0.7s" '
+                 f'begin="{0.2+i*0.05:.2f}s" fill="freeze"/>'
+                 f'<animate attributeName="y" from="{base}" to="{base-bh:.1f}" dur="0.7s" '
+                 f'begin="{0.2+i*0.05:.2f}s" fill="freeze"/></rect>')
+        if (not s.n) or i % 3 == 0 or is_peak:
+            lab = datetime.date(int(mon[:4]), int(mon[5:7]), 1).strftime("%b")
+            p.append(t(x + bw / 2, base + 19, lab, s.det, DIM, anchor="middle"))
+        if is_peak or (not s.n and val):
+            p.append(f'<text x="{x+bw/2:.1f}" y="{base-bh-8:.1f}" font-family="{MONO}" '
+                     f'font-size="{s.det}" fill="{AMBER if is_peak else DIM}" text-anchor="middle" '
+                     f'opacity="0">{fade(0.9+i*0.05, 0.4)}{val}</text>')
         if partial:
-            p.append(f'<text x="{x+bw/2:.1f}" y="{base+30}" font-family="{MONO}" '
-                     f'font-size="8" fill="#8A6A0A" text-anchor="middle">MTD</text>')
-        if val:
-            p.append(f'<text x="{x+bw/2:.1f}" y="{base-h-8:.1f}" font-family="{MONO}" '
-                     f'font-size="9.5" fill="{AMBER if is_peak else DIM}" '
-                     f'text-anchor="middle" opacity="0">'
-                     f'<animate attributeName="opacity" from="0" to="1" dur="0.4s" '
-                     f'begin="{0.9+i*0.06:.2f}s" fill="freeze"/>{val}</text>')
-
-    p.append(f'<line x1="60" y1="{base}" x2="966" y2="{base}" stroke="{GRID}" stroke-opacity="0.2"/>')
-    p.append(f'<text x="60" y="254" font-family="{MONO}" font-size="10.5" fill="{DIM}">'
-             f'The curve is Vault-OS. Founding the company is the point where it leaves the floor.</text>')
-    return "\n".join(p + close(W, H))
+            p.append(t(x + bw / 2, base + 34, "MTD", s.det, "#8A6A0A", anchor="middle"))
+    p.append(f'<line x1="{gx}" y1="{base}" x2="{s.W-s.pad}" y2="{base}" stroke="{GRID}" stroke-opacity="0.2"/>')
+    return "\n".join(p + tail(s, h)), h
 
 
-# ------------------------------------------------------------------------- rhythm
+# ----------------------------------------------------------------------- rhythm
 
-def build_rhythm(d):
+def build_rhythm(s, d):
     cal = d["contributionsCollection"]["contributionCalendar"]
     today = datetime.date.today().isoformat()
-    days = [day for w in cal["weeks"] for day in w["contributionDays"]
-            if day["date"] <= today]
+    days = [x for w in cal["weeks"] for x in w["contributionDays"] if x["date"] <= today]
     active = [x for x in days if x["contributionCount"] > 0]
     best = max(days, key=lambda x: x["contributionCount"]) if days else None
-
     longest = run = 0
     for x in days:
         run = run + 1 if x["contributionCount"] > 0 else 0
@@ -287,82 +270,75 @@ def build_rhythm(d):
         if x["contributionCount"] == 0:
             break
         current += 1
-
     wd = collections.Counter()
     for x in days:
         wd[x["weekday"]] += x["contributionCount"]
     names = ["Sun", "Mon", "Tue", "Wed", "Thu", "Fri", "Sat"]
     wpeak = max(wd.values()) if wd else 1
-
     avg = sum(x["contributionCount"] for x in active) / len(active) if active else 0
     pct = round(len(active) * 100 / len(days)) if days else 0
-
-    W, H = 1000, 300
-    p = frame(W, H, "Working rhythm for %s" % USER, "r")
-    p.append(f'<text x="34" y="34" font-family="{MONO}" font-size="12" fill="{AMBER}" '
-             f'letter-spacing="2.6">WORKING RHYTHM</text>')
-
-    tiles = [(f"{longest}", "LONGEST STREAK / DAYS", AMBER),
-             (f"{best['contributionCount']}" if best else "0", "BUSIEST SINGLE DAY", AMBER),
-             (f"{avg:.1f}", "AVG ON AN ACTIVE DAY", GREEN),
-             (f"{pct}%", "OF DAYS WITH COMMITS", TEXT)]
-    for i, (val, label, colr) in enumerate(tiles):
-        x = 34 + i * 238
-        p.append(f'<g opacity="0"><animate attributeName="opacity" values="0;1" '
-                 f'begin="{i*0.13:.2f}s" dur="0.5s" fill="freeze"/>'
-                 f'<rect x="{x}" y="54" width="222" height="80" rx="8" fill="#0E1116" '
-                 f'stroke="{GRID}" stroke-opacity="0.16"/>'
-                 f'<text x="{x+18}" y="103" font-family="{MONO}" font-size="32" '
-                 f'font-weight="700" fill="{colr}">{val}</text>'
-                 f'<text x="{x+18}" y="122" font-family="{MONO}" font-size="10" '
-                 f'fill="{DIM}" letter-spacing="1.5">{label}</text></g>')
-
-    p.append(f'<text x="34" y="168" font-family="{MONO}" font-size="11" fill="{DIM}" '
-             f'letter-spacing="2.2">WHICH DAYS THE WORK LANDS ON</text>')
-
-    base, top = 254, 184
-    slot, bw = 932 / 7, 58
     heaviest = max(wd, key=lambda k: wd[k]) if wd else 0
+
+    vals = [(f"{longest}", "LONGEST STREAK" if s.n else "LONGEST STREAK / DAYS", AMBER),
+            (f"{best['contributionCount']}" if best else "0",
+             "BUSIEST DAY" if s.n else "BUSIEST SINGLE DAY", AMBER),
+            (f"{avg:.1f}", "AVG / ACTIVE DAY" if s.n else "AVG ON AN ACTIVE DAY", GREEN),
+            (f"{pct}%", "DAYS ACTIVE" if s.n else "OF DAYS WITH COMMITS", TEXT)]
+
+    if s.n:
+        tw, th = (s.inner - 10) / 2, 72
+        gy = 42 + 2 * (th + 10) + 34
+        base = gy + 116
+    else:
+        tw, th = (s.inner - 3 * 12) / 4, 80
+        gy = 44 + th + 42
+        base = gy + 100
+    h = base + 52
+    p = head(s, h, "Working rhythm for %s" % USER, "rh")
+    p.append(sect(s, 26 if s.n else 28, "WORKING RHYTHM"))
+    for i, (v, l, c2) in enumerate(vals):
+        if s.n:
+            p.append(tile(s, s.pad + (i % 2) * (tw + 10), 42 + (i // 2) * (th + 10), tw, th, v, l, c2, 0.1 * i))
+        else:
+            p.append(tile(s, s.pad + i * (tw + 12), 44, tw, th, v, l, c2, 0.12 * i))
+    p.append(t(s.pad, gy - 14, "WHICH DAYS THE WORK LANDS ON", s.det, DIM, ls=1.6))
+    slot = s.inner / 7
+    bw = min(46, slot - 8)
     for i in range(7):
-        x = 34 + i * slot + (slot - bw) / 2
-        h = (wd[i] / wpeak) * (base - top) if wpeak else 0
-        fill = AMBER if i == heaviest else "#8A6A0A"
-        p.append(f'<rect x="{x:.1f}" y="{base}" width="{bw}" height="0" rx="3" fill="{fill}">'
-                 f'<animate attributeName="height" from="0" to="{h:.1f}" dur="0.7s" '
-                 f'begin="{0.6+i*0.07:.2f}s" fill="freeze"/>'
-                 f'<animate attributeName="y" from="{base}" to="{base-h:.1f}" dur="0.7s" '
-                 f'begin="{0.6+i*0.07:.2f}s" fill="freeze"/></rect>')
-        p.append(f'<text x="{x+bw/2:.1f}" y="{base+18}" font-family="{MONO}" font-size="10" '
-                 f'fill="{DIM}" text-anchor="middle">{names[i]}</text>')
-        p.append(f'<text x="{x+bw/2:.1f}" y="{base-h-8:.1f}" font-family="{MONO}" '
-                 f'font-size="9.5" fill="{AMBER if i == heaviest else DIM}" '
-                 f'text-anchor="middle" opacity="0"><animate attributeName="opacity" '
-                 f'from="0" to="1" dur="0.4s" begin="{1.3+i*0.07:.2f}s" fill="freeze"/>'
-                 f'{wd[i]}</text>')
+        x = s.pad + i * slot + (slot - bw) / 2
+        bh = (wd[i] / wpeak) * (base - gy - 6) if wpeak else 0
+        p.append(f'<rect x="{x:.1f}" y="{base}" width="{bw:.1f}" height="0" rx="3" '
+                 f'fill="{AMBER if i==heaviest else "#8A6A0A"}">'
+                 f'<animate attributeName="height" from="0" to="{bh:.1f}" dur="0.7s" '
+                 f'begin="{0.5+i*0.07:.2f}s" fill="freeze"/>'
+                 f'<animate attributeName="y" from="{base}" to="{base-bh:.1f}" dur="0.7s" '
+                 f'begin="{0.5+i*0.07:.2f}s" fill="freeze"/></rect>')
+        p.append(t(x + bw / 2, base + 19, names[i], s.det, DIM, anchor="middle"))
+        p.append(f'<text x="{x+bw/2:.1f}" y="{base-bh-7:.1f}" font-family="{MONO}" '
+                 f'font-size="{s.det}" fill="{AMBER if i==heaviest else DIM}" text-anchor="middle" '
+                 f'opacity="0">{fade(1.2+i*0.07, 0.4)}{wd[i]}</text>')
+    p.append(f'<line x1="{s.pad}" y1="{base}" x2="{s.W-s.pad}" y2="{base}" stroke="{GRID}" stroke-opacity="0.2"/>')
+    p.append(t(s.pad, base + 42, f"current streak · {current} days", s.det, DIM))
+    return "\n".join(p + tail(s, h)), h
 
-    p.append(f'<line x1="34" y1="{base}" x2="966" y2="{base}" stroke="{GRID}" stroke-opacity="0.2"/>')
-    p.append(f'<text x="34" y="286" font-family="{MONO}" font-size="10.5" fill="{DIM}">'
-             f'Current streak {current} days. Fewer, longer sessions rather than a daily trickle &#8212; '
-             f'the average active day carries {avg:.0f} commits.</text>')
-    return NL.join(p + close(W, H))
 
+BUILDERS = {"stats": build_stats, "contrib": build_contrib,
+            "velocity": build_velocity, "rhythm": build_rhythm}
 
 if __name__ == "__main__":
     data = fetch()
     c = data["contributionsCollection"]
-    has_private = any(n.get("isPrivate") for n in data["repositories"]["nodes"])
-    if c["restrictedContributionsCount"] == 0 and has_private:
+    if c["restrictedContributionsCount"] == 0 and any(
+            n.get("isPrivate") for n in data["repositories"]["nodes"]):
         raise SystemExit(
-            "refusing to publish: restrictedContributionsCount is 0 but private "
-            "repositories exist, so this token cannot see private contributions.\n"
+            "refusing to publish: restrictedContributionsCount is 0 but private repositories "
+            "exist, so this token cannot see private contributions.\n"
             "Add a classic PAT with `repo` scope as the STATS_TOKEN repository secret.")
-
     os.makedirs("assets", exist_ok=True)
-    for name, svg in (("stats", build_stats(data)),
-                      ("contrib", build_contrib(data)),
-                      ("velocity", build_velocity(data)),
-                      ("rhythm", build_rhythm(data))):
-        path = "assets/%s.svg" % name
-        with open(path, "w", encoding="utf-8") as f:
-            f.write(svg)
-        print("wrote %s (%d bytes)" % (path, len(svg)))
+    for name, fn in BUILDERS.items():
+        for suffix, narrow in (("", False), ("-narrow", True)):
+            svg, h = fn(S(narrow), data)
+            path = f"assets/{name}{suffix}.svg"
+            with open(path, "w", encoding="utf-8") as f:
+                f.write(svg)
+            print(f"{path:32} {S(narrow).W}x{h}")
