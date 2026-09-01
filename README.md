@@ -200,14 +200,11 @@ Built for the department I study in.
 
 <div align="center">
 
-<img height="165" src="https://github-readme-stats.vercel.app/api?username=taha-halakoo&show_icons=true&hide_border=true&bg_color=07070A&title_color=FFC93C&text_color=C9CDD6&icon_color=3FB950&hide_title=true&include_all_commits=true">
-<img height="165" src="https://github-readme-stats.vercel.app/api/top-langs/?username=taha-halakoo&layout=compact&hide_border=true&bg_color=07070A&title_color=FFC93C&text_color=C9CDD6&langs_count=8">
+<img src="assets/stats.svg" alt="GitHub activity — commits, private share, repositories, stars and language distribution" width="100%">
 
-<br><br>
-
-<sub>Most of what I build ships in private repositories — the graph below is a fraction of the work.</sub>
-
-<img src="https://github-readme-activity-graph.vercel.app/graph?username=taha-halakoo&bg_color=07070A&color=FFC93C&line=3FB950&point=FFC93C&area=true&hide_border=true&custom_title=Commit%20activity" width="100%">
+<sub>Generated daily by <a href="scripts/gen_stats.py">a script in this repo</a> rather than a third-party widget —
+the usual ones rate-limit, run out of quota, and eventually stop rendering.
+Fitting, for someone who builds things that don't phone home.</sub>
 
 </div>
 
