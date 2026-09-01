@@ -98,9 +98,17 @@ It also keeps me honest about the AI hype. When you've studied how hard it is to
 medical device, you become suspicious of anything that claims to work because it demoed
 well.
 
+<div align="center">
+<img src="assets/bme.svg" alt="How biomedical engineering training maps onto secure systems work" width="100%">
+</div>
+
 ---
 
 ## Building
+
+<div align="center">
+<img src="assets/portfolio.svg" alt="Map of work across security infrastructure, platforms, applied vision and industrial systems" width="100%">
+</div>
 
 <table>
 <tr><td width="50%" valign="top">
@@ -203,6 +211,14 @@ the seam between hardware and software.
 The shape of that last chart is the honest version of my CV. Nothing much until early 2026,
 then Vault-OS. I would rather show you the ramp, including the flat part at the start, than
 claim I have been doing this for a decade.
+
+<div align="center">
+<img src="assets/rhythm.svg" alt="Working rhythm — streaks, busiest day, and which days the work lands on" width="100%">
+</div>
+
+I don't commit every day and I'm not going to pretend otherwise. A third of days, but
+roughly twelve commits on each of them — I work in long sessions rather than keeping a
+streak alive, and I'd rather the graph said something true than something tidy.
 
 <div align="center">
 
