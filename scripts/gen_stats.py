@@ -20,6 +20,7 @@ QUERY = """
     repositories(first: 100, ownerAffiliations: OWNER) {
       totalCount
       nodes {
+        isPrivate
         stargazerCount
         languages(first: 10, orderBy: {field: SIZE, direction: DESC}) {
           edges { size node { name color } }
@@ -55,6 +56,18 @@ def build(d):
     pub = c["totalCommitContributions"]
     priv = c["restrictedContributionsCount"]
     total = pub + priv
+
+    # restrictedContributionsCount is only visible to a token authenticated as the
+    # user. A repo-scoped GITHUB_TOKEN silently reports 0, which would quietly
+    # rewrite the private-work figure to near-zero. Fail loudly instead of
+    # publishing a number that is wrong.
+    has_private = any(n.get("isPrivate") for n in d["repositories"]["nodes"])
+    if priv == 0 and has_private:
+        raise SystemExit(
+            "refusing to publish: restrictedContributionsCount is 0 but private "
+            "repositories exist, so this token cannot see private contributions.\n"
+            "Add a classic PAT with `repo` scope as the STATS_TOKEN repository secret."
+        )
     pct = round(priv * 100 / total) if total else 0
     repos = d["repositories"]["totalCount"]
     stars = sum(n["stargazerCount"] for n in d["repositories"]["nodes"])
