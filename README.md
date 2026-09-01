@@ -1,6 +1,9 @@
 <div align="center">
 
-<img src="assets/header.svg" alt="IronGap // Vault-OS — The Air-Gapped AI Appliance for Zero-Trust Environments" width="100%">
+<picture>
+  <source media="(max-width: 600px)" srcset="assets/header-narrow.svg">
+  <img src="assets/header.svg" alt="IronGap // Vault-OS — The Air-Gapped AI Appliance for Zero-Trust Environments" width="100%">
+</picture>
 
 <br>
 
@@ -11,7 +14,10 @@
 
 <br>
 
-<img src="assets/whoami.svg" alt="Terminal introduction" width="100%">
+<picture>
+  <source media="(max-width: 600px)" srcset="assets/whoami-narrow.svg">
+  <img src="assets/whoami.svg" alt="Terminal introduction" width="100%">
+</picture>
 
 </div>
 
@@ -31,7 +37,10 @@ found the same lesson waiting. So I stopped treating isolation as a constraint t
 around and started treating it as the thing worth building.
 
 <div align="center">
-<img src="assets/timeline.svg" alt="Trajectory from Sampad through Golestan Axon and Yıldız Technical to founding IronGap" width="100%">
+<picture>
+  <source media="(max-width: 600px)" srcset="assets/timeline-narrow.svg">
+  <img src="assets/timeline.svg" alt="Trajectory from Sampad through Golestan Axon and Yıldız Technical to founding IronGap" width="100%">
+</picture>
 </div>
 
 ---
@@ -43,7 +52,10 @@ where a TPM chip has to convince a database that a license is valid, or where a 
 client has to find an appliance on a network with no DNS and no internet.
 
 <div align="center">
-<img src="assets/depth.svg" alt="The six layers I work across, from silicon to interface" width="100%">
+<picture>
+  <source media="(max-width: 600px)" srcset="assets/depth-narrow.svg">
+  <img src="assets/depth.svg" alt="The six layers I work across, from silicon to interface" width="100%">
+</picture>
 </div>
 
 I do not claim equal depth at every layer. I claim I can move between them without needing
@@ -78,7 +90,10 @@ is more useful than any blog post about secure deletion. Most of the hard proble
 been thought about carefully by someone else first.
 
 <div align="center">
-<img src="assets/method.svg" alt="How I work a failure — reproduce, isolate, falsify, fix, verify" width="100%">
+<picture>
+  <source media="(max-width: 600px)" srcset="assets/method-narrow.svg">
+  <img src="assets/method.svg" alt="How I work a failure — reproduce, isolate, falsify, fix, verify" width="100%">
+</picture>
 </div>
 
 ---
@@ -99,7 +114,10 @@ medical device, you become suspicious of anything that claims to work because it
 well.
 
 <div align="center">
-<img src="assets/bme.svg" alt="How biomedical engineering training maps onto secure systems work" width="100%">
+<picture>
+  <source media="(max-width: 600px)" srcset="assets/bme-narrow.svg">
+  <img src="assets/bme.svg" alt="How biomedical engineering training maps onto secure systems work" width="100%">
+</picture>
 </div>
 
 ---
@@ -107,7 +125,10 @@ well.
 ## Building
 
 <div align="center">
-<img src="assets/portfolio.svg" alt="Map of work across security infrastructure, platforms, applied vision and industrial systems" width="100%">
+<picture>
+  <source media="(max-width: 600px)" srcset="assets/portfolio-narrow.svg">
+  <img src="assets/portfolio.svg" alt="Map of work across security infrastructure, platforms, applied vision and industrial systems" width="100%">
+</picture>
 </div>
 
 <table>
@@ -184,7 +205,10 @@ me in the corridor.
 Getting Vault-OS onto Linux and macOS, and the Ecosystem clients onto everything else.
 
 <div align="center">
-<img src="assets/focus.svg" alt="Shipping status across Windows, Linux, macOS, Android and iOS" width="100%">
+<picture>
+  <source media="(max-width: 600px)" srcset="assets/focus-narrow.svg">
+  <img src="assets/focus.svg" alt="Shipping status across Windows, Linux, macOS, Android and iOS" width="100%">
+</picture>
 </div>
 
 Open to conversations about sovereign AI infrastructure, secure systems, and anything at
@@ -196,15 +220,24 @@ the seam between hardware and software.
 
 <div align="center">
 
-<img src="assets/stats.svg" alt="GitHub activity — commits, private share, repositories, stars and language distribution" width="100%">
+<picture>
+  <source media="(max-width: 600px)" srcset="assets/stats-narrow.svg">
+  <img src="assets/stats.svg" alt="GitHub activity — commits, private share, repositories, stars and language distribution" width="100%">
+</picture>
 
 <br>
 
-<img src="assets/contrib.svg" alt="Contribution heatmap over the last twelve months" width="100%">
+<picture>
+  <source media="(max-width: 600px)" srcset="assets/contrib-narrow.svg">
+  <img src="assets/contrib.svg" alt="Contribution heatmap over the last twelve months" width="100%">
+</picture>
 
 <br>
 
-<img src="assets/velocity.svg" alt="Contributions per month over the last year" width="100%">
+<picture>
+  <source media="(max-width: 600px)" srcset="assets/velocity-narrow.svg">
+  <img src="assets/velocity.svg" alt="Contributions per month over the last year" width="100%">
+</picture>
 
 </div>
 
@@ -213,7 +246,10 @@ then Vault-OS. I would rather show you the ramp, including the flat part at the 
 claim I have been doing this for a decade.
 
 <div align="center">
-<img src="assets/rhythm.svg" alt="Working rhythm — streaks, busiest day, and which days the work lands on" width="100%">
+<picture>
+  <source media="(max-width: 600px)" srcset="assets/rhythm-narrow.svg">
+  <img src="assets/rhythm.svg" alt="Working rhythm — streaks, busiest day, and which days the work lands on" width="100%">
+</picture>
 </div>
 
 I don't commit every day and I'm not going to pretend otherwise. A third of days, but
