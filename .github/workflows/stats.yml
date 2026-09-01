@@ -49,8 +49,10 @@ jobs:
           python scripts/diagrams.py
           python scripts/gen_stats.py
 
-      - name: Check legibility at both widths
-        run: python scripts/check_svg.py
+      - name: Check legibility and collisions at both widths
+        run: |
+          python scripts/check_svg.py
+          python scripts/check_overlap.py
 
       - name: Commit if changed
         run: |
