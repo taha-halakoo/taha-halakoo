@@ -16,7 +16,7 @@ on:
   workflow_dispatch:
   push:
     branches: [main]
-    paths: ['scripts/gen_stats.py', '.github/workflows/stats.yml']
+    paths: ['scripts/**', '.github/workflows/stats.yml']
 
 permissions:
   contents: write
@@ -41,21 +41,26 @@ jobs:
             exit 1
           fi
 
-      - name: Generate stats panel
+      - name: Generate panels
         env:
           GITHUB_TOKEN: ${{ secrets.STATS_TOKEN }}
           GH_USER: ${{ github.repository_owner }}
-        run: python scripts/gen_stats.py
+        run: |
+          python scripts/diagrams.py
+          python scripts/gen_stats.py
+
+      - name: Check legibility at both widths
+        run: python scripts/check_svg.py
 
       - name: Commit if changed
         run: |
           git config user.name  "github-actions[bot]"
           git config user.email "41898282+github-actions[bot]@users.noreply.github.com"
-          if git diff --quiet -- assets/stats.svg; then
+          if git diff --quiet -- assets/; then
             echo "No change."
           else
-            git add assets/stats.svg
-            git commit -m "chore: refresh stats panel [skip ci]"
+            git add assets/
+            git commit -m "chore: refresh generated panels [skip ci]"
             # another push may have landed while this job ran
             for i in 1 2 3; do
               git pull --rebase --autostash origin main && git push && exit 0
