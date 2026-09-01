@@ -18,8 +18,8 @@ import sys
 import urllib.request
 
 sys.path.insert(0, os.path.dirname(os.path.abspath(__file__)))
-from diagrams import (S, head, tail, sect, fade, card, t,  # noqa: E402
-                      GRID, DIM, TEXT, AMBER, GREEN, MUTE, MONO)
+from diagrams import (S, head, tail, sect, fade, card, t, pulse, sweep,  # noqa: E402
+                      hsweep, burst, GRID, DIM, TEXT, AMBER, GREEN, MUTE, MONO)
 
 USER = os.environ.get("GH_USER", "taha-halakoo")
 TOKEN = os.environ["GITHUB_TOKEN"]
@@ -229,6 +229,7 @@ def build_velocity(s, d):
 
     slot = gw / len(months)
     bw = min(40, slot - (3 if s.n else 8))
+    last_label = [-1e9]
     for i, (mon, val) in enumerate(months):
         x = gx + i * slot + (slot - bw) / 2
         bh = (val / peak) * (base - top)
@@ -239,10 +240,17 @@ def build_velocity(s, d):
                  f'<animate attributeName="height" from="0" to="{bh:.1f}" dur="0.7s" '
                  f'begin="{0.2+i*0.05:.2f}s" fill="freeze"/>'
                  f'<animate attributeName="y" from="{base}" to="{base-bh:.1f}" dur="0.7s" '
-                 f'begin="{0.2+i*0.05:.2f}s" fill="freeze"/></rect>')
-        if (not s.n) or i % 3 == 0 or is_peak:
-            lab = datetime.date(int(mon[:4]), int(mon[5:7]), 1).strftime("%b")
+                 f'begin="{0.2+i*0.05:.2f}s" fill="freeze"/>'
+                 f'{pulse(0.62, 1, 2.8, 1.4) if is_peak else ""}</rect>')
+        if is_peak:
+            p.append(f'<g opacity="0">{fade(1.4, 0.4)}'
+                     f'{burst(x + bw / 2, base - bh, 22, 3.0, 1.6, AMBER)}</g>')
+        lab = datetime.date(int(mon[:4]), int(mon[5:7]), 1).strftime("%b")
+        lw = len(lab) * s.det * 0.605
+        want = (not s.n) or i % 3 == 0 or is_peak
+        if want and (x + bw / 2 - lw / 2) > last_label[0] + 4:
             p.append(t(x + bw / 2, base + 19, lab, s.det, DIM, anchor="middle"))
+            last_label[0] = x + bw / 2 + lw / 2
         if is_peak or (not s.n and val):
             p.append(f'<text x="{x+bw/2:.1f}" y="{base-bh-8:.1f}" font-family="{MONO}" '
                      f'font-size="{s.det}" fill="{AMBER if is_peak else DIM}" text-anchor="middle" '
@@ -282,7 +290,7 @@ def build_rhythm(s, d):
     vals = [(f"{longest}", "LONGEST STREAK" if s.n else "LONGEST STREAK / DAYS", AMBER),
             (f"{best['contributionCount']}" if best else "0",
              "BUSIEST DAY" if s.n else "BUSIEST SINGLE DAY", AMBER),
-            (f"{avg:.1f}", "AVG / ACTIVE DAY" if s.n else "AVG ON AN ACTIVE DAY", GREEN),
+            (f"{avg:.1f}", "AVG / DAY" if s.n else "AVG ON AN ACTIVE DAY", GREEN),
             (f"{pct}%", "DAYS ACTIVE" if s.n else "OF DAYS WITH COMMITS", TEXT)]
 
     if s.n:
@@ -312,7 +320,8 @@ def build_rhythm(s, d):
                  f'<animate attributeName="height" from="0" to="{bh:.1f}" dur="0.7s" '
                  f'begin="{0.5+i*0.07:.2f}s" fill="freeze"/>'
                  f'<animate attributeName="y" from="{base}" to="{base-bh:.1f}" dur="0.7s" '
-                 f'begin="{0.5+i*0.07:.2f}s" fill="freeze"/></rect>')
+                 f'begin="{0.5+i*0.07:.2f}s" fill="freeze"/>'
+                 f'{pulse(0.62, 1, 2.8, 1.6) if i == heaviest else ""}</rect>')
         p.append(t(x + bw / 2, base + 19, names[i], s.det, DIM, anchor="middle"))
         p.append(f'<text x="{x+bw/2:.1f}" y="{base-bh-7:.1f}" font-family="{MONO}" '
                  f'font-size="{s.det}" fill="{AMBER if i==heaviest else DIM}" text-anchor="middle" '
