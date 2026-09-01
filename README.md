@@ -9,194 +9,172 @@
 [![Portfolio](https://img.shields.io/badge/PORTFOLIO-metronix.ir-FFC93C?style=for-the-badge&labelColor=07070A)](https://metronix.ir)
 [![Email](https://img.shields.io/badge/CONTACT-taha%40iron--gap.com-FFC93C?style=for-the-badge&labelColor=07070A&logo=maildotru&logoColor=FFC93C)](mailto:taha@iron-gap.com)
 
+<br>
+
+<img src="assets/whoami.svg" alt="Terminal introduction" width="100%">
+
 </div>
 
 ---
 
-## The premise
+## How I got here
 
-Every AI product being built right now assumes one thing: that you are willing to send your
-data somewhere else. For most of the world that assumption is fine. For defense contractors
-under CMMC, for hospitals holding genomic data, for banks running proprietary models, for
-anyone operating under PIPL or a cross-border transfer regime — it is a non-starter, and no
-amount of encryption-in-transit fixes it.
+I did not start with security. I started with a plant in Golestan that could not afford to
+have its systems go down, and a job keeping them up through the construction and
+commissioning of an iodine extraction facility. Two years of that teaches you something a
+course cannot: that the interesting failures are never the ones in the design document, and
+that "it works on my machine" is a sentence with real consequences when the machine is in a
+control room.
 
-**I build for the people who can't say yes to that.**
-
-Not a private cloud. Not a VPC. No network egress path at all — because a path that exists
-is a path that can be exploited, and the only guarantee that survives contact with a real
-adversary is the one enforced by architecture rather than policy.
+Then I started building software for environments where the network is not a given, and
+found the same lesson waiting. So I stopped treating isolation as a constraint to work
+around and started treating it as the thing worth building.
 
 <div align="center">
-<img src="assets/airgap.svg" alt="Air-gap architecture — zero egress paths between the untrusted network and the Vault-OS enclave" width="100%">
+<img src="assets/timeline.svg" alt="Trajectory from Sampad through Golestan Axon and Yıldız Technical to founding IronGap" width="100%">
 </div>
 
 ---
 
-## Vault-OS
+## The range
 
-> A hardware-tethered, fully offline AI operating system. `v1.0.9.1` · Windows shipping · Linux and macOS in development.
-
-<details open>
-<summary><b>Isolation</b> — the gap is structural, not configured</summary>
-<br>
-
-TPM 2.0 tethering binds the license to specific silicon through Platform Configuration
-Registers, falling back to motherboard UUID and CPU serial. Zero-Docker by design:
-PostgreSQL and pgvector run as native services, not containers, so there is no runtime to
-escape and no orchestration layer to compromise. A BitLocker enclave holds the data under a
-master password **IronGap does not keep a copy of** — which means a lost password is
-unrecoverable data. That cuts both ways, and it is the honest cost of the guarantee.
-
-</details>
-
-<details>
-<summary><b>Inference</b> — three engines, open weights, no API keys</summary>
-<br>
-
-A polymorphic engine layer over vLLM, Ollama and TensorRT-LLM, with multi-node GPU
-clustering for distributed inference. Bundled multimodal chat, vision, embeddings and
-Whisper speech recognition. Open weights only — Llama 3, Mixtral, Qwen — because a model you
-cannot inspect is a dependency you cannot audit.
-
-</details>
-
-<details>
-<summary><b>Retrieval</b> — grounded, not generated</summary>
-<br>
-
-Hybrid RAG on pgvector with HNSW indexing over 768-dimensional embeddings, with a similarity
-boost for recognized entities. Automated entity and relationship extraction builds a
-knowledge graph underneath, so synthesis is anchored to retrieved facts. A multi-agent
-critic runs an adversarial second pass before any output is accepted.
-
-</details>
-
-<details>
-<summary><b>Agency</b> — 33 node types, sandboxed</summary>
-<br>
-
-A DAG workflow runtime with Kahn topological sorting, 33 node types, 33 contextual assistant
-tools, and sandboxed ReAct agents. Autonomous execution inside a perimeter that has no way
-to reach out of itself.
-
-</details>
-
-<details>
-<summary><b>Custody</b> — 9 clearance tiers and a burn switch</summary>
-<br>
-
-A 9-tier RBAC matrix with multi-party encrypted messaging, per-member restrictions and
-server-enforced auto-delete. SHA-256 hash-chained, RSA-signed audit logs. A NIST SP 800-88
-burn protocol for cryptographic self-termination. Resumable ~22GB unpack that survives power
-loss, and a shutdown path that *verifies* the enclave locked rather than assuming it did.
-
-</details>
+Most of what I do sits at the seams. Not the frontend, not the backend — the awkward joints
+where a TPM chip has to convince a database that a license is valid, or where a Flutter
+client has to find an appliance on a network with no DNS and no internet.
 
 <div align="center">
-<br>
-<img src="assets/ledger.svg" alt="Tamper-evident audit ledger — SHA-256 chained, RSA signed" width="100%">
+<img src="assets/depth.svg" alt="The six layers I work across, from silicon to interface" width="100%">
 </div>
 
----
-
-## The ethic
-
-Security work is unusually easy to fake. You can ship a product that says "military-grade"
-and "zero-trust" on the box and never once be held to it, because the failure mode is
-silent — nobody finds out the guarantee was hollow until an adversary does, and by then the
-data is gone.
-
-So I try to build things that are **falsifiable**. A hash chain either verifies or it
-doesn't. An egress count is either zero or it isn't. A burn protocol either meets NIST
-SP 800-88 or it doesn't. Claims that can be checked are worth more than claims that sound
-impressive, and I would rather ship a smaller promise I can prove than a larger one I can't.
-
-The password we can't recover is the clearest case. It would be trivial to keep an escrow
-copy and quietly call it a support feature. We don't, because sovereignty with a vendor
-backdoor is not sovereignty — it is a marketing claim with an asterisk.
+I do not claim equal depth at every layer. I claim I can move between them without needing
+someone to translate, which on a small team is the thing that actually matters.
 
 ---
 
-## Other work
+## How I work
+
+**I optimise for the failure case.** The happy path is the easy half. Most of the design
+work in Vault-OS went into what happens when the install loses power at 18GB, when the
+measurement doesn't match, when the operator loses the password. Shutdown *verifies* the
+enclave locked rather than assuming it — because assuming is how you find out six months
+later.
+
+**I remove dependencies rather than manage them.** Every layer you add is a layer that can
+fail, be compromised, or be discontinued by someone else's business decision. Vault-OS runs
+PostgreSQL natively instead of in a container, not because containers are bad, but because
+a container runtime is one more thing between me and a guarantee I have to make in writing.
+
+**I prefer claims that can be falsified.** "Military-grade" means nothing. "SHA-256
+hash-chained, RSA-signed, and here is the ledger" either verifies or it doesn't. When I
+write a number in a spec I want it to be checkable, and when I can't check it I'd rather
+not write it.
+
+**I build for the operator, not the demo.** Nine clearance tiers and server-enforced
+auto-delete are unglamorous. They are also what someone actually needs at 2am when a
+contractor's access has to be revoked before the audit.
+
+**I read the standard.** NIST SP 800-88 exists, is specific about what erasure means, and
+is more useful than any blog post about secure deletion. Most of the hard problems have
+been thought about carefully by someone else first.
+
+---
+
+## What the biomedical degree is actually for
+
+People assume it's unrelated. It isn't, and not for the reason you'd guess.
+
+Biomedical engineering is the discipline of building things that fail safely around people
+who cannot consent to the risk — where the regulatory burden is the engineering, not
+paperwork stapled to it afterwards. That is the same instinct behind an air-gapped
+appliance for a hospital or a defence contractor. Signal processing, control systems and the
+statistics of measurement all transfer directly. The habit of treating a compliance regime
+as a design input transfers even more.
+
+It also keeps me honest about the AI hype. When you've studied how hard it is to validate a
+medical device, you become suspicious of anything that claims to work because it demoed
+well.
+
+---
+
+## Building
 
 <table>
-<tr>
-<td width="50%" valign="top">
+<tr><td width="50%" valign="top">
+
+### Vault-OS · IronGap
+Air-gapped AI appliance. `v1.0.9.1`, Windows shipping.
+
+`TPM 2.0` `pgvector` `vLLM` `TensorRT-LLM` `Node.js`
+
+Hardware-tethered licensing, zero-Docker native services, DAG agent runtime, hash-chained
+audit ledger, NIST SP 800-88 burn protocol.
+
+**[Architecture →](https://github.com/IronGap-Technologies)**
+
+</td><td width="50%" valign="top">
+
+### Vault-Ecosystem
+Companion clients for the appliance.
+
+`Flutter` `Dart` `Riverpod`
+
+Biometric-locked founder and staff consoles, an offline TOTP authenticator, and hotspot
+auto-discovery so devices find the appliance inside an isolated perimeter.
+
+</td></tr>
+<tr><td width="50%" valign="top">
 
 ### [TRACES](https://github.com/taha-halakoo/Lumo-traces)
-Location-aware social platform. Content is pinned to physical coordinates and stays locked
-until you are within 20 m of it.
+Content pinned to physical coordinates, locked until you're within 20 m.
 
 `Fastify` `PostGIS` `pgvector` `Flutter`
 
-Hybrid vector + spatial ranking, offline-first mobile architecture, realtime sync, in a
-Turborepo monorepo.
+Hybrid vector + spatial ranking, offline-first client, realtime sync, Turborepo monorepo.
+The proximity constraint is enforced server-side — the client is never trusted with it.
 
-</td>
-<td width="50%" valign="top">
+</td><td width="50%" valign="top">
 
 ### [StudyHub OS](https://github.com/taha-halakoo/studyhub)
-Modular productivity dashboard with an integrated AI assistant.
+Modular productivity dashboard with an AI assistant.
 
 `React` `TypeScript` `Supabase` `Zustand`
 
 Lazy-loaded feature modules, RBAC over Supabase Auth, realtime collaboration.
 
-</td>
-</tr>
-<tr>
-<td width="50%" valign="top">
+</td></tr>
+<tr><td width="50%" valign="top">
 
 ### [Virtual Mouse](https://github.com/taha-halakoo/virtual-mouse)
 Hands-free pointer control from hand tracking.
 
 `Python` `MediaPipe` `OpenCV`
 
-One-Euro filtering with relative delta tracking — the air becomes a trackpad, with a clutch
-gesture and a precision mode.
+One-Euro filtering with relative delta tracking. A clutch gesture lets you reposition your
+arm without moving the cursor — the detail that makes it usable rather than a demo.
 
-</td>
-<td width="50%" valign="top">
+</td><td width="50%" valign="top">
 
 ### YTU BME Nexus
-Department platform for Biomedical Engineering at Yıldız Technical University.
+Department platform for Biomedical Engineering at Yıldız Technical.
 
 `React` `Supabase`
 
-Built for the department I study in.
+Built for the department I actually study in, which is a useful constraint — the users find
+me in the corridor.
 
-</td>
-</tr>
+</td></tr>
 </table>
 
 ---
 
-## Stack
+## Currently
 
-<div align="center">
+Getting Vault-OS onto Linux and macOS. Reading more about formal verification than I can
+yet apply. Learning where the limits of local inference actually are, as opposed to where
+the benchmarks say they are.
 
-![C++](https://img.shields.io/badge/C++-07070A?style=for-the-badge&logo=cplusplus&logoColor=FFC93C)
-![Python](https://img.shields.io/badge/Python-07070A?style=for-the-badge&logo=python&logoColor=FFC93C)
-![TypeScript](https://img.shields.io/badge/TypeScript-07070A?style=for-the-badge&logo=typescript&logoColor=FFC93C)
-![Node.js](https://img.shields.io/badge/Node.js-07070A?style=for-the-badge&logo=nodedotjs&logoColor=FFC93C)
-![Dart](https://img.shields.io/badge/Dart-07070A?style=for-the-badge&logo=dart&logoColor=FFC93C)
-
-![PostgreSQL](https://img.shields.io/badge/PostgreSQL-07070A?style=for-the-badge&logo=postgresql&logoColor=FFC93C)
-![Flutter](https://img.shields.io/badge/Flutter-07070A?style=for-the-badge&logo=flutter&logoColor=FFC93C)
-![React](https://img.shields.io/badge/React-07070A?style=for-the-badge&logo=react&logoColor=FFC93C)
-![NVIDIA](https://img.shields.io/badge/TensorRT--LLM-07070A?style=for-the-badge&logo=nvidia&logoColor=FFC93C)
-![Linux](https://img.shields.io/badge/Linux-07070A?style=for-the-badge&logo=linux&logoColor=FFC93C)
-
-**Security** `TPM 2.0` · `HSM` · `bare-metal architecture` · `applied cryptography` · `zero-trust design` · `NIST SP 800-88`
-**AI** `RAG pipelines` · `pgvector / HNSW` · `knowledge graphs` · `DAG orchestration` · `ReAct agents` · `MCP`
-**Engineering** `MATLAB` · `Simulink` · `embedded systems` · `system architecture`
-
-</div>
-
----
-
-## Signal
+Open to conversations about sovereign AI infrastructure, secure systems, and anything at
+the seam between hardware and software.
 
 <div align="center">
 
@@ -212,15 +190,13 @@ Fitting, for someone who builds things that don't phone home.</sub>
 
 <div align="center">
 
-### Elsewhere
-
 Founder & Chief Architect at **[IronGap Technologies](https://www.iron-gap.com)** · Istanbul, Türkiye
 Biomedical Engineering at **Yıldız Technical University** · MATE R&D, Polaris Group
 
-[iron-gap.com](https://www.iron-gap.com) · [LinkedIn](https://www.linkedin.com/in/taha-halakooei) · [Company](https://www.linkedin.com/company/irongap-technologies) · [taha@iron-gap.com](mailto:taha@iron-gap.com)
+[iron-gap.com](https://www.iron-gap.com) · [LinkedIn](https://www.linkedin.com/in/taha-halakooei) · [taha@iron-gap.com](mailto:taha@iron-gap.com)
 
 <br>
 
-<sub><i>Absolute data sovereignty requires absolute isolation.</i></sub>
+<sub><i>Isolation you can verify beats assurance you have to trust.</i></sub>
 
 </div>
