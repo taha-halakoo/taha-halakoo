@@ -9,16 +9,19 @@ GitHub's README column is 831px at a 1280px viewport and 293px on a 375px
 phone, so the scale factor is column_width / viewBox_width.
 """
 import glob
+import os
 import re
 import sys
 import xml.etree.ElementTree as ET
 
 COL_WIDE, COL_NARROW = 831.0, 293.0
 MIN_EFFECTIVE = 11.5
-ADV = 0.605  # monospace advance per em
+GLOB = os.environ.get("SVG_GLOB", "assets/*.svg")
+ADV = 0.605
+GLOB = os.environ.get("SVG_GLOB", "assets/*.svg")  # monospace advance per em
 
 fails = []
-for path in sorted(glob.glob("assets/*.svg")):
+for path in sorted(glob.glob(GLOB)):
     root = ET.parse(path).getroot()
     vb = [float(v) for v in root.get("viewBox").split()]
     vw, vh = vb[2], vb[3]
