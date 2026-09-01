@@ -1,0 +1,47 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1000 400" width="1000" height="400" role="img" aria-label="Terminal session introducing Taha Halakooei">
+<defs>
+  <pattern id="gw" width="26" height="26" patternUnits="userSpaceOnUse"><path d="M26 0H0V26" fill="none" stroke="#FFC93C" stroke-opacity="0.04" stroke-width="1"/></pattern>
+  <clipPath id="cw"><rect width="1000" height="400" rx="14"/></clipPath>
+</defs>
+<g clip-path="url(#cw)">
+<rect width="1000" height="400" fill="#07070A"/><rect width="1000" height="400" fill="url(#gw)"/>
+
+<rect width="1000" height="42" fill="#0E1116"/>
+<circle cx="26" cy="21" r="5.5" fill="#F85149" fill-opacity="0.75"/>
+<circle cx="46" cy="21" r="5.5" fill="#FFC93C" fill-opacity="0.75"/>
+<circle cx="66" cy="21" r="5.5" fill="#3FB950" fill-opacity="0.75"/>
+<text x="92" y="26" font-family="ui-monospace,Menlo,monospace" font-size="12" fill="#5F6672" letter-spacing="1.4">taha@irongap — ~ — zsh</text>
+<line x1="0" y1="42" x2="1000" y2="42" stroke="#FFC93C" stroke-opacity="0.14"/>
+
+<g font-family="ui-monospace,'SF Mono',Menlo,Consolas,monospace" font-size="14.5">
+
+  <g opacity="0"><animate attributeName="opacity" from="0" to="1" begin="0.3s" dur="0.45s" fill="freeze"/>
+    <text x="34" y="86" fill="#3FB950">&#8250;</text><text x="56" y="86" fill="#E4E6EB">whoami</text>
+    <text x="34" y="110" fill="#8B929E">Taha Halakooei &#183; founder &amp; chief architect, IronGap Technologies</text></g>
+
+  <g opacity="0"><animate attributeName="opacity" from="0" to="1" begin="1.1s" dur="0.45s" fill="freeze"/>
+    <text x="34" y="146" fill="#3FB950">&#8250;</text><text x="56" y="146" fill="#E4E6EB">cat ~/.focus</text>
+    <text x="34" y="170" fill="#8B929E">air-gapped AI infrastructure &#183; sovereign compute &#183; zero-trust systems</text></g>
+
+  <g opacity="0"><animate attributeName="opacity" from="0" to="1" begin="1.9s" dur="0.45s" fill="freeze"/>
+    <text x="34" y="206" fill="#3FB950">&#8250;</text><text x="56" y="206" fill="#E4E6EB">ls ~/building</text>
+    <text x="34" y="230" fill="#FFC93C">vault-os/</text><text x="150" y="230" fill="#FFC93C">vault-ecosystem/</text>
+    <text x="336" y="230" fill="#8B929E">traces/</text><text x="432" y="230" fill="#8B929E">studyhub/</text><text x="556" y="230" fill="#8B929E">bme-nexus/</text></g>
+
+  <g opacity="0"><animate attributeName="opacity" from="0" to="1" begin="2.7s" dur="0.45s" fill="freeze"/>
+    <text x="34" y="266" fill="#3FB950">&#8250;</text><text x="56" y="266" fill="#E4E6EB">uptime</text>
+    <text x="34" y="290" fill="#8B929E">industrial systems since 2024 &#183; founded Jan 2026 &#183; Vault-OS v1.0.9.1 shipping</text></g>
+
+  <g opacity="0"><animate attributeName="opacity" from="0" to="1" begin="3.5s" dur="0.45s" fill="freeze"/>
+    <text x="34" y="326" fill="#3FB950">&#8250;</text><text x="56" y="326" fill="#E4E6EB">echo $PRINCIPLE</text>
+    <text x="34" y="350" fill="#FFC93C">isolation you can verify beats assurance you have to trust</text></g>
+
+  <text x="34" y="384" fill="#3FB950" opacity="0"><animate attributeName="opacity" from="0" to="1" begin="4.2s" dur="0.2s" fill="freeze"/>&#8250;</text>
+  <rect x="56" y="371" width="9" height="17" fill="#3FB950" opacity="0">
+    <animate attributeName="opacity" from="0" to="1" begin="4.2s" dur="0.2s" fill="freeze"/>
+    <animate attributeName="opacity" values="1;1;0;0;1" dur="1.1s" begin="4.4s" repeatCount="indefinite"/>
+  </rect>
+</g>
+<rect x="0.5" y="0.5" width="999" height="399" rx="14" fill="none" stroke="#FFC93C" stroke-opacity="0.14"/>
+</g>
+</svg>
