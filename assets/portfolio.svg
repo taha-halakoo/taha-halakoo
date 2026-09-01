@@ -1,81 +1,23 @@
-<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1000 340" width="1000" height="340" role="img" aria-label="Map of work across security infrastructure, platforms, applied vision and industrial systems">
-<defs>
-  <pattern id="gpo" width="26" height="26" patternUnits="userSpaceOnUse"><path d="M26 0H0V26" fill="none" stroke="#FFC93C" stroke-opacity="0.04" stroke-width="1"/></pattern>
-  <clipPath id="cpo"><rect width="1000" height="340" rx="14"/></clipPath>
-</defs>
-<g clip-path="url(#cpo)">
-<rect width="1000" height="340" fill="#07070A"/><rect width="1000" height="340" fill="url(#gpo)"/>
-<text x="34" y="34" font-family="ui-monospace,Menlo,monospace" font-size="12" fill="#FFC93C" letter-spacing="2.6">WHAT I HAVE BUILT</text>
-
-<g font-family="ui-monospace,Menlo,monospace">
-
-  <text x="26" y="66" font-size="10.5" fill="#FFC93C" letter-spacing="1.8">SECURITY &amp; INFRASTRUCTURE</text>
-  <line x1="26" y1="76" x2="248" y2="76" stroke="#FFC93C" stroke-opacity="0.3"/>
-  <g opacity="0"><animate attributeName="opacity" from="0" to="1" begin="0.15s" dur="0.45s" fill="freeze"/>
-    <rect x="26" y="88" width="222" height="62" rx="7" fill="#0E1116" stroke="#FFC93C" stroke-opacity="0.3"/>
-    <text x="42" y="110" font-size="12" fill="#E4E6EB">Vault-OS</text>
-    <text x="42" y="127" font-size="9" fill="#5F6672">air-gapped AI appliance</text>
-    <text x="42" y="141" font-size="8.5" fill="#8A7A4A">TPM 2.0 &#183; pgvector &#183; vLLM</text></g>
-  <g opacity="0"><animate attributeName="opacity" from="0" to="1" begin="0.30s" dur="0.45s" fill="freeze"/>
-    <rect x="26" y="158" width="222" height="62" rx="7" fill="#0E1116" stroke="#FFC93C" stroke-opacity="0.22"/>
-    <text x="42" y="180" font-size="12" fill="#E4E6EB">Vault-Ecosystem</text>
-    <text x="42" y="197" font-size="9" fill="#5F6672">clients, 6 platforms</text>
-    <text x="42" y="211" font-size="8.5" fill="#8A7A4A">Flutter &#183; biometric lock &#183; TOTP</text></g>
-  <g opacity="0"><animate attributeName="opacity" from="0" to="1" begin="0.45s" dur="0.45s" fill="freeze"/>
-    <rect x="26" y="228" width="222" height="62" rx="7" fill="#0E1116" stroke="#FFC93C" stroke-opacity="0.22"/>
-    <text x="42" y="250" font-size="12" fill="#E4E6EB">Console MCP</text>
-    <text x="42" y="267" font-size="9" fill="#5F6672">agent interface to the console</text>
-    <text x="42" y="281" font-size="8.5" fill="#8A7A4A">every write hits the ledger</text></g>
-
-  <text x="268" y="66" font-size="10.5" fill="#5FB84B" letter-spacing="1.8">PLATFORMS</text>
-  <line x1="268" y1="76" x2="490" y2="76" stroke="#5FB84B" stroke-opacity="0.3"/>
-  <g opacity="0"><animate attributeName="opacity" from="0" to="1" begin="0.60s" dur="0.45s" fill="freeze"/>
-    <rect x="268" y="88" width="222" height="62" rx="7" fill="#0E1116" stroke="#5FB84B" stroke-opacity="0.28"/>
-    <text x="284" y="110" font-size="12" fill="#E4E6EB">TRACES</text>
-    <text x="284" y="127" font-size="9" fill="#5F6672">location-locked content</text>
-    <text x="284" y="141" font-size="8.5" fill="#5F7A4A">PostGIS &#183; pgvector &#183; Fastify</text></g>
-  <g opacity="0"><animate attributeName="opacity" from="0" to="1" begin="0.75s" dur="0.45s" fill="freeze"/>
-    <rect x="268" y="158" width="222" height="62" rx="7" fill="#0E1116" stroke="#5FB84B" stroke-opacity="0.28"/>
-    <text x="284" y="180" font-size="12" fill="#E4E6EB">StudyHub OS</text>
-    <text x="284" y="197" font-size="9" fill="#5F6672">modular productivity</text>
-    <text x="284" y="211" font-size="8.5" fill="#5F7A4A">React &#183; Supabase RBAC</text></g>
-  <g opacity="0"><animate attributeName="opacity" from="0" to="1" begin="0.90s" dur="0.45s" fill="freeze"/>
-    <rect x="268" y="228" width="222" height="62" rx="7" fill="#0E1116" stroke="#5FB84B" stroke-opacity="0.28"/>
-    <text x="284" y="250" font-size="12" fill="#E4E6EB">YTU BME Nexus</text>
-    <text x="284" y="267" font-size="9" fill="#5F6672">department platform</text>
-    <text x="284" y="281" font-size="8.5" fill="#5F7A4A">users find me in the corridor</text></g>
-
-  <text x="510" y="66" font-size="10.5" fill="#8FB63C" letter-spacing="1.8">APPLIED VISION</text>
-  <line x1="510" y1="76" x2="732" y2="76" stroke="#8FB63C" stroke-opacity="0.3"/>
-  <g opacity="0"><animate attributeName="opacity" from="0" to="1" begin="1.05s" dur="0.45s" fill="freeze"/>
-    <rect x="510" y="88" width="222" height="62" rx="7" fill="#0E1116" stroke="#8FB63C" stroke-opacity="0.28"/>
-    <text x="526" y="110" font-size="12" fill="#E4E6EB">Virtual Mouse</text>
-    <text x="526" y="127" font-size="9" fill="#5F6672">hands-free pointer control</text>
-    <text x="526" y="141" font-size="8.5" fill="#7A7A4A">MediaPipe &#183; One-Euro filter</text></g>
-  <g opacity="0"><animate attributeName="opacity" from="0" to="1" begin="1.20s" dur="0.45s" fill="freeze"/>
-    <rect x="510" y="158" width="222" height="62" rx="7" fill="#0E1116" stroke="#8FB63C" stroke-opacity="0.2"/>
-    <text x="526" y="180" font-size="12" fill="#E4E6EB">Polaris R&amp;D</text>
-    <text x="526" y="197" font-size="9" fill="#5F6672">MATE research group, YTU</text>
-    <text x="526" y="211" font-size="8.5" fill="#7A7A4A">Python, algorithms, teaching</text></g>
-
-  <text x="752" y="66" font-size="10.5" fill="#8B929E" letter-spacing="1.8">INDUSTRIAL</text>
-  <line x1="752" y1="76" x2="974" y2="76" stroke="#8B929E" stroke-opacity="0.25"/>
-  <g opacity="0"><animate attributeName="opacity" from="0" to="1" begin="1.35s" dur="0.45s" fill="freeze"/>
-    <rect x="752" y="88" width="222" height="62" rx="7" fill="#0E1116" stroke="#8B929E" stroke-opacity="0.22"/>
-    <text x="768" y="110" font-size="12" fill="#E4E6EB">Golestan Axon</text>
-    <text x="768" y="127" font-size="9" fill="#5F6672">systems &amp; IT, 2 years</text>
-    <text x="768" y="141" font-size="8.5" fill="#6A6A6A">iodine plant commissioning</text></g>
-  <g opacity="0"><animate attributeName="opacity" from="0" to="1" begin="1.50s" dur="0.45s" fill="freeze"/>
-    <rect x="752" y="158" width="222" height="62" rx="7" fill="#0E1116" stroke="#8B929E" stroke-opacity="0.18"/>
-    <text x="768" y="180" font-size="12" fill="#E4E6EB">Iodina</text>
-    <text x="768" y="197" font-size="9" fill="#5F6672">extraction plant systems</text>
-    <text x="768" y="211" font-size="8.5" fill="#6A6A6A">where the uptime lessons came from</text></g>
-</g>
-
-<g opacity="0"><animate attributeName="opacity" from="0" to="1" begin="1.8s" dur="0.7s" fill="freeze"/>
-  <line x1="26" y1="306" x2="974" y2="306" stroke="#FFC93C" stroke-opacity="0.10"/>
-  <text x="26" y="328" font-family="ui-monospace,Menlo,monospace" font-size="11" fill="#5F6672">Four domains, one throughline: systems that have to keep working when the convenient assumptions are not available.</text>
-</g>
-<rect x="0.5" y="0.5" width="999" height="339" rx="14" fill="none" stroke="#FFC93C" stroke-opacity="0.14"/>
-</g>
-</svg>
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 820 392" width="820" height="392" role="img" aria-label="Map of work across security, platforms, applied vision and industry">
+<defs><pattern id="gpf" width="26" height="26" patternUnits="userSpaceOnUse"><path d="M26 0H0V26" fill="none" stroke="#FFC93C" stroke-opacity="0.045"/></pattern><clipPath id="cpf"><rect width="820" height="392" rx="12"/></clipPath></defs>
+<g clip-path="url(#cpf)"><rect width="820" height="392" fill="#07070A"/><rect width="820" height="392" fill="url(#gpf)"/>
+<text x="28" y="28" font-family="ui-monospace,'SF Mono',Menlo,Consolas,monospace" font-size="13.5" fill="#FFC93C" letter-spacing="2.2">WHAT I HAVE BUILT</text>
+<text x="28.0" y="58.0" font-family="ui-monospace,'SF Mono',Menlo,Consolas,monospace" font-size="12.5" fill="#FFC93C" letter-spacing="1.3">SECURITY &amp; INFRASTRUCTURE</text>
+<line x1="28.0" y1="66" x2="210.0" y2="66" stroke="#FFC93C" stroke-opacity="0.3"/>
+<g opacity="0"><animate attributeName="opacity" from="0" to="1" begin="0.15s" dur="0.45s" fill="freeze"/><rect x="28.0" y="80.0" width="182.0" height="92.0" rx="7" fill="#0E1116" stroke="#FFC93C" stroke-opacity="0.26"/><text x="40.0" y="101.0" font-family="ui-monospace,'SF Mono',Menlo,Consolas,monospace" font-size="13.5" fill="#E4E6EB">Vault-OS</text><text x="40.0" y="119.0" font-family="ui-monospace,'SF Mono',Menlo,Consolas,monospace" font-size="12.5" fill="#5F6672">air-gapped AI</text><text x="40.0" y="134.0" font-family="ui-monospace,'SF Mono',Menlo,Consolas,monospace" font-size="12.5" fill="#5F6672">appliance</text><text x="40.0" y="157.0" font-family="ui-monospace,'SF Mono',Menlo,Consolas,monospace" font-size="12.5" fill="#8A7A4A">TPM 2.0 · pgvector ·</text><text x="40.0" y="172.0" font-family="ui-monospace,'SF Mono',Menlo,Consolas,monospace" font-size="12.5" fill="#8A7A4A">vLLM</text></g>
+<g opacity="0"><animate attributeName="opacity" from="0" to="1" begin="0.24s" dur="0.45s" fill="freeze"/><rect x="28.0" y="180.0" width="182.0" height="92.0" rx="7" fill="#0E1116" stroke="#FFC93C" stroke-opacity="0.26"/><text x="40.0" y="201.0" font-family="ui-monospace,'SF Mono',Menlo,Consolas,monospace" font-size="13.5" fill="#E4E6EB">Vault-Ecosystem</text><text x="40.0" y="219.0" font-family="ui-monospace,'SF Mono',Menlo,Consolas,monospace" font-size="12.5" fill="#5F6672">clients, 6 platforms</text><text x="40.0" y="257.0" font-family="ui-monospace,'SF Mono',Menlo,Consolas,monospace" font-size="12.5" fill="#8A7A4A">Flutter · biometric</text><text x="40.0" y="272.0" font-family="ui-monospace,'SF Mono',Menlo,Consolas,monospace" font-size="12.5" fill="#8A7A4A">lock</text></g>
+<g opacity="0"><animate attributeName="opacity" from="0" to="1" begin="0.33s" dur="0.45s" fill="freeze"/><rect x="28.0" y="280.0" width="182.0" height="92.0" rx="7" fill="#0E1116" stroke="#FFC93C" stroke-opacity="0.26"/><text x="40.0" y="301.0" font-family="ui-monospace,'SF Mono',Menlo,Consolas,monospace" font-size="13.5" fill="#E4E6EB">Console MCP</text><text x="40.0" y="319.0" font-family="ui-monospace,'SF Mono',Menlo,Consolas,monospace" font-size="12.5" fill="#5F6672">agent interface</text><text x="40.0" y="357.0" font-family="ui-monospace,'SF Mono',Menlo,Consolas,monospace" font-size="12.5" fill="#8A7A4A">every write hits the</text><text x="40.0" y="372.0" font-family="ui-monospace,'SF Mono',Menlo,Consolas,monospace" font-size="12.5" fill="#8A7A4A">ledger</text></g>
+<text x="222.0" y="58.0" font-family="ui-monospace,'SF Mono',Menlo,Consolas,monospace" font-size="12.5" fill="#5FB84B" letter-spacing="1.3">PLATFORMS</text>
+<line x1="222.0" y1="66" x2="404.0" y2="66" stroke="#5FB84B" stroke-opacity="0.3"/>
+<g opacity="0"><animate attributeName="opacity" from="0" to="1" begin="0.42s" dur="0.45s" fill="freeze"/><rect x="222.0" y="80.0" width="182.0" height="92.0" rx="7" fill="#0E1116" stroke="#5FB84B" stroke-opacity="0.26"/><text x="234.0" y="101.0" font-family="ui-monospace,'SF Mono',Menlo,Consolas,monospace" font-size="13.5" fill="#E4E6EB">TRACES</text><text x="234.0" y="119.0" font-family="ui-monospace,'SF Mono',Menlo,Consolas,monospace" font-size="12.5" fill="#5F6672">location-locked</text><text x="234.0" y="134.0" font-family="ui-monospace,'SF Mono',Menlo,Consolas,monospace" font-size="12.5" fill="#5F6672">content</text><text x="234.0" y="157.0" font-family="ui-monospace,'SF Mono',Menlo,Consolas,monospace" font-size="12.5" fill="#8A7A4A">PostGIS · pgvector ·</text><text x="234.0" y="172.0" font-family="ui-monospace,'SF Mono',Menlo,Consolas,monospace" font-size="12.5" fill="#8A7A4A">Fastify</text></g>
+<g opacity="0"><animate attributeName="opacity" from="0" to="1" begin="0.51s" dur="0.45s" fill="freeze"/><rect x="222.0" y="180.0" width="182.0" height="92.0" rx="7" fill="#0E1116" stroke="#5FB84B" stroke-opacity="0.26"/><text x="234.0" y="201.0" font-family="ui-monospace,'SF Mono',Menlo,Consolas,monospace" font-size="13.5" fill="#E4E6EB">StudyHub OS</text><text x="234.0" y="219.0" font-family="ui-monospace,'SF Mono',Menlo,Consolas,monospace" font-size="12.5" fill="#5F6672">modular productivity</text><text x="234.0" y="257.0" font-family="ui-monospace,'SF Mono',Menlo,Consolas,monospace" font-size="12.5" fill="#8A7A4A">React · Supabase</text><text x="234.0" y="272.0" font-family="ui-monospace,'SF Mono',Menlo,Consolas,monospace" font-size="12.5" fill="#8A7A4A">RBAC</text></g>
+<g opacity="0"><animate attributeName="opacity" from="0" to="1" begin="0.60s" dur="0.45s" fill="freeze"/><rect x="222.0" y="280.0" width="182.0" height="92.0" rx="7" fill="#0E1116" stroke="#5FB84B" stroke-opacity="0.26"/><text x="234.0" y="301.0" font-family="ui-monospace,'SF Mono',Menlo,Consolas,monospace" font-size="13.5" fill="#E4E6EB">YTU BME Nexus</text><text x="234.0" y="319.0" font-family="ui-monospace,'SF Mono',Menlo,Consolas,monospace" font-size="12.5" fill="#5F6672">department platform</text><text x="234.0" y="357.0" font-family="ui-monospace,'SF Mono',Menlo,Consolas,monospace" font-size="12.5" fill="#8A7A4A">React · Supabase</text></g>
+<text x="416.0" y="58.0" font-family="ui-monospace,'SF Mono',Menlo,Consolas,monospace" font-size="12.5" fill="#8FB63C" letter-spacing="1.3">APPLIED VISION</text>
+<line x1="416.0" y1="66" x2="598.0" y2="66" stroke="#8FB63C" stroke-opacity="0.3"/>
+<g opacity="0"><animate attributeName="opacity" from="0" to="1" begin="0.69s" dur="0.45s" fill="freeze"/><rect x="416.0" y="80.0" width="182.0" height="92.0" rx="7" fill="#0E1116" stroke="#8FB63C" stroke-opacity="0.26"/><text x="428.0" y="101.0" font-family="ui-monospace,'SF Mono',Menlo,Consolas,monospace" font-size="13.5" fill="#E4E6EB">Virtual Mouse</text><text x="428.0" y="119.0" font-family="ui-monospace,'SF Mono',Menlo,Consolas,monospace" font-size="12.5" fill="#5F6672">hands-free pointer</text><text x="428.0" y="134.0" font-family="ui-monospace,'SF Mono',Menlo,Consolas,monospace" font-size="12.5" fill="#5F6672">control</text><text x="428.0" y="157.0" font-family="ui-monospace,'SF Mono',Menlo,Consolas,monospace" font-size="12.5" fill="#8A7A4A">MediaPipe · One-Euro</text></g>
+<g opacity="0"><animate attributeName="opacity" from="0" to="1" begin="0.78s" dur="0.45s" fill="freeze"/><rect x="416.0" y="180.0" width="182.0" height="92.0" rx="7" fill="#0E1116" stroke="#8FB63C" stroke-opacity="0.26"/><text x="428.0" y="201.0" font-family="ui-monospace,'SF Mono',Menlo,Consolas,monospace" font-size="13.5" fill="#E4E6EB">Polaris R&amp;D</text><text x="428.0" y="219.0" font-family="ui-monospace,'SF Mono',Menlo,Consolas,monospace" font-size="12.5" fill="#5F6672">MATE research group</text><text x="428.0" y="257.0" font-family="ui-monospace,'SF Mono',Menlo,Consolas,monospace" font-size="12.5" fill="#8A7A4A">Python · algorithms</text></g>
+<text x="610.0" y="58.0" font-family="ui-monospace,'SF Mono',Menlo,Consolas,monospace" font-size="12.5" fill="#8B929E" letter-spacing="1.3">INDUSTRIAL</text>
+<line x1="610.0" y1="66" x2="792.0" y2="66" stroke="#8B929E" stroke-opacity="0.3"/>
+<g opacity="0"><animate attributeName="opacity" from="0" to="1" begin="0.87s" dur="0.45s" fill="freeze"/><rect x="610.0" y="80.0" width="182.0" height="92.0" rx="7" fill="#0E1116" stroke="#8B929E" stroke-opacity="0.26"/><text x="622.0" y="101.0" font-family="ui-monospace,'SF Mono',Menlo,Consolas,monospace" font-size="13.5" fill="#E4E6EB">Golestan Axon</text><text x="622.0" y="119.0" font-family="ui-monospace,'SF Mono',Menlo,Consolas,monospace" font-size="12.5" fill="#5F6672">systems &amp; IT, 2</text><text x="622.0" y="134.0" font-family="ui-monospace,'SF Mono',Menlo,Consolas,monospace" font-size="12.5" fill="#5F6672">years</text><text x="622.0" y="157.0" font-family="ui-monospace,'SF Mono',Menlo,Consolas,monospace" font-size="12.5" fill="#8A7A4A">iodine plant</text><text x="622.0" y="172.0" font-family="ui-monospace,'SF Mono',Menlo,Consolas,monospace" font-size="12.5" fill="#8A7A4A">commissioning</text></g>
+<g opacity="0"><animate attributeName="opacity" from="0" to="1" begin="0.96s" dur="0.45s" fill="freeze"/><rect x="610.0" y="180.0" width="182.0" height="92.0" rx="7" fill="#0E1116" stroke="#8B929E" stroke-opacity="0.26"/><text x="622.0" y="201.0" font-family="ui-monospace,'SF Mono',Menlo,Consolas,monospace" font-size="13.5" fill="#E4E6EB">Iodina</text><text x="622.0" y="219.0" font-family="ui-monospace,'SF Mono',Menlo,Consolas,monospace" font-size="12.5" fill="#5F6672">extraction plant</text><text x="622.0" y="234.0" font-family="ui-monospace,'SF Mono',Menlo,Consolas,monospace" font-size="12.5" fill="#5F6672">systems</text><text x="622.0" y="257.0" font-family="ui-monospace,'SF Mono',Menlo,Consolas,monospace" font-size="12.5" fill="#8A7A4A">where uptime was</text><text x="622.0" y="272.0" font-family="ui-monospace,'SF Mono',Menlo,Consolas,monospace" font-size="12.5" fill="#8A7A4A">learned</text></g>
+<rect x="0.5" y="0.5" width="819" height="391" rx="12" fill="none" stroke="#FFC93C" stroke-opacity="0.16"/></g></svg>

@@ -1,64 +1,12 @@
-<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1000 250" width="1000" height="250" role="img" aria-label="Timeline: Sampad, Golestan Axon, Yildiz Technical University, IronGap founding, Vault-OS shipping">
-<defs>
-  <linearGradient id="tl" x1="0" y1="0" x2="1" y2="0">
-    <stop offset="0" stop-color="#3FB950"/><stop offset="0.55" stop-color="#8FB63C"/><stop offset="1" stop-color="#FFC93C"/>
-  </linearGradient>
-  <pattern id="gt" width="26" height="26" patternUnits="userSpaceOnUse"><path d="M26 0H0V26" fill="none" stroke="#FFC93C" stroke-opacity="0.04" stroke-width="1"/></pattern>
-  <clipPath id="ct"><rect width="1000" height="250" rx="14"/></clipPath>
-  <filter id="glt" x="-60%" y="-60%" width="220%" height="220%"><feGaussianBlur stdDeviation="3" result="b"/><feMerge><feMergeNode in="b"/><feMergeNode in="SourceGraphic"/></feMerge></filter>
-</defs>
-<g clip-path="url(#ct)">
-<rect width="1000" height="250" fill="#07070A"/><rect width="1000" height="250" fill="url(#gt)"/>
-<text x="34" y="34" font-family="ui-monospace,Menlo,monospace" font-size="12" fill="#FFC93C" letter-spacing="2.6">TRAJECTORY</text>
-
-<line x1="80" y1="112" x2="915" y2="112" stroke="#1C2128" stroke-width="2"/>
-<line x1="80" y1="112" x2="915" y2="112" stroke="url(#tl)" stroke-width="2.5" stroke-dasharray="835" stroke-dashoffset="835">
-  <animate attributeName="stroke-dashoffset" from="835" to="0" dur="2.6s" fill="freeze"/>
-</line>
-
-<g font-family="ui-monospace,Menlo,monospace">
-
-  <g opacity="0"><animate attributeName="opacity" from="0" to="1" begin="0.2s" dur="0.5s" fill="freeze"/>
-    <text x="80" y="92" font-size="10.5" fill="#5F6672" letter-spacing="1.4" text-anchor="middle">2013 &#8212; 2025</text>
-    <circle cx="80" cy="112" r="6" fill="#07070A" stroke="#3FB950" stroke-width="2"/>
-    <text x="80" y="146" font-size="12.5" fill="#E4E6EB" text-anchor="middle">SAMPAD</text>
-    <text x="80" y="166" font-size="10.5" fill="#5F6672" text-anchor="middle">exceptional</text>
-    <text x="80" y="181" font-size="10.5" fill="#5F6672" text-anchor="middle">talents program</text></g>
-
-  <g opacity="0"><animate attributeName="opacity" from="0" to="1" begin="0.8s" dur="0.5s" fill="freeze"/>
-    <text x="289" y="92" font-size="10.5" fill="#5F6672" letter-spacing="1.4" text-anchor="middle">JUN 2024</text>
-    <circle cx="289" cy="112" r="6" fill="#07070A" stroke="#5FB84B" stroke-width="2"/>
-    <text x="289" y="146" font-size="12.5" fill="#E4E6EB" text-anchor="middle">GOLESTAN AXON</text>
-    <text x="289" y="166" font-size="10.5" fill="#5F6672" text-anchor="middle">systems &amp; IT &#183; uptime through</text>
-    <text x="289" y="181" font-size="10.5" fill="#5F6672" text-anchor="middle">an iodine plant commissioning</text></g>
-
-  <g opacity="0"><animate attributeName="opacity" from="0" to="1" begin="1.4s" dur="0.5s" fill="freeze"/>
-    <text x="497" y="92" font-size="10.5" fill="#5F6672" letter-spacing="1.4" text-anchor="middle">SEP 2025</text>
-    <circle cx="497" cy="112" r="6" fill="#07070A" stroke="#8FB63C" stroke-width="2"/>
-    <text x="497" y="146" font-size="12.5" fill="#E4E6EB" text-anchor="middle">YILDIZ TECHNICAL</text>
-    <text x="497" y="166" font-size="10.5" fill="#5F6672" text-anchor="middle">biomedical engineering</text>
-    <text x="497" y="181" font-size="10.5" fill="#5F6672" text-anchor="middle">100% English curriculum</text></g>
-
-  <g opacity="0"><animate attributeName="opacity" from="0" to="1" begin="2.0s" dur="0.5s" fill="freeze"/>
-    <text x="706" y="92" font-size="10.5" fill="#5F6672" letter-spacing="1.4" text-anchor="middle">JAN 2026</text>
-    <circle cx="706" cy="112" r="6" fill="#07070A" stroke="#D9C22E" stroke-width="2"/>
-    <text x="706" y="146" font-size="12.5" fill="#E4E6EB" text-anchor="middle">IRONGAP FOUNDED</text>
-    <text x="706" y="166" font-size="10.5" fill="#5F6672" text-anchor="middle">Vault-OS architecture</text>
-    <text x="706" y="181" font-size="10.5" fill="#5F6672" text-anchor="middle">begins from bare metal</text></g>
-
-  <g opacity="0"><animate attributeName="opacity" from="0" to="1" begin="2.6s" dur="0.5s" fill="freeze"/>
-    <text x="915" y="92" font-size="10.5" fill="#FFC93C" letter-spacing="1.4" text-anchor="middle">NOW</text>
-    <circle cx="915" cy="112" r="7.5" fill="#FFC93C" filter="url(#glt)">
-      <animate attributeName="opacity" values="1;0.35;1" dur="2.2s" begin="3.1s" repeatCount="indefinite"/></circle>
-    <text x="915" y="146" font-size="12.5" fill="#FFC93C" text-anchor="middle">v1.0.9.1</text>
-    <text x="915" y="166" font-size="10.5" fill="#5F6672" text-anchor="middle">shipping on Windows</text>
-    <text x="915" y="181" font-size="10.5" fill="#5F6672" text-anchor="middle">Linux &amp; macOS in progress</text></g>
-</g>
-
-<g opacity="0"><animate attributeName="opacity" from="0" to="1" begin="3.2s" dur="0.7s" fill="freeze"/>
-  <line x1="34" y1="207" x2="966" y2="207" stroke="#FFC93C" stroke-opacity="0.10"/>
-  <text x="34" y="231" font-family="ui-monospace,Menlo,monospace" font-size="11.5" fill="#5F6672">Two years keeping industrial infrastructure alive taught me more about uptime than any course did. The rest followed from that.</text>
-</g>
-<rect x="0.5" y="0.5" width="999" height="249" rx="14" fill="none" stroke="#FFC93C" stroke-opacity="0.14"/>
-</g>
-</svg>
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 820 217" width="820" height="217" role="img" aria-label="Trajectory from Sampad to IronGap">
+<defs><pattern id="gtl" width="26" height="26" patternUnits="userSpaceOnUse"><path d="M26 0H0V26" fill="none" stroke="#FFC93C" stroke-opacity="0.045"/></pattern><clipPath id="ctl"><rect width="820" height="217" rx="12"/></clipPath></defs>
+<g clip-path="url(#ctl)"><rect width="820" height="217" fill="#07070A"/><rect width="820" height="217" fill="url(#gtl)"/>
+<text x="28" y="28" font-family="ui-monospace,'SF Mono',Menlo,Consolas,monospace" font-size="13.5" fill="#FFC93C" letter-spacing="2.2">TRAJECTORY</text>
+<defs><linearGradient id="tg" x1="0" y1="0" x2="1" y2="0"><stop offset="0" stop-color="#3FB950"/><stop offset="1" stop-color="#FFC93C"/></linearGradient></defs>
+<line x1="104.4" y1="94" x2="715.6" y2="94" stroke="url(#tg)" stroke-width="2.5" stroke-dasharray="611" stroke-dashoffset="611"><animate attributeName="stroke-dashoffset" from="611" to="0" dur="2.2s" fill="freeze"/></line>
+<g opacity="0"><animate attributeName="opacity" from="0" to="1" begin="0.20s" dur="0.45s" fill="freeze"/><text x="104.4" y="76.0" font-family="ui-monospace,'SF Mono',Menlo,Consolas,monospace" font-size="12.5" fill="#5F6672" text-anchor="middle" letter-spacing="1.2">2013 — 2025</text><circle cx="104.4" cy="94" r="6" fill="#07070A" stroke="#3FB950" stroke-width="2"/><text x="104.4" y="126.0" font-family="ui-monospace,'SF Mono',Menlo,Consolas,monospace" font-size="13.5" fill="#E4E6EB" text-anchor="middle">SAMPAD</text><text x="104.4" y="148.0" font-family="ui-monospace,'SF Mono',Menlo,Consolas,monospace" font-size="12.5" fill="#5F6672" text-anchor="middle">exceptional</text><text x="104.4" y="165.0" font-family="ui-monospace,'SF Mono',Menlo,Consolas,monospace" font-size="12.5" fill="#5F6672" text-anchor="middle">talents programme</text></g>
+<g opacity="0"><animate attributeName="opacity" from="0" to="1" begin="0.50s" dur="0.45s" fill="freeze"/><text x="257.2" y="76.0" font-family="ui-monospace,'SF Mono',Menlo,Consolas,monospace" font-size="12.5" fill="#5F6672" text-anchor="middle" letter-spacing="1.2">JUN 2024</text><circle cx="257.2" cy="94" r="6" fill="#07070A" stroke="#5FB84B" stroke-width="2"/><text x="257.2" y="126.0" font-family="ui-monospace,'SF Mono',Menlo,Consolas,monospace" font-size="13.5" fill="#E4E6EB" text-anchor="middle">GOLESTAN AXON</text><text x="257.2" y="148.0" font-family="ui-monospace,'SF Mono',Menlo,Consolas,monospace" font-size="12.5" fill="#5F6672" text-anchor="middle">systems &amp; IT ·</text><text x="257.2" y="165.0" font-family="ui-monospace,'SF Mono',Menlo,Consolas,monospace" font-size="12.5" fill="#5F6672" text-anchor="middle">iodine plant</text><text x="257.2" y="182.0" font-family="ui-monospace,'SF Mono',Menlo,Consolas,monospace" font-size="12.5" fill="#5F6672" text-anchor="middle">uptime</text></g>
+<g opacity="0"><animate attributeName="opacity" from="0" to="1" begin="0.80s" dur="0.45s" fill="freeze"/><text x="410.0" y="76.0" font-family="ui-monospace,'SF Mono',Menlo,Consolas,monospace" font-size="12.5" fill="#5F6672" text-anchor="middle" letter-spacing="1.2">SEP 2025</text><circle cx="410.0" cy="94" r="6" fill="#07070A" stroke="#8FB63C" stroke-width="2"/><text x="410.0" y="126.0" font-family="ui-monospace,'SF Mono',Menlo,Consolas,monospace" font-size="13.5" fill="#E4E6EB" text-anchor="middle">YILDIZ TECHNICAL</text><text x="410.0" y="148.0" font-family="ui-monospace,'SF Mono',Menlo,Consolas,monospace" font-size="12.5" fill="#5F6672" text-anchor="middle">biomedical</text><text x="410.0" y="165.0" font-family="ui-monospace,'SF Mono',Menlo,Consolas,monospace" font-size="12.5" fill="#5F6672" text-anchor="middle">engineering, 100%</text><text x="410.0" y="182.0" font-family="ui-monospace,'SF Mono',Menlo,Consolas,monospace" font-size="12.5" fill="#5F6672" text-anchor="middle">English</text></g>
+<g opacity="0"><animate attributeName="opacity" from="0" to="1" begin="1.10s" dur="0.45s" fill="freeze"/><text x="562.8" y="76.0" font-family="ui-monospace,'SF Mono',Menlo,Consolas,monospace" font-size="12.5" fill="#5F6672" text-anchor="middle" letter-spacing="1.2">JAN 2026</text><circle cx="562.8" cy="94" r="6" fill="#07070A" stroke="#D9C22E" stroke-width="2"/><text x="562.8" y="126.0" font-family="ui-monospace,'SF Mono',Menlo,Consolas,monospace" font-size="13.5" fill="#E4E6EB" text-anchor="middle">IRONGAP FOUNDED</text><text x="562.8" y="148.0" font-family="ui-monospace,'SF Mono',Menlo,Consolas,monospace" font-size="12.5" fill="#5F6672" text-anchor="middle">Vault-OS</text><text x="562.8" y="165.0" font-family="ui-monospace,'SF Mono',Menlo,Consolas,monospace" font-size="12.5" fill="#5F6672" text-anchor="middle">architecture from</text><text x="562.8" y="182.0" font-family="ui-monospace,'SF Mono',Menlo,Consolas,monospace" font-size="12.5" fill="#5F6672" text-anchor="middle">bare metal</text></g>
+<g opacity="0"><animate attributeName="opacity" from="0" to="1" begin="1.40s" dur="0.45s" fill="freeze"/><text x="715.6" y="76.0" font-family="ui-monospace,'SF Mono',Menlo,Consolas,monospace" font-size="12.5" fill="#FFC93C" text-anchor="middle" letter-spacing="1.2">NOW</text><circle cx="715.6" cy="94" r="7" fill="#FFC93C" stroke="#FFC93C" stroke-width="2"/><text x="715.6" y="126.0" font-family="ui-monospace,'SF Mono',Menlo,Consolas,monospace" font-size="13.5" fill="#E4E6EB" text-anchor="middle">v1.0.9.1</text><text x="715.6" y="148.0" font-family="ui-monospace,'SF Mono',Menlo,Consolas,monospace" font-size="12.5" fill="#5F6672" text-anchor="middle">shipping on</text><text x="715.6" y="165.0" font-family="ui-monospace,'SF Mono',Menlo,Consolas,monospace" font-size="12.5" fill="#5F6672" text-anchor="middle">Windows</text></g>
+<rect x="0.5" y="0.5" width="819" height="216" rx="12" fill="none" stroke="#FFC93C" stroke-opacity="0.16"/></g></svg>

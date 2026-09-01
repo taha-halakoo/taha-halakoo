@@ -1,50 +1,48 @@
-<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1000 270" width="1000" height="270" role="img" aria-label="Monthly contribution volume for taha-halakoo">
-<defs><pattern id="gv" width="26" height="26" patternUnits="userSpaceOnUse"><path d="M26 0H0V26" fill="none" stroke="#FFC93C" stroke-opacity="0.045"/></pattern><clipPath id="cv"><rect width="1000" height="270" rx="14"/></clipPath></defs>
-<g clip-path="url(#cv)"><rect width="1000" height="270" fill="#07070A"/>
-<rect width="1000" height="270" fill="url(#gv)"/>
-<text x="34" y="34" font-family="ui-monospace,Menlo,monospace" font-size="12" fill="#FFC93C" letter-spacing="2.6">VELOCITY &#183; CONTRIBUTIONS PER MONTH</text>
-<line x1="60" y1="179.0" x2="966" y2="179.0" stroke="#FFC93C" stroke-opacity="0.07"/><text x="52" y="183.0" font-family="ui-monospace,Menlo,monospace" font-size="9" fill="#5F6672" text-anchor="end">130</text>
-<line x1="60" y1="144.0" x2="966" y2="144.0" stroke="#FFC93C" stroke-opacity="0.07"/><text x="52" y="148.0" font-family="ui-monospace,Menlo,monospace" font-size="9" fill="#5F6672" text-anchor="end">261</text>
-<line x1="60" y1="109.0" x2="966" y2="109.0" stroke="#FFC93C" stroke-opacity="0.07"/><text x="52" y="113.0" font-family="ui-monospace,Menlo,monospace" font-size="9" fill="#5F6672" text-anchor="end">392</text>
-<line x1="60" y1="74.0" x2="966" y2="74.0" stroke="#FFC93C" stroke-opacity="0.07"/><text x="52" y="78.0" font-family="ui-monospace,Menlo,monospace" font-size="9" fill="#5F6672" text-anchor="end">523</text>
-<rect x="71.8" y="214" width="46.0" height="0" rx="3" fill="#8A6A0A"><animate attributeName="height" from="0" to="0.0" dur="0.7s" begin="0.20s" fill="freeze"/><animate attributeName="y" from="214" to="214.0" dur="0.7s" begin="0.20s" fill="freeze"/></rect>
-<text x="94.8" y="232" font-family="ui-monospace,Menlo,monospace" font-size="9.5" fill="#5F6672" text-anchor="middle">Sep</text>
-<rect x="141.5" y="214" width="46.0" height="0" rx="3" fill="#8A6A0A"><animate attributeName="height" from="0" to="0.0" dur="0.7s" begin="0.26s" fill="freeze"/><animate attributeName="y" from="214" to="214.0" dur="0.7s" begin="0.26s" fill="freeze"/></rect>
-<text x="164.5" y="232" font-family="ui-monospace,Menlo,monospace" font-size="9.5" fill="#5F6672" text-anchor="middle">Oct</text>
-<rect x="211.2" y="214" width="46.0" height="0" rx="3" fill="#8A6A0A"><animate attributeName="height" from="0" to="0.8" dur="0.7s" begin="0.32s" fill="freeze"/><animate attributeName="y" from="214" to="213.2" dur="0.7s" begin="0.32s" fill="freeze"/></rect>
-<text x="234.2" y="232" font-family="ui-monospace,Menlo,monospace" font-size="9.5" fill="#5F6672" text-anchor="middle">Nov</text>
-<text x="234.2" y="205.2" font-family="ui-monospace,Menlo,monospace" font-size="9.5" fill="#5F6672" text-anchor="middle" opacity="0"><animate attributeName="opacity" from="0" to="1" dur="0.4s" begin="1.02s" fill="freeze"/>3</text>
-<rect x="280.9" y="214" width="46.0" height="0" rx="3" fill="#8A6A0A"><animate attributeName="height" from="0" to="4.6" dur="0.7s" begin="0.38s" fill="freeze"/><animate attributeName="y" from="214" to="209.4" dur="0.7s" begin="0.38s" fill="freeze"/></rect>
-<text x="303.9" y="232" font-family="ui-monospace,Menlo,monospace" font-size="9.5" fill="#5F6672" text-anchor="middle">Dec</text>
-<text x="303.9" y="201.4" font-family="ui-monospace,Menlo,monospace" font-size="9.5" fill="#5F6672" text-anchor="middle" opacity="0"><animate attributeName="opacity" from="0" to="1" dur="0.4s" begin="1.08s" fill="freeze"/>17</text>
-<rect x="350.6" y="214" width="46.0" height="0" rx="3" fill="#8A6A0A"><animate attributeName="height" from="0" to="1.6" dur="0.7s" begin="0.44s" fill="freeze"/><animate attributeName="y" from="214" to="212.4" dur="0.7s" begin="0.44s" fill="freeze"/></rect>
-<text x="373.6" y="232" font-family="ui-monospace,Menlo,monospace" font-size="9.5" fill="#5F6672" text-anchor="middle">Jan</text>
-<text x="373.6" y="204.4" font-family="ui-monospace,Menlo,monospace" font-size="9.5" fill="#5F6672" text-anchor="middle" opacity="0"><animate attributeName="opacity" from="0" to="1" dur="0.4s" begin="1.14s" fill="freeze"/>6</text>
-<rect x="420.3" y="214" width="46.0" height="0" rx="3" fill="#8A6A0A"><animate attributeName="height" from="0" to="19.8" dur="0.7s" begin="0.50s" fill="freeze"/><animate attributeName="y" from="214" to="194.2" dur="0.7s" begin="0.50s" fill="freeze"/></rect>
-<text x="443.3" y="232" font-family="ui-monospace,Menlo,monospace" font-size="9.5" fill="#5F6672" text-anchor="middle">Feb</text>
-<text x="443.3" y="186.2" font-family="ui-monospace,Menlo,monospace" font-size="9.5" fill="#5F6672" text-anchor="middle" opacity="0"><animate attributeName="opacity" from="0" to="1" dur="0.4s" begin="1.20s" fill="freeze"/>74</text>
-<rect x="490.0" y="214" width="46.0" height="0" rx="3" fill="#8A6A0A"><animate attributeName="height" from="0" to="8.3" dur="0.7s" begin="0.56s" fill="freeze"/><animate attributeName="y" from="214" to="205.7" dur="0.7s" begin="0.56s" fill="freeze"/></rect>
-<text x="513.0" y="232" font-family="ui-monospace,Menlo,monospace" font-size="9.5" fill="#5F6672" text-anchor="middle">Mar</text>
-<text x="513.0" y="197.7" font-family="ui-monospace,Menlo,monospace" font-size="9.5" fill="#5F6672" text-anchor="middle" opacity="0"><animate attributeName="opacity" from="0" to="1" dur="0.4s" begin="1.26s" fill="freeze"/>31</text>
-<rect x="559.7" y="214" width="46.0" height="0" rx="3" fill="#8A6A0A"><animate attributeName="height" from="0" to="18.7" dur="0.7s" begin="0.62s" fill="freeze"/><animate attributeName="y" from="214" to="195.3" dur="0.7s" begin="0.62s" fill="freeze"/></rect>
-<text x="582.7" y="232" font-family="ui-monospace,Menlo,monospace" font-size="9.5" fill="#5F6672" text-anchor="middle">Apr</text>
-<text x="582.7" y="187.3" font-family="ui-monospace,Menlo,monospace" font-size="9.5" fill="#5F6672" text-anchor="middle" opacity="0"><animate attributeName="opacity" from="0" to="1" dur="0.4s" begin="1.32s" fill="freeze"/>70</text>
-<rect x="629.4" y="214" width="46.0" height="0" rx="3" fill="#8A6A0A"><animate attributeName="height" from="0" to="67.5" dur="0.7s" begin="0.68s" fill="freeze"/><animate attributeName="y" from="214" to="146.5" dur="0.7s" begin="0.68s" fill="freeze"/></rect>
-<text x="652.4" y="232" font-family="ui-monospace,Menlo,monospace" font-size="9.5" fill="#5F6672" text-anchor="middle">May</text>
-<text x="652.4" y="138.5" font-family="ui-monospace,Menlo,monospace" font-size="9.5" fill="#5F6672" text-anchor="middle" opacity="0"><animate attributeName="opacity" from="0" to="1" dur="0.4s" begin="1.38s" fill="freeze"/>252</text>
-<rect x="699.1" y="214" width="46.0" height="0" rx="3" fill="#8A6A0A"><animate attributeName="height" from="0" to="16.9" dur="0.7s" begin="0.74s" fill="freeze"/><animate attributeName="y" from="214" to="197.1" dur="0.7s" begin="0.74s" fill="freeze"/></rect>
-<text x="722.1" y="232" font-family="ui-monospace,Menlo,monospace" font-size="9.5" fill="#5F6672" text-anchor="middle">Jun</text>
-<text x="722.1" y="189.1" font-family="ui-monospace,Menlo,monospace" font-size="9.5" fill="#5F6672" text-anchor="middle" opacity="0"><animate attributeName="opacity" from="0" to="1" dur="0.4s" begin="1.44s" fill="freeze"/>63</text>
-<rect x="768.8" y="214" width="46.0" height="0" rx="3" fill="#8A6A0A"><animate attributeName="height" from="0" to="93.7" dur="0.7s" begin="0.80s" fill="freeze"/><animate attributeName="y" from="214" to="120.3" dur="0.7s" begin="0.80s" fill="freeze"/></rect>
-<text x="791.8" y="232" font-family="ui-monospace,Menlo,monospace" font-size="9.5" fill="#5F6672" text-anchor="middle">Jul</text>
-<text x="791.8" y="112.3" font-family="ui-monospace,Menlo,monospace" font-size="9.5" fill="#5F6672" text-anchor="middle" opacity="0"><animate attributeName="opacity" from="0" to="1" dur="0.4s" begin="1.50s" fill="freeze"/>350</text>
-<rect x="838.5" y="214" width="46.0" height="0" rx="3" fill="#FFC93C"><animate attributeName="height" from="0" to="140.0" dur="0.7s" begin="0.86s" fill="freeze"/><animate attributeName="y" from="214" to="74.0" dur="0.7s" begin="0.86s" fill="freeze"/></rect>
-<text x="861.5" y="232" font-family="ui-monospace,Menlo,monospace" font-size="9.5" fill="#5F6672" text-anchor="middle">Aug</text>
-<text x="861.5" y="66.0" font-family="ui-monospace,Menlo,monospace" font-size="9.5" fill="#FFC93C" text-anchor="middle" opacity="0"><animate attributeName="opacity" from="0" to="1" dur="0.4s" begin="1.56s" fill="freeze"/>523</text>
-<rect x="908.2" y="214" width="46.0" height="0" rx="3" fill="#8A6A0A"><animate attributeName="height" from="0" to="12.6" dur="0.7s" begin="0.92s" fill="freeze"/><animate attributeName="y" from="214" to="201.4" dur="0.7s" begin="0.92s" fill="freeze"/></rect>
-<text x="931.2" y="232" font-family="ui-monospace,Menlo,monospace" font-size="9.5" fill="#5F6672" text-anchor="middle">Sep</text>
-<text x="931.2" y="244" font-family="ui-monospace,Menlo,monospace" font-size="8" fill="#8A6A0A" text-anchor="middle">MTD</text>
-<text x="931.2" y="193.4" font-family="ui-monospace,Menlo,monospace" font-size="9.5" fill="#5F6672" text-anchor="middle" opacity="0"><animate attributeName="opacity" from="0" to="1" dur="0.4s" begin="1.62s" fill="freeze"/>47</text>
-<line x1="60" y1="214" x2="966" y2="214" stroke="#FFC93C" stroke-opacity="0.2"/>
-<text x="60" y="254" font-family="ui-monospace,Menlo,monospace" font-size="10.5" fill="#5F6672">The curve is Vault-OS. Founding the company is the point where it leaves the floor.</text>
-<rect x="0.5" y="0.5" width="999" height="269" rx="14" fill="none" stroke="#FFC93C" stroke-opacity="0.14"/></g></svg>
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 820 282" width="820" height="282" role="img" aria-label="Monthly contribution volume for taha-halakoo">
+<defs><pattern id="gvl" width="26" height="26" patternUnits="userSpaceOnUse"><path d="M26 0H0V26" fill="none" stroke="#FFC93C" stroke-opacity="0.045"/></pattern><clipPath id="cvl"><rect width="820" height="282" rx="12"/></clipPath></defs>
+<g clip-path="url(#cvl)"><rect width="820" height="282" fill="#07070A"/><rect width="820" height="282" fill="url(#gvl)"/>
+<text x="28" y="28" font-family="ui-monospace,'SF Mono',Menlo,Consolas,monospace" font-size="13.5" fill="#FFC93C" letter-spacing="2.2">VELOCITY · CONTRIBUTIONS PER MONTH</text>
+<line x1="74" y1="150.0" x2="792" y2="150.0" stroke="#FFC93C" stroke-opacity="0.08"/>
+<text x="67.0" y="154.0" font-family="ui-monospace,'SF Mono',Menlo,Consolas,monospace" font-size="12.5" fill="#5F6672" text-anchor="end">261</text>
+<line x1="74" y1="74.0" x2="792" y2="74.0" stroke="#FFC93C" stroke-opacity="0.08"/>
+<text x="67.0" y="78.0" font-family="ui-monospace,'SF Mono',Menlo,Consolas,monospace" font-size="12.5" fill="#5F6672" text-anchor="end">523</text>
+<rect x="81.6" y="226" width="40.0" height="0" rx="3" fill="#8A6A0A"><animate attributeName="height" from="0" to="0.0" dur="0.7s" begin="0.20s" fill="freeze"/><animate attributeName="y" from="226" to="226.0" dur="0.7s" begin="0.20s" fill="freeze"/></rect>
+<text x="101.6" y="245.0" font-family="ui-monospace,'SF Mono',Menlo,Consolas,monospace" font-size="12.5" fill="#5F6672" text-anchor="middle">Sep</text>
+<rect x="136.8" y="226" width="40.0" height="0" rx="3" fill="#8A6A0A"><animate attributeName="height" from="0" to="0.0" dur="0.7s" begin="0.25s" fill="freeze"/><animate attributeName="y" from="226" to="226.0" dur="0.7s" begin="0.25s" fill="freeze"/></rect>
+<text x="156.8" y="245.0" font-family="ui-monospace,'SF Mono',Menlo,Consolas,monospace" font-size="12.5" fill="#5F6672" text-anchor="middle">Oct</text>
+<rect x="192.1" y="226" width="40.0" height="0" rx="3" fill="#8A6A0A"><animate attributeName="height" from="0" to="0.9" dur="0.7s" begin="0.30s" fill="freeze"/><animate attributeName="y" from="226" to="225.1" dur="0.7s" begin="0.30s" fill="freeze"/></rect>
+<text x="212.1" y="245.0" font-family="ui-monospace,'SF Mono',Menlo,Consolas,monospace" font-size="12.5" fill="#5F6672" text-anchor="middle">Nov</text>
+<text x="212.1" y="217.1" font-family="ui-monospace,'SF Mono',Menlo,Consolas,monospace" font-size="12.5" fill="#5F6672" text-anchor="middle" opacity="0"><animate attributeName="opacity" from="0" to="1" begin="1.00s" dur="0.4s" fill="freeze"/>3</text>
+<rect x="247.3" y="226" width="40.0" height="0" rx="3" fill="#8A6A0A"><animate attributeName="height" from="0" to="4.9" dur="0.7s" begin="0.35s" fill="freeze"/><animate attributeName="y" from="226" to="221.1" dur="0.7s" begin="0.35s" fill="freeze"/></rect>
+<text x="267.3" y="245.0" font-family="ui-monospace,'SF Mono',Menlo,Consolas,monospace" font-size="12.5" fill="#5F6672" text-anchor="middle">Dec</text>
+<text x="267.3" y="213.1" font-family="ui-monospace,'SF Mono',Menlo,Consolas,monospace" font-size="12.5" fill="#5F6672" text-anchor="middle" opacity="0"><animate attributeName="opacity" from="0" to="1" begin="1.05s" dur="0.4s" fill="freeze"/>17</text>
+<rect x="302.5" y="226" width="40.0" height="0" rx="3" fill="#8A6A0A"><animate attributeName="height" from="0" to="1.7" dur="0.7s" begin="0.40s" fill="freeze"/><animate attributeName="y" from="226" to="224.3" dur="0.7s" begin="0.40s" fill="freeze"/></rect>
+<text x="322.5" y="245.0" font-family="ui-monospace,'SF Mono',Menlo,Consolas,monospace" font-size="12.5" fill="#5F6672" text-anchor="middle">Jan</text>
+<text x="322.5" y="216.3" font-family="ui-monospace,'SF Mono',Menlo,Consolas,monospace" font-size="12.5" fill="#5F6672" text-anchor="middle" opacity="0"><animate attributeName="opacity" from="0" to="1" begin="1.10s" dur="0.4s" fill="freeze"/>6</text>
+<rect x="357.8" y="226" width="40.0" height="0" rx="3" fill="#8A6A0A"><animate attributeName="height" from="0" to="21.5" dur="0.7s" begin="0.45s" fill="freeze"/><animate attributeName="y" from="226" to="204.5" dur="0.7s" begin="0.45s" fill="freeze"/></rect>
+<text x="377.8" y="245.0" font-family="ui-monospace,'SF Mono',Menlo,Consolas,monospace" font-size="12.5" fill="#5F6672" text-anchor="middle">Feb</text>
+<text x="377.8" y="196.5" font-family="ui-monospace,'SF Mono',Menlo,Consolas,monospace" font-size="12.5" fill="#5F6672" text-anchor="middle" opacity="0"><animate attributeName="opacity" from="0" to="1" begin="1.15s" dur="0.4s" fill="freeze"/>74</text>
+<rect x="413.0" y="226" width="40.0" height="0" rx="3" fill="#8A6A0A"><animate attributeName="height" from="0" to="9.0" dur="0.7s" begin="0.50s" fill="freeze"/><animate attributeName="y" from="226" to="217.0" dur="0.7s" begin="0.50s" fill="freeze"/></rect>
+<text x="433.0" y="245.0" font-family="ui-monospace,'SF Mono',Menlo,Consolas,monospace" font-size="12.5" fill="#5F6672" text-anchor="middle">Mar</text>
+<text x="433.0" y="209.0" font-family="ui-monospace,'SF Mono',Menlo,Consolas,monospace" font-size="12.5" fill="#5F6672" text-anchor="middle" opacity="0"><animate attributeName="opacity" from="0" to="1" begin="1.20s" dur="0.4s" fill="freeze"/>31</text>
+<rect x="468.2" y="226" width="40.0" height="0" rx="3" fill="#8A6A0A"><animate attributeName="height" from="0" to="20.3" dur="0.7s" begin="0.55s" fill="freeze"/><animate attributeName="y" from="226" to="205.7" dur="0.7s" begin="0.55s" fill="freeze"/></rect>
+<text x="488.2" y="245.0" font-family="ui-monospace,'SF Mono',Menlo,Consolas,monospace" font-size="12.5" fill="#5F6672" text-anchor="middle">Apr</text>
+<text x="488.2" y="197.7" font-family="ui-monospace,'SF Mono',Menlo,Consolas,monospace" font-size="12.5" fill="#5F6672" text-anchor="middle" opacity="0"><animate attributeName="opacity" from="0" to="1" begin="1.25s" dur="0.4s" fill="freeze"/>70</text>
+<rect x="523.5" y="226" width="40.0" height="0" rx="3" fill="#8A6A0A"><animate attributeName="height" from="0" to="73.2" dur="0.7s" begin="0.60s" fill="freeze"/><animate attributeName="y" from="226" to="152.8" dur="0.7s" begin="0.60s" fill="freeze"/></rect>
+<text x="543.5" y="245.0" font-family="ui-monospace,'SF Mono',Menlo,Consolas,monospace" font-size="12.5" fill="#5F6672" text-anchor="middle">May</text>
+<text x="543.5" y="144.8" font-family="ui-monospace,'SF Mono',Menlo,Consolas,monospace" font-size="12.5" fill="#5F6672" text-anchor="middle" opacity="0"><animate attributeName="opacity" from="0" to="1" begin="1.30s" dur="0.4s" fill="freeze"/>252</text>
+<rect x="578.7" y="226" width="40.0" height="0" rx="3" fill="#8A6A0A"><animate attributeName="height" from="0" to="18.3" dur="0.7s" begin="0.65s" fill="freeze"/><animate attributeName="y" from="226" to="207.7" dur="0.7s" begin="0.65s" fill="freeze"/></rect>
+<text x="598.7" y="245.0" font-family="ui-monospace,'SF Mono',Menlo,Consolas,monospace" font-size="12.5" fill="#5F6672" text-anchor="middle">Jun</text>
+<text x="598.7" y="199.7" font-family="ui-monospace,'SF Mono',Menlo,Consolas,monospace" font-size="12.5" fill="#5F6672" text-anchor="middle" opacity="0"><animate attributeName="opacity" from="0" to="1" begin="1.35s" dur="0.4s" fill="freeze"/>63</text>
+<rect x="633.9" y="226" width="40.0" height="0" rx="3" fill="#8A6A0A"><animate attributeName="height" from="0" to="101.7" dur="0.7s" begin="0.70s" fill="freeze"/><animate attributeName="y" from="226" to="124.3" dur="0.7s" begin="0.70s" fill="freeze"/></rect>
+<text x="653.9" y="245.0" font-family="ui-monospace,'SF Mono',Menlo,Consolas,monospace" font-size="12.5" fill="#5F6672" text-anchor="middle">Jul</text>
+<text x="653.9" y="116.3" font-family="ui-monospace,'SF Mono',Menlo,Consolas,monospace" font-size="12.5" fill="#5F6672" text-anchor="middle" opacity="0"><animate attributeName="opacity" from="0" to="1" begin="1.40s" dur="0.4s" fill="freeze"/>350</text>
+<rect x="689.2" y="226" width="40.0" height="0" rx="3" fill="#FFC93C"><animate attributeName="height" from="0" to="152.0" dur="0.7s" begin="0.75s" fill="freeze"/><animate attributeName="y" from="226" to="74.0" dur="0.7s" begin="0.75s" fill="freeze"/></rect>
+<text x="709.2" y="245.0" font-family="ui-monospace,'SF Mono',Menlo,Consolas,monospace" font-size="12.5" fill="#5F6672" text-anchor="middle">Aug</text>
+<text x="709.2" y="66.0" font-family="ui-monospace,'SF Mono',Menlo,Consolas,monospace" font-size="12.5" fill="#FFC93C" text-anchor="middle" opacity="0"><animate attributeName="opacity" from="0" to="1" begin="1.45s" dur="0.4s" fill="freeze"/>523</text>
+<rect x="744.4" y="226" width="40.0" height="0" rx="3" fill="#8A6A0A" fill-opacity="0.35" stroke="#8A6A0A" stroke-dasharray="3 3"><animate attributeName="height" from="0" to="18.3" dur="0.7s" begin="0.80s" fill="freeze"/><animate attributeName="y" from="226" to="207.7" dur="0.7s" begin="0.80s" fill="freeze"/></rect>
+<text x="764.4" y="245.0" font-family="ui-monospace,'SF Mono',Menlo,Consolas,monospace" font-size="12.5" fill="#5F6672" text-anchor="middle">Sep</text>
+<text x="764.4" y="199.7" font-family="ui-monospace,'SF Mono',Menlo,Consolas,monospace" font-size="12.5" fill="#5F6672" text-anchor="middle" opacity="0"><animate attributeName="opacity" from="0" to="1" begin="1.50s" dur="0.4s" fill="freeze"/>63</text>
+<text x="764.4" y="260.0" font-family="ui-monospace,'SF Mono',Menlo,Consolas,monospace" font-size="12.5" fill="#8A6A0A" text-anchor="middle">MTD</text>
+<line x1="74" y1="226" x2="792" y2="226" stroke="#FFC93C" stroke-opacity="0.2"/>
+<rect x="0.5" y="0.5" width="819" height="281" rx="12" fill="none" stroke="#FFC93C" stroke-opacity="0.16"/></g></svg>
