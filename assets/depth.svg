@@ -1,0 +1,71 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1000 424" width="1000" height="424" role="img" aria-label="The six layers I work across, from silicon to interface">
+<defs>
+  <pattern id="gd" width="26" height="26" patternUnits="userSpaceOnUse"><path d="M26 0H0V26" fill="none" stroke="#FFC93C" stroke-opacity="0.04" stroke-width="1"/></pattern>
+  <clipPath id="cd"><rect width="1000" height="424" rx="14"/></clipPath>
+  <linearGradient id="sweep" x1="0" y1="0" x2="0" y2="1">
+    <stop offset="0" stop-color="#FFC93C" stop-opacity="0"/>
+    <stop offset="0.5" stop-color="#FFC93C" stop-opacity="0.20"/>
+    <stop offset="1" stop-color="#FFC93C" stop-opacity="0"/>
+  </linearGradient>
+</defs>
+<g clip-path="url(#cd)">
+<rect width="1000" height="424" fill="#07070A"/><rect width="1000" height="424" fill="url(#gd)"/>
+<text x="34" y="34" font-family="ui-monospace,Menlo,monospace" font-size="12" fill="#FFC93C" letter-spacing="2.6">THE STACK I WORK ACROSS</text>
+<text x="862" y="34" font-family="ui-monospace,Menlo,monospace" font-size="10.5" fill="#5F6672" letter-spacing="1.4">INTERFACE</text>
+<text x="884" y="404" font-family="ui-monospace,Menlo,monospace" font-size="10.5" fill="#5F6672" letter-spacing="1.4">SILICON</text>
+
+<g font-family="ui-monospace,Menlo,monospace">
+  <g opacity="0"><animate attributeName="opacity" from="0" to="1" begin="1.5s" dur="0.45s" fill="freeze"/>
+    <rect x="34" y="54" width="800" height="50" rx="7" fill="#0E1116" stroke="#3FB950" stroke-opacity="0.30"/>
+    <rect x="34" y="54" width="4" height="50" rx="2" fill="#3FB950"/>
+    <text x="56" y="76" font-size="13" fill="#E4E6EB">Interface</text>
+    <text x="56" y="94" font-size="10.5" fill="#5F6672">cross-platform clients, offline-first state, design systems</text>
+    <text x="818" y="84" font-size="10.5" fill="#3FB950" text-anchor="end">Flutter &#183; React &#183; TypeScript</text></g>
+
+  <g opacity="0"><animate attributeName="opacity" from="0" to="1" begin="1.25s" dur="0.45s" fill="freeze"/>
+    <rect x="34" y="114" width="800" height="50" rx="7" fill="#0E1116" stroke="#5FB84B" stroke-opacity="0.30"/>
+    <rect x="34" y="114" width="4" height="50" rx="2" fill="#5FB84B"/>
+    <text x="56" y="136" font-size="13" fill="#E4E6EB">Orchestration</text>
+    <text x="56" y="154" font-size="10.5" fill="#5F6672">DAG runtime, sandboxed agents, adversarial critic pass, tool protocols</text>
+    <text x="818" y="144" font-size="10.5" fill="#5FB84B" text-anchor="end">ReAct &#183; MCP &#183; Node.js</text></g>
+
+  <g opacity="0"><animate attributeName="opacity" from="0" to="1" begin="1.0s" dur="0.45s" fill="freeze"/>
+    <rect x="34" y="174" width="800" height="50" rx="7" fill="#0E1116" stroke="#8FB63C" stroke-opacity="0.30"/>
+    <rect x="34" y="174" width="4" height="50" rx="2" fill="#8FB63C"/>
+    <text x="56" y="196" font-size="13" fill="#E4E6EB">Inference</text>
+    <text x="56" y="214" font-size="10.5" fill="#5F6672">engine abstraction, multi-node GPU clustering, open-weight models</text>
+    <text x="818" y="204" font-size="10.5" fill="#8FB63C" text-anchor="end">vLLM &#183; TensorRT-LLM &#183; Ollama</text></g>
+
+  <g opacity="0"><animate attributeName="opacity" from="0" to="1" begin="0.75s" dur="0.45s" fill="freeze"/>
+    <rect x="34" y="234" width="800" height="50" rx="7" fill="#0E1116" stroke="#C0BE34" stroke-opacity="0.30"/>
+    <rect x="34" y="234" width="4" height="50" rx="2" fill="#C0BE34"/>
+    <text x="56" y="256" font-size="13" fill="#E4E6EB">Data</text>
+    <text x="56" y="274" font-size="10.5" fill="#5F6672">vector search, spatial constraints, knowledge graphs, schema design</text>
+    <text x="818" y="264" font-size="10.5" fill="#C0BE34" text-anchor="end">PostgreSQL &#183; pgvector &#183; PostGIS</text></g>
+
+  <g opacity="0"><animate attributeName="opacity" from="0" to="1" begin="0.5s" dur="0.45s" fill="freeze"/>
+    <rect x="34" y="294" width="800" height="50" rx="7" fill="#0E1116" stroke="#E0C630" stroke-opacity="0.30"/>
+    <rect x="34" y="294" width="4" height="50" rx="2" fill="#E0C630"/>
+    <text x="56" y="316" font-size="13" fill="#E4E6EB">Bare metal</text>
+    <text x="56" y="334" font-size="10.5" fill="#5F6672">no container runtime, native services, resumable installs, OS integration</text>
+    <text x="818" y="324" font-size="10.5" fill="#E0C630" text-anchor="end">Windows &#183; Linux &#183; Shell</text></g>
+
+  <g opacity="0"><animate attributeName="opacity" from="0" to="1" begin="0.25s" dur="0.45s" fill="freeze"/>
+    <rect x="34" y="354" width="800" height="50" rx="7" fill="#0E1116" stroke="#FFC93C" stroke-opacity="0.45"/>
+    <rect x="34" y="354" width="4" height="50" rx="2" fill="#FFC93C"/>
+    <text x="56" y="376" font-size="13" fill="#E4E6EB">Silicon</text>
+    <text x="56" y="394" font-size="10.5" fill="#5F6672">TPM attestation, PCR-bound licensing, cryptographic erasure</text>
+    <text x="818" y="384" font-size="10.5" fill="#FFC93C" text-anchor="end">TPM 2.0 &#183; HSM &#183; NIST SP 800-88</text></g>
+</g>
+
+<rect x="34" y="0" width="800" height="70" fill="url(#sweep)">
+  <animate attributeName="y" values="424;-70" dur="4.5s" repeatCount="indefinite"/>
+</rect>
+
+<g opacity="0"><animate attributeName="opacity" from="0" to="1" begin="2s" dur="0.8s" fill="freeze"/>
+  <path d="M856 60 h14 v338 h-14" fill="none" stroke="#FFC93C" stroke-opacity="0.45" stroke-width="1.5"/>
+  <text x="946" y="212" font-family="ui-monospace,Menlo,monospace" font-size="11.5" fill="#FFC93C" text-anchor="middle" transform="rotate(90 946 212)">ONE ENGINEER, ALL SIX</text>
+</g>
+<rect x="0.5" y="0.5" width="999" height="423" rx="14" fill="none" stroke="#FFC93C" stroke-opacity="0.14"/>
+</g>
+</svg>
