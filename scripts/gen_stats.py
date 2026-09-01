@@ -22,6 +22,7 @@ BG, GRID, DIM, TEXT, AMBER, GREEN = (
     "#07070A", "#FFC93C", "#5F6672", "#E4E6EB", "#FFC93C", "#3FB950")
 HEAT = ["#131318", "#4A3A0E", "#8A6A0A", "#C99A12", "#FFC93C"]
 MONO = "ui-monospace,Menlo,monospace"
+NL = chr(10)
 
 QUERY = """
 {
@@ -267,6 +268,85 @@ def build_velocity(d):
     return "\n".join(p + close(W, H))
 
 
+# ------------------------------------------------------------------------- rhythm
+
+def build_rhythm(d):
+    cal = d["contributionsCollection"]["contributionCalendar"]
+    today = datetime.date.today().isoformat()
+    days = [day for w in cal["weeks"] for day in w["contributionDays"]
+            if day["date"] <= today]
+    active = [x for x in days if x["contributionCount"] > 0]
+    best = max(days, key=lambda x: x["contributionCount"]) if days else None
+
+    longest = run = 0
+    for x in days:
+        run = run + 1 if x["contributionCount"] > 0 else 0
+        longest = max(longest, run)
+    current = 0
+    for x in reversed(days):
+        if x["contributionCount"] == 0:
+            break
+        current += 1
+
+    wd = collections.Counter()
+    for x in days:
+        wd[x["weekday"]] += x["contributionCount"]
+    names = ["Sun", "Mon", "Tue", "Wed", "Thu", "Fri", "Sat"]
+    wpeak = max(wd.values()) if wd else 1
+
+    avg = sum(x["contributionCount"] for x in active) / len(active) if active else 0
+    pct = round(len(active) * 100 / len(days)) if days else 0
+
+    W, H = 1000, 300
+    p = frame(W, H, "Working rhythm for %s" % USER, "r")
+    p.append(f'<text x="34" y="34" font-family="{MONO}" font-size="12" fill="{AMBER}" '
+             f'letter-spacing="2.6">WORKING RHYTHM</text>')
+
+    tiles = [(f"{longest}", "LONGEST STREAK / DAYS", AMBER),
+             (f"{best['contributionCount']}" if best else "0", "BUSIEST SINGLE DAY", AMBER),
+             (f"{avg:.1f}", "AVG ON AN ACTIVE DAY", GREEN),
+             (f"{pct}%", "OF DAYS WITH COMMITS", TEXT)]
+    for i, (val, label, colr) in enumerate(tiles):
+        x = 34 + i * 238
+        p.append(f'<g opacity="0"><animate attributeName="opacity" values="0;1" '
+                 f'begin="{i*0.13:.2f}s" dur="0.5s" fill="freeze"/>'
+                 f'<rect x="{x}" y="54" width="222" height="80" rx="8" fill="#0E1116" '
+                 f'stroke="{GRID}" stroke-opacity="0.16"/>'
+                 f'<text x="{x+18}" y="103" font-family="{MONO}" font-size="32" '
+                 f'font-weight="700" fill="{colr}">{val}</text>'
+                 f'<text x="{x+18}" y="122" font-family="{MONO}" font-size="10" '
+                 f'fill="{DIM}" letter-spacing="1.5">{label}</text></g>')
+
+    p.append(f'<text x="34" y="168" font-family="{MONO}" font-size="11" fill="{DIM}" '
+             f'letter-spacing="2.2">WHICH DAYS THE WORK LANDS ON</text>')
+
+    base, top = 254, 184
+    slot, bw = 932 / 7, 58
+    heaviest = max(wd, key=lambda k: wd[k]) if wd else 0
+    for i in range(7):
+        x = 34 + i * slot + (slot - bw) / 2
+        h = (wd[i] / wpeak) * (base - top) if wpeak else 0
+        fill = AMBER if i == heaviest else "#8A6A0A"
+        p.append(f'<rect x="{x:.1f}" y="{base}" width="{bw}" height="0" rx="3" fill="{fill}">'
+                 f'<animate attributeName="height" from="0" to="{h:.1f}" dur="0.7s" '
+                 f'begin="{0.6+i*0.07:.2f}s" fill="freeze"/>'
+                 f'<animate attributeName="y" from="{base}" to="{base-h:.1f}" dur="0.7s" '
+                 f'begin="{0.6+i*0.07:.2f}s" fill="freeze"/></rect>')
+        p.append(f'<text x="{x+bw/2:.1f}" y="{base+18}" font-family="{MONO}" font-size="10" '
+                 f'fill="{DIM}" text-anchor="middle">{names[i]}</text>')
+        p.append(f'<text x="{x+bw/2:.1f}" y="{base-h-8:.1f}" font-family="{MONO}" '
+                 f'font-size="9.5" fill="{AMBER if i == heaviest else DIM}" '
+                 f'text-anchor="middle" opacity="0"><animate attributeName="opacity" '
+                 f'from="0" to="1" dur="0.4s" begin="{1.3+i*0.07:.2f}s" fill="freeze"/>'
+                 f'{wd[i]}</text>')
+
+    p.append(f'<line x1="34" y1="{base}" x2="966" y2="{base}" stroke="{GRID}" stroke-opacity="0.2"/>')
+    p.append(f'<text x="34" y="286" font-family="{MONO}" font-size="10.5" fill="{DIM}">'
+             f'Current streak {current} days. Fewer, longer sessions rather than a daily trickle &#8212; '
+             f'the average active day carries {avg:.0f} commits.</text>')
+    return NL.join(p + close(W, H))
+
+
 if __name__ == "__main__":
     data = fetch()
     c = data["contributionsCollection"]
@@ -280,7 +360,8 @@ if __name__ == "__main__":
     os.makedirs("assets", exist_ok=True)
     for name, svg in (("stats", build_stats(data)),
                       ("contrib", build_contrib(data)),
-                      ("velocity", build_velocity(data))):
+                      ("velocity", build_velocity(data)),
+                      ("rhythm", build_rhythm(data))):
         path = "assets/%s.svg" % name
         with open(path, "w", encoding="utf-8") as f:
             f.write(svg)
