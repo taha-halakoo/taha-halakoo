@@ -1,0 +1,88 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1000 380" width="1000" height="380" role="img" aria-label="Air-gap architecture: zero egress paths between the untrusted network and the Vault-OS enclave">
+<defs>
+  <linearGradient id="a2" x1="0" y1="0" x2="1" y2="1"><stop offset="0" stop-color="#FFC93C"/><stop offset="1" stop-color="#F59300"/></linearGradient>
+  <linearGradient id="hot" x1="0" y1="0" x2="1" y2="0"><stop offset="0" stop-color="#F85149" stop-opacity="0"/><stop offset="1" stop-color="#F85149" stop-opacity="0.55"/></linearGradient>
+  <pattern id="g2" width="26" height="26" patternUnits="userSpaceOnUse"><path d="M26 0H0V26" fill="none" stroke="#FFC93C" stroke-opacity="0.045" stroke-width="1"/></pattern>
+  <filter id="gl2" x="-60%" y="-60%" width="220%" height="220%"><feGaussianBlur stdDeviation="3" result="b"/><feMerge><feMergeNode in="b"/><feMergeNode in="SourceGraphic"/></feMerge></filter>
+  <clipPath id="c2"><rect width="1000" height="380" rx="14"/></clipPath>
+</defs>
+<g clip-path="url(#c2)">
+<rect width="1000" height="380" fill="#07070A"/><rect width="1000" height="380" fill="url(#g2)"/>
+
+<text x="34" y="34" font-family="ui-monospace,Menlo,monospace" font-size="12" fill="#F85149" letter-spacing="2.6">UNTRUSTED NETWORK</text>
+<rect x="30" y="52" width="286" height="298" rx="10" fill="#F85149" fill-opacity="0.03" stroke="#F85149" stroke-opacity="0.22" stroke-dasharray="5 4"/>
+<g font-family="ui-monospace,Menlo,monospace" font-size="12" fill="#8A6F72">
+  <text x="56" y="96">cloud inference APIs</text><text x="56" y="130">vendor telemetry</text>
+  <text x="56" y="164">model providers</text><text x="56" y="198">subprocessors</text>
+  <text x="56" y="232">exfiltration attempts</text><text x="56" y="266">supply-chain implants</text>
+  <text x="56" y="300">cross-border transfer</text>
+</g>
+<g fill="#F85149">
+  <circle cx="44" cy="92" r="2.6"/><circle cx="44" cy="126" r="2.6"/><circle cx="44" cy="160" r="2.6"/>
+  <circle cx="44" cy="194" r="2.6"/><circle cx="44" cy="228" r="2.6"/><circle cx="44" cy="262" r="2.6"/><circle cx="44" cy="296" r="2.6"/>
+</g>
+
+<g>
+  <rect x="316" y="52" width="130" height="298" fill="url(#hot)" opacity="0.30"/>
+  <line x1="446" y1="52" x2="446" y2="350" stroke="url(#a2)" stroke-width="3.5" stroke-dasharray="10 7" filter="url(#gl2)">
+    <animate attributeName="stroke-opacity" values="0.75;1;0.75" dur="2.6s" repeatCount="indefinite"/>
+  </line>
+  <text x="381" y="34" font-family="ui-monospace,Menlo,monospace" font-size="12" fill="#FFC93C" letter-spacing="2.6">AIR GAP</text>
+  <text x="352" y="372" font-family="ui-monospace,Menlo,monospace" font-size="11.5" fill="#FFC93C" letter-spacing="1.8">0 EGRESS PATHS</text>
+</g>
+
+<g fill="#F85149">
+  <circle r="4"><animate attributeName="cx" values="150;438" dur="2.9s" repeatCount="indefinite"/><animate attributeName="cy" values="92;92" dur="2.9s" repeatCount="indefinite"/><animate attributeName="opacity" values="0;0.95;0.95;0" keyTimes="0;0.15;0.86;1" dur="2.9s" repeatCount="indefinite"/></circle>
+  <circle r="4"><animate attributeName="cx" values="150;438" dur="2.9s" begin="0.5s" repeatCount="indefinite"/><animate attributeName="cy" values="160;160" dur="2.9s" begin="0.5s" repeatCount="indefinite"/><animate attributeName="opacity" values="0;0.95;0.95;0" keyTimes="0;0.15;0.86;1" dur="2.9s" begin="0.5s" repeatCount="indefinite"/></circle>
+  <circle r="4"><animate attributeName="cx" values="150;438" dur="2.9s" begin="1.1s" repeatCount="indefinite"/><animate attributeName="cy" values="228;228" dur="2.9s" begin="1.1s" repeatCount="indefinite"/><animate attributeName="opacity" values="0;0.95;0.95;0" keyTimes="0;0.15;0.86;1" dur="2.9s" begin="1.1s" repeatCount="indefinite"/></circle>
+  <circle r="4"><animate attributeName="cx" values="150;438" dur="2.9s" begin="1.7s" repeatCount="indefinite"/><animate attributeName="cy" values="296;296" dur="2.9s" begin="1.7s" repeatCount="indefinite"/><animate attributeName="opacity" values="0;0.95;0.95;0" keyTimes="0;0.15;0.86;1" dur="2.9s" begin="1.7s" repeatCount="indefinite"/></circle>
+</g>
+<g fill="none" stroke="#FFC93C" stroke-width="2">
+  <circle cx="446" cy="92" r="3"><animate attributeName="r" values="2;19" dur="2.9s" repeatCount="indefinite"/><animate attributeName="opacity" values="0;0;0.9;0" keyTimes="0;0.82;0.88;1" dur="2.9s" repeatCount="indefinite"/></circle>
+  <circle cx="446" cy="160" r="3"><animate attributeName="r" values="2;19" dur="2.9s" begin="0.5s" repeatCount="indefinite"/><animate attributeName="opacity" values="0;0;0.9;0" keyTimes="0;0.82;0.88;1" dur="2.9s" begin="0.5s" repeatCount="indefinite"/></circle>
+  <circle cx="446" cy="228" r="3"><animate attributeName="r" values="2;19" dur="2.9s" begin="1.1s" repeatCount="indefinite"/><animate attributeName="opacity" values="0;0;0.9;0" keyTimes="0;0.82;0.88;1" dur="2.9s" begin="1.1s" repeatCount="indefinite"/></circle>
+  <circle cx="446" cy="296" r="3"><animate attributeName="r" values="2;19" dur="2.9s" begin="1.7s" repeatCount="indefinite"/><animate attributeName="opacity" values="0;0;0.9;0" keyTimes="0;0.82;0.88;1" dur="2.9s" begin="1.7s" repeatCount="indefinite"/></circle>
+</g>
+
+<text x="476" y="34" font-family="ui-monospace,Menlo,monospace" font-size="12" fill="#3FB950" letter-spacing="2.6">VAULT-OS ENCLAVE &#183; YOUR HARDWARE</text>
+<rect x="472" y="52" width="498" height="298" rx="10" fill="#3FB950" fill-opacity="0.035" stroke="#3FB950" stroke-opacity="0.30"/>
+
+<g font-family="ui-monospace,Menlo,monospace">
+  <rect x="500" y="80" width="200" height="56" rx="7" fill="#0E1116" stroke="#3FB950" stroke-opacity="0.34"/>
+  <text x="516" y="104" font-size="12.5" fill="#E4E6EB">TPM 2.0 TETHER</text><text x="516" y="123" font-size="10.5" fill="#5F6672">PCR-bound license</text>
+  <circle cx="682" cy="94" r="3.4" fill="#3FB950"><animate attributeName="opacity" values="1;0.2;1" dur="2.2s" repeatCount="indefinite"/></circle>
+
+  <rect x="742" y="80" width="200" height="56" rx="7" fill="#0E1116" stroke="#3FB950" stroke-opacity="0.34"/>
+  <text x="758" y="104" font-size="12.5" fill="#E4E6EB">GPU CLUSTER</text><text x="758" y="123" font-size="10.5" fill="#5F6672">vLLM / TensorRT-LLM</text>
+  <circle cx="924" cy="94" r="3.4" fill="#3FB950"><animate attributeName="opacity" values="1;0.2;1" dur="2.2s" begin="0.4s" repeatCount="indefinite"/></circle>
+
+  <rect x="500" y="156" width="200" height="56" rx="7" fill="#0E1116" stroke="#3FB950" stroke-opacity="0.34"/>
+  <text x="516" y="180" font-size="12.5" fill="#E4E6EB">pgvector + HNSW</text><text x="516" y="199" font-size="10.5" fill="#5F6672">native, zero-docker</text>
+  <circle cx="682" cy="170" r="3.4" fill="#3FB950"><animate attributeName="opacity" values="1;0.2;1" dur="2.2s" begin="0.8s" repeatCount="indefinite"/></circle>
+
+  <rect x="742" y="156" width="200" height="56" rx="7" fill="#0E1116" stroke="#3FB950" stroke-opacity="0.34"/>
+  <text x="758" y="180" font-size="12.5" fill="#E4E6EB">DAG RUNTIME</text><text x="758" y="199" font-size="10.5" fill="#5F6672">33 nodes &#183; ReAct agents</text>
+  <circle cx="924" cy="170" r="3.4" fill="#3FB950"><animate attributeName="opacity" values="1;0.2;1" dur="2.2s" begin="1.2s" repeatCount="indefinite"/></circle>
+
+  <rect x="500" y="232" width="200" height="56" rx="7" fill="#0E1116" stroke="#3FB950" stroke-opacity="0.34"/>
+  <text x="516" y="256" font-size="12.5" fill="#E4E6EB">CRITIC PASS</text><text x="516" y="275" font-size="10.5" fill="#5F6672">adversarial review</text>
+  <circle cx="682" cy="246" r="3.4" fill="#3FB950"><animate attributeName="opacity" values="1;0.2;1" dur="2.2s" begin="1.6s" repeatCount="indefinite"/></circle>
+
+  <rect x="742" y="232" width="200" height="56" rx="7" fill="#0E1116" stroke="#FFC93C" stroke-opacity="0.40"/>
+  <text x="758" y="256" font-size="12.5" fill="#E4E6EB">BURN SWITCH</text><text x="758" y="275" font-size="10.5" fill="#5F6672">NIST SP 800-88</text>
+  <circle cx="924" cy="246" r="3.4" fill="#FFC93C"><animate attributeName="opacity" values="1;0.15;1" dur="1.5s" repeatCount="indefinite"/></circle>
+
+  <rect x="500" y="304" width="442" height="34" rx="7" fill="#0E1116" stroke="#3FB950" stroke-opacity="0.22"/>
+  <text x="516" y="326" font-size="11.5" fill="#5F6672">SHA-256 hash-chained &#183; RSA-signed &#183; tamper-evident audit ledger</text>
+</g>
+<g stroke="#3FB950" stroke-opacity="0.30" stroke-width="1.4" fill="none">
+  <path d="M600 136 V156"/><path d="M842 136 V156"/><path d="M600 212 V232"/><path d="M842 212 V232"/><path d="M700 108 H742"/><path d="M700 184 H742"/>
+</g>
+<g fill="#3FB950">
+  <circle r="2.8"><animateMotion path="M600 136 V156" dur="1.7s" repeatCount="indefinite"/><animate attributeName="opacity" values="0;1;0" dur="1.7s" repeatCount="indefinite"/></circle>
+  <circle r="2.8"><animateMotion path="M700 108 H742" dur="1.7s" begin="0.6s" repeatCount="indefinite"/><animate attributeName="opacity" values="0;1;0" dur="1.7s" begin="0.6s" repeatCount="indefinite"/></circle>
+  <circle r="2.8"><animateMotion path="M842 212 V232" dur="1.7s" begin="1.1s" repeatCount="indefinite"/><animate attributeName="opacity" values="0;1;0" dur="1.7s" begin="1.1s" repeatCount="indefinite"/></circle>
+</g>
+<rect x="0.5" y="0.5" width="999" height="379" rx="14" fill="none" stroke="#FFC93C" stroke-opacity="0.14"/>
+</g>
+</svg>
