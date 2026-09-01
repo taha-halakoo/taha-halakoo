@@ -1,0 +1,52 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1000 296" width="1000" height="296" role="img" aria-label="Platform shipping status for Vault-OS and Vault-Ecosystem">
+<defs>
+  <pattern id="gf" width="26" height="26" patternUnits="userSpaceOnUse"><path d="M26 0H0V26" fill="none" stroke="#FFC93C" stroke-opacity="0.04" stroke-width="1"/></pattern>
+  <clipPath id="cf"><rect width="1000" height="296" rx="14"/></clipPath>
+</defs>
+<g clip-path="url(#cf)">
+<rect width="1000" height="296" fill="#07070A"/><rect width="1000" height="296" fill="url(#gf)"/>
+<text x="34" y="34" font-family="ui-monospace,Menlo,monospace" font-size="12" fill="#FFC93C" letter-spacing="2.6">SHIPPING STATUS</text>
+
+<g font-family="ui-monospace,Menlo,monospace" font-size="10.5" fill="#5F6672" letter-spacing="1.5">
+  <text x="330" y="76" text-anchor="middle">WINDOWS</text>
+  <text x="460" y="76" text-anchor="middle">LINUX</text>
+  <text x="590" y="76" text-anchor="middle">MACOS</text>
+  <text x="720" y="76" text-anchor="middle">ANDROID</text>
+  <text x="850" y="76" text-anchor="middle">IOS</text>
+</g>
+<line x1="34" y1="88" x2="966" y2="88" stroke="#FFC93C" stroke-opacity="0.10"/>
+
+<g font-family="ui-monospace,Menlo,monospace">
+  <g opacity="0"><animate attributeName="opacity" from="0" to="1" begin="0.2s" dur="0.5s" fill="freeze"/>
+    <text x="34" y="122" font-size="13" fill="#E4E6EB">Vault-OS</text>
+    <text x="34" y="140" font-size="9.5" fill="#5F6672">the appliance &#183; v1.0.9.1</text>
+    <circle cx="330" cy="124" r="7" fill="#3FB950"/>
+    <circle cx="460" cy="124" r="7" fill="none" stroke="#FFC93C" stroke-width="2" stroke-dasharray="3 3"><animateTransform attributeName="transform" type="rotate" from="0 460 124" to="360 460 124" dur="9s" repeatCount="indefinite"/></circle>
+    <circle cx="590" cy="124" r="7" fill="none" stroke="#FFC93C" stroke-width="2" stroke-dasharray="3 3"><animateTransform attributeName="transform" type="rotate" from="0 590 124" to="360 590 124" dur="9s" repeatCount="indefinite"/></circle>
+    <text x="720" y="129" font-size="14" fill="#2A2E36" text-anchor="middle">&#8212;</text>
+    <text x="850" y="129" font-size="14" fill="#2A2E36" text-anchor="middle">&#8212;</text></g>
+
+  <line x1="34" y1="156" x2="966" y2="156" stroke="#FFC93C" stroke-opacity="0.06"/>
+
+  <g opacity="0"><animate attributeName="opacity" from="0" to="1" begin="0.5s" dur="0.5s" fill="freeze"/>
+    <text x="34" y="190" font-size="13" fill="#E4E6EB">Vault-Ecosystem</text>
+    <text x="34" y="208" font-size="9.5" fill="#5F6672">companion clients</text>
+    <circle cx="330" cy="192" r="7" fill="#3FB950"/>
+    <circle cx="460" cy="192" r="7" fill="none" stroke="#FFC93C" stroke-width="2" stroke-dasharray="3 3"><animateTransform attributeName="transform" type="rotate" from="0 460 192" to="360 460 192" dur="9s" repeatCount="indefinite"/></circle>
+    <circle cx="590" cy="192" r="7" fill="none" stroke="#FFC93C" stroke-width="2" stroke-dasharray="3 3"><animateTransform attributeName="transform" type="rotate" from="0 590 192" to="360 590 192" dur="9s" repeatCount="indefinite"/></circle>
+    <circle cx="720" cy="192" r="7" fill="none" stroke="#FFC93C" stroke-width="2" stroke-dasharray="3 3"><animateTransform attributeName="transform" type="rotate" from="0 720 192" to="360 720 192" dur="9s" repeatCount="indefinite"/></circle>
+    <circle cx="850" cy="192" r="7" fill="none" stroke="#FFC93C" stroke-width="2" stroke-dasharray="3 3"><animateTransform attributeName="transform" type="rotate" from="0 850 192" to="360 850 192" dur="9s" repeatCount="indefinite"/></circle></g>
+</g>
+
+<g opacity="0"><animate attributeName="opacity" from="0" to="1" begin="0.9s" dur="0.6s" fill="freeze"/>
+  <line x1="34" y1="228" x2="966" y2="228" stroke="#FFC93C" stroke-opacity="0.10"/>
+  <g font-family="ui-monospace,Menlo,monospace" font-size="10.5">
+    <circle cx="40" cy="252" r="6" fill="#3FB950"/><text x="56" y="256" fill="#5F6672">shipping</text>
+    <circle cx="160" cy="252" r="6" fill="none" stroke="#FFC93C" stroke-width="2" stroke-dasharray="3 3"/><text x="176" y="256" fill="#5F6672">in development</text>
+    <text x="316" y="257" fill="#2A2E36" font-size="14">&#8212;</text><text x="332" y="256" fill="#5F6672">not planned</text>
+  </g>
+  <text x="34" y="280" font-family="ui-monospace,Menlo,monospace" font-size="10.5" fill="#5F6672">Also reading: formal verification methods, and where local inference actually degrades as opposed to where the benchmarks say it does.</text>
+</g>
+<rect x="0.5" y="0.5" width="999" height="295" rx="14" fill="none" stroke="#FFC93C" stroke-opacity="0.14"/>
+</g>
+</svg>
