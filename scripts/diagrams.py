@@ -56,21 +56,41 @@ def wrap(text, maxch):
     return lines
 
 
-def head(s, h, alt, uid):
+_UID = ["x"]  # uid of the diagram currently being built, so tail() can match its defs
+
+
+def head(s, h, alt, uid, extra_defs=""):
+    _UID[0] = uid
     return [
         f'<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 {s.W} {h}" width="{s.W}" '
         f'height="{h}" role="img" aria-label="{E(alt)}">',
         f'<defs><pattern id="g{uid}" width="26" height="26" patternUnits="userSpaceOnUse">'
         f'<path d="M26 0H0V26" fill="none" stroke="{GRID}" stroke-opacity="0.045"/></pattern>'
+        f'{sweepdef(uid)}{hsweepdef(uid)}'
+        f'<filter id="gl{uid}" x="-70%" y="-70%" width="240%" height="240%">'
+        f'<feGaussianBlur stdDeviation="3" result="b"/><feMerge><feMergeNode in="b"/>'
+        f'<feMergeNode in="SourceGraphic"/></feMerge></filter>{extra_defs}'
         f'<clipPath id="c{uid}"><rect width="{s.W}" height="{h}" rx="12"/></clipPath></defs>',
         f'<g clip-path="url(#c{uid})"><rect width="{s.W}" height="{h}" fill="{BG}"/>'
         f'<rect width="{s.W}" height="{h}" fill="url(#g{uid})"/>',
     ]
 
 
-def tail(s, h):
-    return [f'<rect x="0.5" y="0.5" width="{s.W-1}" height="{h-1}" rx="12" fill="none" '
-            f'stroke="{GRID}" stroke-opacity="0.16"/></g></svg>']
+def tail(s, h, motion=True):
+    """Close the card, laying a slow travelling highlight over everything first.
+
+    Every diagram gets this, so no panel is ever completely static.
+    """
+    out = []
+    if motion:
+        uid = _UID[0]
+        band = 90 if s.n else 120
+        out.append(f'<rect x="0" y="0" width="{band}" height="{h}" fill="url(#swh{uid})" '
+                   f'pointer-events="none"><animate attributeName="x" values="{-band};{s.W}" '
+                   f'dur="{6.5 if s.n else 7.5}s" repeatCount="indefinite"/></rect>')
+    out.append(f'<rect x="0.5" y="0.5" width="{s.W-1}" height="{h-1}" rx="12" fill="none" '
+               f'stroke="{GRID}" stroke-opacity="0.16"/></g></svg>')
+    return out
 
 
 def sect(s, y, t):
@@ -81,6 +101,93 @@ def sect(s, y, t):
 def fade(delay, dur=0.45):
     return (f'<animate attributeName="opacity" from="0" to="1" begin="{delay:.2f}s" '
             f'dur="{dur}s" fill="freeze"/>')
+
+
+# ------------------------------------------------------------------ animation
+# Content fades in once and stays (fill="freeze"). Everything below is motion
+# layered over it, looping forever, and never hides what it passes across.
+
+def pulse(lo=0.35, hi=1.0, dur=2.4, begin=0.0):
+    return (f'<animate attributeName="opacity" values="{hi};{lo};{hi}" dur="{dur}s" '
+            f'begin="{begin}s" repeatCount="indefinite"/>')
+
+
+def sweepdef(uid, colour=None, op=0.22):
+    c = colour or AMBER
+    return (f'<linearGradient id="sw{uid}" x1="0" y1="0" x2="0" y2="1">'
+            f'<stop offset="0" stop-color="{c}" stop-opacity="0"/>'
+            f'<stop offset="0.5" stop-color="{c}" stop-opacity="{op}"/>'
+            f'<stop offset="1" stop-color="{c}" stop-opacity="0"/></linearGradient>')
+
+
+def sweep(uid, w, h, band=70, dur=6.0, x=0):
+    """A soft light band travelling down the card, forever."""
+    return (f'<rect x="{x}" y="0" width="{w}" height="{band}" fill="url(#sw{uid})" '
+            f'pointer-events="none"><animate attributeName="y" values="{-band};{h}" '
+            f'dur="{dur}s" repeatCount="indefinite"/></rect>')
+
+
+def hsweep(uid, w, h, band=90, dur=5.0, y=0):
+    """The same band travelling left to right."""
+    return (f'<rect x="0" y="{y}" width="{band}" height="{h}" fill="url(#swh{uid})" '
+            f'pointer-events="none"><animate attributeName="x" values="{-band};{w}" '
+            f'dur="{dur}s" repeatCount="indefinite"/></rect>')
+
+
+def hsweepdef(uid, colour=None, op=0.18):
+    c = colour or AMBER
+    return (f'<linearGradient id="swh{uid}" x1="0" y1="0" x2="1" y2="0">'
+            f'<stop offset="0" stop-color="{c}" stop-opacity="0"/>'
+            f'<stop offset="0.5" stop-color="{c}" stop-opacity="{op}"/>'
+            f'<stop offset="1" stop-color="{c}" stop-opacity="0"/></linearGradient>')
+
+
+def travel(path_d, dur, begin=0.0, r=4.0, colour=None, uid=""):
+    """A dot running along a path, fading in and out at the ends."""
+    c = colour or AMBER
+    return (f'<circle r="{r}" fill="{c}">'
+            f'<animateMotion path="{path_d}" dur="{dur}s" begin="{begin}s" repeatCount="indefinite"/>'
+            f'<animate attributeName="opacity" values="0;1;1;0" keyTimes="0;0.12;0.85;1" '
+            f'dur="{dur}s" begin="{begin}s" repeatCount="indefinite"/></circle>')
+
+
+def burst(cx, cy, r1=20, dur=2.6, begin=0.0, colour=None):
+    """An expanding ring, like something landing."""
+    c = colour or AMBER
+    return (f'<circle cx="{cx:.1f}" cy="{cy:.1f}" r="3" fill="none" stroke="{c}" stroke-width="2">'
+            f'<animate attributeName="r" values="3;{r1}" dur="{dur}s" begin="{begin}s" repeatCount="indefinite"/>'
+            f'<animate attributeName="opacity" values="0.9;0" dur="{dur}s" begin="{begin}s" '
+            f'repeatCount="indefinite"/></circle>')
+
+
+def orbit(cx, cy, r, dur=9.0, colour=None, width=2):
+    c = colour or AMBER
+    return (f'<circle cx="{cx:.1f}" cy="{cy:.1f}" r="{r}" fill="none" stroke="{c}" '
+            f'stroke-width="{width}" stroke-dasharray="3 3">'
+            f'<animateTransform attributeName="transform" type="rotate" '
+            f'from="0 {cx:.1f} {cy:.1f}" to="360 {cx:.1f} {cy:.1f}" dur="{dur}s" '
+            f'repeatCount="indefinite"/></circle>')
+
+
+def drawline(length, dur=2.0, begin=0.0):
+    return (f' stroke-dasharray="{length:.0f}" stroke-dashoffset="{length:.0f}">'
+            f'<animate attributeName="stroke-dashoffset" from="{length:.0f}" to="0" '
+            f'dur="{dur}s" begin="{begin}s" fill="freeze"/>')
+
+
+def typeclip(uid, x, y, w, h, dur=1.6, begin=0.2):
+    """Reveals text left to right once, then leaves it visible."""
+    return (f'<clipPath id="tc{uid}"><rect x="{x}" y="{y}" width="0" height="{h}">'
+            f'<animate attributeName="width" from="0" to="{w}" dur="{dur}s" '
+            f'begin="{begin}s" fill="freeze"/></rect></clipPath>')
+
+
+def caret(x, y, h=15, colour=None, begin=0.0):
+    c = colour or GREEN
+    return (f'<rect x="{x:.1f}" y="{y:.1f}" width="9" height="{h}" fill="{c}" opacity="0">'
+            f'<animate attributeName="opacity" from="0" to="1" begin="{begin}s" dur="0.1s" fill="freeze"/>'
+            f'<animate attributeName="opacity" values="1;1;0;0;1" dur="1.1s" '
+            f'begin="{begin+0.2}s" repeatCount="indefinite"/></rect>')
 
 
 def card(s, x, y, w, h, stroke=GRID, op=0.28, fill=PANEL):
@@ -108,35 +215,35 @@ def header(s):
         p.append(t(s.pad, 90, "// VAULT-OS", 26, AMBER, ls=2, weight=700))
         p.append(t(s.pad, 116, "Taha Halakooei", s.body, MUTE))
         p.append(t(s.pad, 134, "Founder & Chief Architect", s.det, DIM))
+        p.append(sweep("hd", s.W, h, band=54, dur=5.5))
         rows = [("TPM 2.0", "TETHERED", GREEN), ("ENCLAVE", "SEALED", GREEN),
                 ("EGRESS", "0 PATHS", AMBER)]
         for i, (k, v, c) in enumerate(rows):
             y = 162 + i * 20
             p.append(f'<g opacity="0">{fade(0.4 + i * 0.18)}'
-                     f'<circle cx="{s.pad+4}" cy="{y-4}" r="3.2" fill="{c}"/>'
+                     f'<circle cx="{s.pad+4}" cy="{y-4}" r="3.2" fill="{c}">{pulse(0.25, 1, 2.2, i*0.4)}</circle>'
                      f'{t(s.pad+16, y, k, s.det, DIM)}{t(s.W-s.pad, y, v, s.det, c, anchor="end")}</g>')
         return "\n".join(p + tail(s, h)), h
 
     h = 200
     p = head(s, h, "IronGap // Vault-OS — the air-gapped AI appliance", "hd")
-    p.append(f'<defs><linearGradient id="sw" x1="0" y1="0" x2="0" y2="1">'
-             f'<stop offset="0" stop-color="{AMBER}" stop-opacity="0"/>'
-             f'<stop offset="0.5" stop-color="{AMBER}" stop-opacity="0.22"/>'
-             f'<stop offset="1" stop-color="{AMBER}" stop-opacity="0"/></linearGradient></defs>')
-    p.append(f'<rect x="0" y="0" width="{s.W}" height="60" fill="url(#sw)">'
-             f'<animate attributeName="y" values="-60;{h}" dur="6s" repeatCount="indefinite"/></rect>')
-    p.append(f'<rect x="{s.pad-12}" y="26" width="4" height="{h-52}" fill="{AMBER}">'
-             f'<animate attributeName="opacity" values="0.6;1;0.6" dur="3.4s" repeatCount="indefinite"/></rect>')
+    p.append(sweep("hd", s.W, h, band=64, dur=6.0))
+    p.append(f'<rect x="{s.pad-12}" y="26" width="4" height="{h-52}" fill="{AMBER}" filter="url(#glhd)">'
+             f'{pulse(0.5, 1, 3.4)}</rect>')
     p.append(t(s.pad, 72, "IRONGAP", 42, "#F2F2F5", ls=5, weight=700))
     p.append(t(s.pad + 292, 72, "// VAULT-OS", 42, AMBER, ls=5, weight=700))
     p.append(t(s.pad, 102, "Taha Halakooei  ·  Founder & Chief Architect  ·  Istanbul", s.body, MUTE))
-    p.append(t(s.pad, 132, "The Air-Gapped AI Appliance for Zero-Trust Environments", 16, TEXT))
+    tag = "The Air-Gapped AI Appliance for Zero-Trust Environments"
+    tw = len(tag) * 16 * 0.605
+    p.append(f'<defs>{typeclip("hd", s.pad, 118, tw, 22, dur=2.0, begin=0.4)}</defs>')
+    p.append(f'<g clip-path="url(#tchd)">{t(s.pad, 132, tag, 16, TEXT)}</g>')
+    p.append(caret(s.pad + tw + 3, 118, 17, AMBER, begin=2.4))
     cells = [("TPM 2.0", "TETHERED", GREEN), ("ENCLAVE", "SEALED", GREEN),
              ("LEDGER", "UNBROKEN", GREEN), ("EGRESS", "0 PATHS", AMBER)]
     for i, (k, v, c) in enumerate(cells):
         x = s.pad + i * 195
-        p.append(f'<g opacity="0">{fade(0.5 + i * 0.16)}'
-                 f'<circle cx="{x+4}" cy="{168}" r="3.4" fill="{c}"/>'
+        p.append(f'<g opacity="0">{fade(2.6 + i * 0.18)}'
+                 f'<circle cx="{x+4}" cy="{168}" r="3.4" fill="{c}">{pulse(0.2, 1, 2.2, i*0.35)}</circle>'
                  f'{t(x+16, 172, k, s.det, DIM)}{t(x+92, 172, v, s.det, c)}</g>')
     return "\n".join(p + tail(s, h)), h
 
@@ -167,18 +274,23 @@ def whoami(s):
         p.append(f'<circle cx="{20+i*17}" cy="18" r="4.6" fill="{c}" fill-opacity="0.8"/>')
     p.append(t(78, 22, "taha@irongap — zsh", s.det, DIM))
     p.append(f'<line x1="0" y1="36" x2="{s.W}" y2="36" stroke="{GRID}" stroke-opacity="0.16"/>')
+    clips = []
     y = 62
     for i, (cmd, wide, narrow) in enumerate(WHO):
         lines = narrow if s.n else wide
         g = [f'<g opacity="0">{fade(0.25 + i * 0.5)}']
         g.append(t(s.pad, y, "›", s.body, GREEN))
-        g.append(t(s.pad + 16, y, cmd, s.body, TEXT))
+        g.append(f'<g clip-path="url(#tcw{i})">{t(s.pad + 16, y, cmd, s.body, TEXT)}</g>')
         for j, ln in enumerate(lines):
             col = AMBER if i in (2, 4) else MUTE
             g.append(t(s.pad, y + lh * (j + 1), ln, s.body, col))
         g.append('</g>')
+        cw_ = len(cmd) * s.body * 0.605
+        clips.append(typeclip(f"w{i}", s.pad + 16, y - 14, cw_, 18, dur=0.45,
+                              begin=0.25 + i * 0.5))
         p.append("".join(g))
         y += blk
+    p.insert(1, f'<defs>{"".join(clips)}</defs>')
     p.append(f'<text x="{s.pad}" y="{y}" font-family="{MONO}" font-size="{s.body}" '
              f'fill="{GREEN}" opacity="0">{fade(2.9, 0.2)}›</text>')
     p.append(f'<rect x="{s.pad+16}" y="{y-12}" width="9" height="15" fill="{GREEN}" opacity="0">'
@@ -210,7 +322,8 @@ def timeline(s):
         for i, (date, name, dl, col) in enumerate(laid):
             y = 62 + i * rh
             g = [f'<g opacity="0">{fade(0.2 + i * 0.22)}',
-                 f'<circle cx="{x}" cy="{y}" r="6" fill="{BG}" stroke="{col}" stroke-width="2"/>',
+                 f'<circle cx="{x}" cy="{y}" r="6" fill="{BG}" stroke="{col}" stroke-width="2">'
+                 f'{pulse(0.4, 1, 2.6, i*0.3) if i == len(TL)-1 else ""}</circle>',
                  t(x + 20, y - 4, date, s.det, DIM, ls=1.2),
                  t(x + 20, y + 16, name, s.title, TEXT)]
             for j, ln in enumerate(dl):
@@ -277,7 +390,8 @@ def depth(s):
         y = 46 + i * (rh + 8)
         g = [f'<g opacity="0">{fade(0.2 + (len(laid)-i) * 0.12)}',
              card(s, s.pad, y, s.inner, rh, col, 0.32),
-             f'<rect x="{s.pad}" y="{y}" width="4" height="{rh}" rx="2" fill="{col}"/>',
+             f'<rect x="{s.pad}" y="{y}" width="4" height="{rh}" rx="2" fill="{col}">'
+             f'{pulse(0.45, 1, 3.0, i * 0.35)}</rect>',
              t(s.pad + 15, y + 21, name, s.title, TEXT)]
         for j, ln in enumerate(dl):
             g.append(t(s.pad + 15, y + 40 + j * 17, ln, s.det, DIM))
@@ -348,6 +462,11 @@ def method(s):
         p.append("".join(g))
         if i < 4:
             p.append(f'<path d="M{x+bw+1} {top+bh/2} h8" stroke="{AMBER}" stroke-opacity="0.5" stroke-width="1.6"/>')
+    cy = top + bh / 2
+    p.append(travel(f"M{s.pad+bw/2:.0f} {cy:.0f} H{s.pad+4*(bw+12)+bw/2:.0f}", 6.5, 1.4, 4.5, AMBER))
+    p.append(burst(s.pad + 2 * (bw + 12) + bw / 2, cy, 22, 3.2, 2.6, AMBER))
+    p.append(travel(f"M{s.pad+bw*2+24+bw/2:.0f} {top+bh:.0f} V{top+bh+20:.0f} "
+                    f"H{s.pad+bw/2:.0f} V{top+bh:.0f}", 4.0, 3.4, 3.4, AMBER))
     ry = top + bh + 20
     p.append(f'<path d="M{s.pad+bw*2+24+bw/2} {top+bh} v20 H{s.pad+bw/2} v-20" fill="none" '
              f'stroke="{AMBER}" stroke-opacity="0.35" stroke-width="1.4" stroke-dasharray="5 4"/>')
@@ -383,6 +502,7 @@ def bme(s):
                      f'{card(s, s.pad, y+ph+20, s.inner, ph, AMBER, 0.3)}'
                      f'{t(s.pad+12, y+ph+43, right[0], s.det, TEXT)}'
                      f'{t(s.pad+12, y+ph+61, right[1], s.det, TEXT)}</g>')
+            p.append(travel(f"M{s.W/2:.0f} {y+ph+3} v13", 2.4, i * 0.55, 3.2, AMBER))
             y += ph * 2 + 26
         return "\n".join(p + tail(s, h)), h
 
@@ -412,7 +532,7 @@ def bme(s):
 
 # -------------------------------------------------------------------- portfolio
 
-DOMAINS = [("SECURITY & INFRASTRUCTURE", AMBER,
+DOMAINS = [("SECURITY & INFRA", AMBER,
             [("Vault-OS", "air-gapped AI appliance", "TPM 2.0 · pgvector · vLLM"),
              ("Vault-Ecosystem", "clients, 6 platforms", "Flutter · biometric lock"),
              ("Console MCP", "agent interface", "every write hits the ledger")]),
