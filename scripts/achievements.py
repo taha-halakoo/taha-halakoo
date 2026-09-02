@@ -77,6 +77,11 @@ def tiers(name, have, levels, unit, how):
 
 
 def binary(name, done, how):
+    """done: True, False, or None when the API cannot tell us."""
+    if done is None:
+        print(f"  {name:22} ?  not exposed by the API")
+        print(f"  {'':22} {how}")
+        return
     mark = "★ earned" if done else "☆ not yet"
     print(f"  {name:22} {mark}")
     if not done:
@@ -101,10 +106,13 @@ if __name__ == "__main__":
     print("\n  EARNABLE BY YOUR OWN WORK\n")
     tiers("Pull Shark", merged, [2, 16, 128, 1024], "merged PRs",
           "merge your own PRs instead of pushing to main (scripts/ship.sh)")
-    binary("Quickdraw", False,
-           "open an issue and close it within 5 minutes — one real issue does it")
-    binary("YOLO", False,
-           "merge one of your own PRs without requesting a review")
+    # There is no API for individual achievements; these two are one-shot and
+    # cannot be counted from activity, so report them honestly rather than
+    # guessing. Confirm at https://github.com/taha-halakoo?tab=achievements
+    binary("Quickdraw", None,
+           "earned by closing an issue or PR within 5 minutes of opening it")
+    binary("YOLO", None,
+           "earned by merging your own PR without requesting a review")
     tiers("Pair Extraordinaire", 24, [1, 10, 24, 48], "co-authored commits",
           "keep the Co-Authored-By trailer on commits that land via a PR")
 
