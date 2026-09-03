@@ -29,6 +29,6 @@
 <text x="266.6" y="375.0" font-family="ui-monospace,'SF Mono',Menlo,Consolas,monospace" font-size="13" fill="#5F6672" text-anchor="middle">Sat</text>
 <text x="266.6" y="269.7" font-family="ui-monospace,'SF Mono',Menlo,Consolas,monospace" font-size="13" fill="#5F6672" text-anchor="middle" opacity="0"><animate attributeName="opacity" from="0" to="1" begin="1.62s" dur="0.4s" fill="freeze"/>227</text>
 <line x1="14" y1="356" x2="286" y2="356" stroke="#FFC93C" stroke-opacity="0.2"/>
-<text x="14.0" y="398.0" font-family="ui-monospace,'SF Mono',Menlo,Consolas,monospace" font-size="13" fill="#5F6672">current streak · 3 days</text>
+<text x="14.0" y="398.0" font-family="ui-monospace,'SF Mono',Menlo,Consolas,monospace" font-size="13" fill="#5F6672">current streak · 0 days</text>
 <rect x="0" y="0" width="90" height="408" fill="url(#swhrh)" pointer-events="none"><animate attributeName="x" values="-90;300" dur="6.5s" repeatCount="indefinite"/></rect>
 <rect x="0.5" y="0.5" width="299" height="407" rx="12" fill="none" stroke="#FFC93C" stroke-opacity="0.16"/></g></svg>
