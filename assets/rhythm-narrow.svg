@@ -22,13 +22,13 @@
 <rect x="173.4" y="356" width="30.9" height="0" rx="3" fill="#8A6A0A"><animate attributeName="height" from="0" to="61.8" dur="0.7s" begin="0.78s" fill="freeze"/><animate attributeName="y" from="356" to="294.2" dur="0.7s" begin="0.78s" fill="freeze"/></rect>
 <text x="188.9" y="375.0" font-family="ui-monospace,'SF Mono',Menlo,Consolas,monospace" font-size="13" fill="#5F6672" text-anchor="middle">Thu</text>
 <text x="188.9" y="287.2" font-family="ui-monospace,'SF Mono',Menlo,Consolas,monospace" font-size="13" fill="#5F6672" text-anchor="middle" opacity="0"><animate attributeName="opacity" from="0" to="1" begin="1.48s" dur="0.4s" fill="freeze"/>177</text>
-<rect x="212.3" y="356" width="30.9" height="0" rx="3" fill="#8A6A0A"><animate attributeName="height" from="0" to="39.8" dur="0.7s" begin="0.85s" fill="freeze"/><animate attributeName="y" from="356" to="316.2" dur="0.7s" begin="0.85s" fill="freeze"/></rect>
+<rect x="212.3" y="356" width="30.9" height="0" rx="3" fill="#8A6A0A"><animate attributeName="height" from="0" to="40.5" dur="0.7s" begin="0.85s" fill="freeze"/><animate attributeName="y" from="356" to="315.5" dur="0.7s" begin="0.85s" fill="freeze"/></rect>
 <text x="227.7" y="375.0" font-family="ui-monospace,'SF Mono',Menlo,Consolas,monospace" font-size="13" fill="#5F6672" text-anchor="middle">Fri</text>
-<text x="227.7" y="309.2" font-family="ui-monospace,'SF Mono',Menlo,Consolas,monospace" font-size="13" fill="#5F6672" text-anchor="middle" opacity="0"><animate attributeName="opacity" from="0" to="1" begin="1.55s" dur="0.4s" fill="freeze"/>114</text>
+<text x="227.7" y="308.5" font-family="ui-monospace,'SF Mono',Menlo,Consolas,monospace" font-size="13" fill="#5F6672" text-anchor="middle" opacity="0"><animate attributeName="opacity" from="0" to="1" begin="1.55s" dur="0.4s" fill="freeze"/>116</text>
 <rect x="251.1" y="356" width="30.9" height="0" rx="3" fill="#8A6A0A"><animate attributeName="height" from="0" to="79.3" dur="0.7s" begin="0.92s" fill="freeze"/><animate attributeName="y" from="356" to="276.7" dur="0.7s" begin="0.92s" fill="freeze"/></rect>
 <text x="266.6" y="375.0" font-family="ui-monospace,'SF Mono',Menlo,Consolas,monospace" font-size="13" fill="#5F6672" text-anchor="middle">Sat</text>
 <text x="266.6" y="269.7" font-family="ui-monospace,'SF Mono',Menlo,Consolas,monospace" font-size="13" fill="#5F6672" text-anchor="middle" opacity="0"><animate attributeName="opacity" from="0" to="1" begin="1.62s" dur="0.4s" fill="freeze"/>227</text>
 <line x1="14" y1="356" x2="286" y2="356" stroke="#FFC93C" stroke-opacity="0.2"/>
-<text x="14.0" y="398.0" font-family="ui-monospace,'SF Mono',Menlo,Consolas,monospace" font-size="13" fill="#5F6672">current streak · 0 days</text>
+<text x="14.0" y="398.0" font-family="ui-monospace,'SF Mono',Menlo,Consolas,monospace" font-size="13" fill="#5F6672">current streak · 1 days</text>
 <rect x="0" y="0" width="90" height="408" fill="url(#swhrh)" pointer-events="none"><animate attributeName="x" values="-90;300" dur="6.5s" repeatCount="indefinite"/></rect>
 <rect x="0.5" y="0.5" width="299" height="407" rx="12" fill="none" stroke="#FFC93C" stroke-opacity="0.16"/></g></svg>
