@@ -487,6 +487,7 @@
 </g>
 <g opacity="0"><animate attributeName="opacity" from="0" to="1" begin="1.25s" dur="0.35s" fill="freeze"/>
 <rect x="778.3" y="70.0" width="10.7" height="10.7" rx="2.5" fill="#131318"/>
+<rect x="778.3" y="83.7" width="10.7" height="10.7" rx="2.5" fill="#131318"/>
 </g>
 <text x="28.0" y="192.2" font-family="ui-monospace,'SF Mono',Menlo,Consolas,monospace" font-size="12.5" fill="#5F6672">peak day · 152 contributions</text>
 <text x="618.0" y="192.2" font-family="ui-monospace,'SF Mono',Menlo,Consolas,monospace" font-size="12.5" fill="#5F6672">less</text>
