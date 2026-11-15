@@ -1,6 +1,7 @@
 name: Refresh stats panel
 
-# Regenerates assets/stats.svg from live GitHub data.
+# Regenerates every panel in assets/, in all three layouts: the hand-authored
+# ones from scripts/diagrams.py and the data panels from live GitHub data.
 #
 # Requires a STATS_TOKEN secret: a classic PAT with `repo` scope.
 #
@@ -58,14 +59,17 @@ jobs:
         run: |
           git config user.name  "github-actions[bot]"
           git config user.email "41898282+github-actions[bot]@users.noreply.github.com"
-          if git diff --quiet -- assets/; then
+          git add assets/          # staged first, so brand-new files count as a change
+          if git diff --cached --quiet; then
             echo "No change."
           else
-            git add assets/
             git commit -m "chore: refresh generated panels [skip ci]"
-            # another push may have landed while this job ran
+            # Push back to the branch this run was started on, so a manual run
+            # on a feature branch refreshes that branch and never touches main.
+            # Another push may have landed while this job ran.
             for i in 1 2 3; do
-              git pull --rebase --autostash origin main && git push && exit 0
+              git pull --rebase --autostash origin "$GITHUB_REF_NAME" \
+                && git push origin "HEAD:$GITHUB_REF_NAME" && exit 0
               echo "push attempt $i failed, retrying"; sleep 5
             done
             exit 1

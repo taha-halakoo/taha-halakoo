@@ -52,15 +52,18 @@ def phased(g):
 def collect(root):
     """Text boxes plus whether each sits inside a time-multiplexed group."""
     out = []
+    # A counter's rolling digits are a cover drawn over a figure for under two
+    # seconds and then removed; the figure beneath is ordinary text and is checked.
+    roll = {id(e) for g in root.iter(NS + "g") if g.get("class") == "roll" for e in g.iter(NS + "text")}
     for g in root.iter(NS + "g"):
         ph = phased(g)
         for e in g.findall(NS + "text"):
-            b = box(e)
+            b = None if id(e) in roll else box(e)
             if b:
                 out.append((b, ph))
     seen = {id(e) for g in root.iter(NS + "g") for e in g.findall(NS + "text")}
     for e in root.iter(NS + "text"):
-        if id(e) not in seen:
+        if id(e) not in seen and id(e) not in roll:
             b = box(e)
             if b:
                 out.append((b, False))

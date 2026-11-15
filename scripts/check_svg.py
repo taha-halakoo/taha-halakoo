@@ -3,32 +3,49 @@
 
 Two failure modes matter, and neither is visible by looking at one file:
   1. text that overruns the canvas at its own viewBox width
-  2. text that lands below ~12px once GitHub scales the image to the column
+  2. text that lands below ~11.5px once GitHub scales the image to the column
 
-GitHub's README column is 831px at a 1280px viewport and 293px on a 375px
-phone, so the scale factor is column_width / viewBox_width.
+Each layout is tested at the narrowest README column it is served into (see the
+breakpoint table in diagrams.py), so the scale factor is column / viewBox width:
+
+    wide    820 units   771px column   (a 1220px window, where wide takes over)
+    medium  480 units   440px column   (a 521px window, with margin)
+    narrow  300 units   293px column   (a 375px phone)
 """
 import glob
 import os
-import re
 import sys
 import xml.etree.ElementTree as ET
 
-COL_WIDE, COL_NARROW = 831.0, 293.0
+NS = "{http://www.w3.org/2000/svg}"
+COLUMN = {"wide": 771.0, "medium": 440.0, "narrow": 293.0}
 MIN_EFFECTIVE = 11.5
-GLOB = os.environ.get("SVG_GLOB", "assets/*.svg")
 ADV = 0.605  # monospace advance per em
+GLOB = os.environ.get("SVG_GLOB", "assets/*.svg")
+
+
+def layout(path):
+    for name in ("medium", "narrow"):
+        if f"-{name}." in path:
+            return name
+    return "wide"
+
+
+def rolling(root):
+    """Digits inside a counter's roll are covers for text that is checked on its own."""
+    return {id(e) for g in root.iter(NS + "g") if g.get("class") == "roll" for e in g.iter(NS + "text")}
+
 
 fails = []
 for path in sorted(glob.glob(GLOB)):
     root = ET.parse(path).getroot()
     vb = [float(v) for v in root.get("viewBox").split()]
     vw, vh = vb[2], vb[3]
-    col = COL_NARROW if "-narrow" in path else COL_WIDE
-    scale = col / vw
-    for el in root.iter("{http://www.w3.org/2000/svg}text"):
+    scale = min(1.0, COLUMN[layout(path)] / vw) if "btn-" in path else COLUMN[layout(path)] / vw
+    skip = rolling(root)
+    for el in root.iter(NS + "text"):
         txt = "".join(el.itertext()).strip()
-        if not txt:
+        if not txt or id(el) in skip:
             continue
         size = float(el.get("font-size", 12))
         x, y = float(el.get("x", 0)), float(el.get("y", 0))

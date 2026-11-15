@@ -1,7 +1,10 @@
 <div align="center">
 
 <picture>
-  <source media="(max-width: 600px)" srcset="assets/header-narrow.svg">
+  <source media="(max-width: 520px)" srcset="assets/header-narrow.svg">
+  <source media="(max-width: 767px)" srcset="assets/header-medium.svg">
+  <source media="(max-width: 859px)" srcset="assets/header-narrow.svg">
+  <source media="(max-width: 1219px)" srcset="assets/header-medium.svg">
   <img src="assets/header.svg" alt="Taha Halakooei — Founder & Chief Architect. IronGap Technologies: air-gapped AI for zero-trust environments. VEYMEER: from-scratch LLM inference engine." width="100%">
 </picture>
 
@@ -15,7 +18,10 @@
 <br><br>
 
 <picture>
-  <source media="(max-width: 600px)" srcset="assets/whoami-narrow.svg">
+  <source media="(max-width: 520px)" srcset="assets/whoami-narrow.svg">
+  <source media="(max-width: 767px)" srcset="assets/whoami-medium.svg">
+  <source media="(max-width: 859px)" srcset="assets/whoami-narrow.svg">
+  <source media="(max-width: 1219px)" srcset="assets/whoami-medium.svg">
   <img src="assets/whoami.svg" alt="Terminal introduction: who I am, what I build, and the principle behind it" width="100%">
 </picture>
 
@@ -42,7 +48,10 @@ An enterprise air-gapped AI knowledge vault. Offline LLM and RAG, shipping on Wi
 
 <div align="center">
 <picture>
-  <source media="(max-width: 600px)" srcset="assets/vault-narrow.svg">
+  <source media="(max-width: 520px)" srcset="assets/vault-narrow.svg">
+  <source media="(max-width: 767px)" srcset="assets/vault-medium.svg">
+  <source media="(max-width: 859px)" srcset="assets/vault-narrow.svg">
+  <source media="(max-width: 1219px)" srcset="assets/vault-medium.svg">
   <img src="assets/vault.svg" alt="Vault-OS architecture inside the air gap: clients on the local network, the Vault-OS core, a pluggable inference layer, a TPM-bound encrypted enclave holding PostgreSQL and pgvector, the fail-deadly trust root, and a Rust appliance operating system underneath" width="100%">
 </picture>
 </div>
@@ -71,7 +80,10 @@ The same model on the same GPU, several times faster, with identical output.
 
 <div align="center">
 <picture>
-  <source media="(max-width: 600px)" srcset="assets/veymeer-narrow.svg">
+  <source media="(max-width: 520px)" srcset="assets/veymeer-narrow.svg">
+  <source media="(max-width: 767px)" srcset="assets/veymeer-medium.svg">
+  <source media="(max-width: 859px)" srcset="assets/veymeer-narrow.svg">
+  <source media="(max-width: 1219px)" srcset="assets/veymeer-medium.svg">
   <img src="assets/veymeer.svg" alt="VEYMEER measured on an RTX 3050 laptop GPU running Qwen2.5-7B: 400 to 500 tokens per second on code editing, 12 to 15 times faster than standard decoding, time to first token cut from 1.9 seconds to 0.05 seconds by prompt caching, and output identical to standard decoding" width="100%">
 </picture>
 </div>
@@ -82,7 +94,10 @@ you wait.
 
 <div align="center">
 <picture>
-  <source media="(max-width: 600px)" srcset="assets/engine-narrow.svg">
+  <source media="(max-width: 520px)" srcset="assets/engine-narrow.svg">
+  <source media="(max-width: 767px)" srcset="assets/engine-medium.svg">
+  <source media="(max-width: 859px)" srcset="assets/engine-narrow.svg">
+  <source media="(max-width: 1219px)" srcset="assets/engine-medium.svg">
   <img src="assets/engine.svg" alt="VEYMEER engine, built from first principles in Rust, CUDA and Python: GGUF loader, BPE tokenizer, CUDA kernels compiled at runtime via NVRTC, KV cache, scheduler and an OpenAI-compatible API, with CUDA and WebGPU backends. STRADA, a desktop IDE, is built on it" width="100%">
 </picture>
 </div>
@@ -110,7 +125,10 @@ instinct went one layer down, into the inference engine itself.
 
 <div align="center">
 <picture>
-  <source media="(max-width: 600px)" srcset="assets/timeline-narrow.svg">
+  <source media="(max-width: 520px)" srcset="assets/timeline-narrow.svg">
+  <source media="(max-width: 767px)" srcset="assets/timeline-medium.svg">
+  <source media="(max-width: 859px)" srcset="assets/timeline-narrow.svg">
+  <source media="(max-width: 1219px)" srcset="assets/timeline-medium.svg">
   <img src="assets/timeline.svg" alt="Trajectory as a Gantt chart: Sampad 2013 to 2025, Golestan Axon since June 2024, Yıldız Technical since September 2025, IronGap since January 2026, VEYMEER since September 2026" width="100%">
 </picture>
 </div>
@@ -129,7 +147,10 @@ kernel compiled at runtime has to produce the same token a reference implementat
 
 <div align="center">
 <picture>
-  <source media="(max-width: 600px)" srcset="assets/depth-narrow.svg">
+  <source media="(max-width: 520px)" srcset="assets/depth-narrow.svg">
+  <source media="(max-width: 767px)" srcset="assets/depth-medium.svg">
+  <source media="(max-width: 859px)" srcset="assets/depth-narrow.svg">
+  <source media="(max-width: 1219px)" srcset="assets/depth-medium.svg">
   <img src="assets/depth.svg" alt="The six layers I work across, from interface down to silicon" width="100%">
 </picture>
 </div>
@@ -139,7 +160,10 @@ someone to translate, which on a small team is the thing that actually matters.
 
 <div align="center">
 <picture>
-  <source media="(max-width: 600px)" srcset="assets/reach-narrow.svg">
+  <source media="(max-width: 520px)" srcset="assets/reach-narrow.svg">
+  <source media="(max-width: 767px)" srcset="assets/reach-medium.svg">
+  <source media="(max-width: 859px)" srcset="assets/reach-narrow.svg">
+  <source media="(max-width: 1219px)" srcset="assets/reach-medium.svg">
   <img src="assets/reach.svg" alt="Where the work runs: Vault-OS on Windows and as a bare-metal appliance; Vault clients on Android, iOS, Windows, macOS and Linux; VEYMEER on NVIDIA, AMD, Intel and Apple GPUs; STRADA on desktop; BME Nexus on web, Android, iOS and desktop" width="100%">
 </picture>
 </div>
@@ -176,7 +200,10 @@ been thought about carefully by someone else first.
 
 <div align="center">
 <picture>
-  <source media="(max-width: 600px)" srcset="assets/method-narrow.svg">
+  <source media="(max-width: 520px)" srcset="assets/method-narrow.svg">
+  <source media="(max-width: 767px)" srcset="assets/method-medium.svg">
+  <source media="(max-width: 859px)" srcset="assets/method-narrow.svg">
+  <source media="(max-width: 1219px)" srcset="assets/method-medium.svg">
   <img src="assets/method.svg" alt="How I work a failure — reproduce, isolate, falsify, fix, verify" width="100%">
 </picture>
 </div>
@@ -187,7 +214,10 @@ been thought about carefully by someone else first.
 
 <div align="center">
 <picture>
-  <source media="(max-width: 600px)" srcset="assets/portfolio-narrow.svg">
+  <source media="(max-width: 520px)" srcset="assets/portfolio-narrow.svg">
+  <source media="(max-width: 767px)" srcset="assets/portfolio-medium.svg">
+  <source media="(max-width: 859px)" srcset="assets/portfolio-narrow.svg">
+  <source media="(max-width: 1219px)" srcset="assets/portfolio-medium.svg">
   <img src="assets/portfolio.svg" alt="Map of work across secure infrastructure, inference and agents, platforms, and autonomy and industry" width="100%">
 </picture>
 </div>
@@ -202,78 +232,58 @@ anyone where to go.
 
 <div align="center">
 <picture>
-  <source media="(max-width: 600px)" srcset="assets/swarm-narrow.svg">
+  <source media="(max-width: 520px)" srcset="assets/swarm-narrow.svg">
+  <source media="(max-width: 767px)" srcset="assets/swarm-medium.svg">
+  <source media="(max-width: 859px)" srcset="assets/swarm-narrow.svg">
+  <source media="(max-width: 1219px)" srcset="assets/swarm-medium.svg">
   <img src="assets/swarm.svg" alt="Lumo: in a 60-drone worst-case crossing, a speed governor derived from turning physics reduced collisions from 717 to zero, with every drone still reaching its goal" width="100%">
 </picture>
 </div>
 
-<table>
-<tr><td width="50%" valign="top">
-
 ### YTU BME Nexus
-Department platform for Biomedical Engineering at Yıldız Technical.
 
-`React` `Supabase`
+Department platform for Biomedical Engineering at Yıldız Technical. `React` `Supabase`
 
 Web, Android, iOS and desktop, in 13 languages, with row-level security throughout. GPA
 calculator, timetable, messaging, file sharing and a department knowledge base. Built for
 the department I actually study in, which is a useful constraint — the users find me in
 the corridor.
 
-</td><td width="50%" valign="top">
-
 ### [Traces](https://github.com/taha-halakoo/Lumo-traces)
-Content pinned to physical coordinates, locked until you're within 20 m.
 
-`Fastify` `PostGIS` `pgvector` `Flutter`
+Content pinned to physical coordinates, locked until you're within 20 m. `Fastify` `PostGIS` `pgvector` `Flutter`
 
 PostGIS geofencing with anti-spoofing checks, combined vector and spatial ranking, and an
 offline-first mobile client. The proximity constraint is enforced server-side — the client
 is never trusted with it.
 
-</td></tr>
-<tr><td width="50%" valign="top">
-
 ### rremote
-Secure remote desktop over encrypted WebSockets.
 
-`Rust` `Tokio`
+Secure remote desktop over encrypted WebSockets. `Rust` `Tokio`
 
 An asynchronous server for screen sharing, remote input, terminal sessions, audio and
 camera streaming, with local-network discovery and QR-code pairing.
 
-</td><td width="50%" valign="top">
-
 ### Aegis
-Hydrogen-electric VTOL cargo drone for medical and disaster-relief logistics. Concept phase.
 
-`Systems engineering` `Python`
+Hydrogen-electric VTOL cargo drone for medical and disaster-relief logistics, in concept
+phase. `Systems engineering` `Python`
 
 Concept of operations, traceable requirements, design decisions, an in-house aerodynamics
 model, and mass and power budgets.
 
-</td></tr>
-<tr><td width="50%" valign="top">
-
 ### [Virtual Mouse](https://github.com/taha-halakoo/virtual-mouse)
-Hands-free pointer control from webcam hand tracking.
 
-`Python` `MediaPipe` `OpenCV`
+Hands-free pointer control from webcam hand tracking. `Python` `MediaPipe` `OpenCV`
 
 One-Euro filtering with relative delta tracking. A clutch gesture lets you reposition your
 arm without moving the cursor — the detail that makes it usable rather than a demo.
 
-</td><td width="50%" valign="top">
-
 ### [StudyHub](https://github.com/taha-halakoo/studyhub)
-Modular productivity dashboard with real-time collaboration.
 
-`React` `TypeScript` `Supabase`
+Modular productivity dashboard with real-time collaboration. `React` `TypeScript` `Supabase`
 
 Lazy-loaded feature modules and role-based access over Supabase Auth.
-
-</td></tr>
-</table>
 
 Also: **WidgetOS**, a platform for embeddable Notion widgets (Next.js, Drizzle, Stripe);
 the IronGap Founder Console with TOTP login, an MCP server that gives AI agents audited
@@ -300,7 +310,10 @@ well.
 
 <div align="center">
 <picture>
-  <source media="(max-width: 600px)" srcset="assets/bme-narrow.svg">
+  <source media="(max-width: 520px)" srcset="assets/bme-narrow.svg">
+  <source media="(max-width: 767px)" srcset="assets/bme-medium.svg">
+  <source media="(max-width: 859px)" srcset="assets/bme-narrow.svg">
+  <source media="(max-width: 1219px)" srcset="assets/bme-medium.svg">
   <img src="assets/bme.svg" alt="How biomedical engineering training maps onto secure systems work" width="100%">
 </picture>
 </div>
@@ -312,21 +325,30 @@ well.
 <div align="center">
 
 <picture>
-  <source media="(max-width: 600px)" srcset="assets/stats-narrow.svg">
+  <source media="(max-width: 520px)" srcset="assets/stats-narrow.svg">
+  <source media="(max-width: 767px)" srcset="assets/stats-medium.svg">
+  <source media="(max-width: 859px)" srcset="assets/stats-narrow.svg">
+  <source media="(max-width: 1219px)" srcset="assets/stats-medium.svg">
   <img src="assets/stats.svg" alt="GitHub activity — commits, private share, repositories and language distribution" width="100%">
 </picture>
 
 <br>
 
 <picture>
-  <source media="(max-width: 600px)" srcset="assets/contrib-narrow.svg">
+  <source media="(max-width: 520px)" srcset="assets/contrib-narrow.svg">
+  <source media="(max-width: 767px)" srcset="assets/contrib-medium.svg">
+  <source media="(max-width: 859px)" srcset="assets/contrib-narrow.svg">
+  <source media="(max-width: 1219px)" srcset="assets/contrib-medium.svg">
   <img src="assets/contrib.svg" alt="Contribution heatmap over the last twelve months" width="100%">
 </picture>
 
 <br>
 
 <picture>
-  <source media="(max-width: 600px)" srcset="assets/velocity-narrow.svg">
+  <source media="(max-width: 520px)" srcset="assets/velocity-narrow.svg">
+  <source media="(max-width: 767px)" srcset="assets/velocity-medium.svg">
+  <source media="(max-width: 859px)" srcset="assets/velocity-narrow.svg">
+  <source media="(max-width: 1219px)" srcset="assets/velocity-medium.svg">
   <img src="assets/velocity.svg" alt="Contributions per month over the last year" width="100%">
 </picture>
 
@@ -337,7 +359,10 @@ included. I would rather show you the ramp than claim I have been doing this for
 
 <div align="center">
 <picture>
-  <source media="(max-width: 600px)" srcset="assets/rhythm-narrow.svg">
+  <source media="(max-width: 520px)" srcset="assets/rhythm-narrow.svg">
+  <source media="(max-width: 767px)" srcset="assets/rhythm-medium.svg">
+  <source media="(max-width: 859px)" srcset="assets/rhythm-narrow.svg">
+  <source media="(max-width: 1219px)" srcset="assets/rhythm-medium.svg">
   <img src="assets/rhythm.svg" alt="Working rhythm — streaks, busiest day, and which days the work lands on" width="100%">
 </picture>
 </div>
@@ -350,7 +375,8 @@ streak alive, and I'd rather the graph said something true than something tidy.
 
 <sub>Every panel on this page, down to the link buttons, is drawn by <a href="scripts/">scripts in this repo</a>
 and refreshed daily, rather than fetched from a third-party widget — the usual ones
-rate-limit, run out of quota, and eventually stop rendering. Fitting, for someone who
+rate-limit, run out of quota, and eventually stop rendering. Each is drawn in three
+layouts, so it stays readable from a phone to a wide monitor. Fitting, for someone who
 builds things that don't phone home.</sub>
 
 </div>

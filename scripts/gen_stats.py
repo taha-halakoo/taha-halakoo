@@ -1,10 +1,10 @@
 #!/usr/bin/env python3
 """Generate the README data panels from live GitHub data.
 
-Writes a wide and a narrow variant of each of stats, contrib, velocity and
-rhythm. The narrow ones exist because an SVG rendered as <img> scales as a
-picture and its text does not reflow: at 1000px wide this type landed at 2.5px
-in a phone's 293px README column.
+Writes stats, contrib, velocity and rhythm in the three layouts diagrams.py
+defines (wide, medium, narrow). They exist because an SVG rendered as <img>
+scales as a picture and its text does not reflow: at 1000px wide this type
+landed at 2.5px in a phone's 293px README column.
 
 Requires STATS_TOKEN (a classic PAT with `repo` scope). The default
 GITHUB_TOKEN cannot enumerate private repositories and would report
@@ -18,8 +18,8 @@ import sys
 import urllib.request
 
 sys.path.insert(0, os.path.dirname(os.path.abspath(__file__)))
-from diagrams import (S, head, tail, sect, fade, card, t, pulse, sweep,  # noqa: E402
-                      hsweep, burst, GRID, DIM, TEXT, AMBER, GREEN, MUTE, MONO)
+from diagrams import (S, VARIANTS, head, tail, title, fade, anim, num, card, t,  # noqa: E402
+                      pulse, burst, GRID, DIM, TEXT, AMBER, GREEN, MUTE, MONO)
 
 USER = os.environ.get("GH_USER", "taha-halakoo")
 TOKEN = os.environ["GITHUB_TOKEN"]
@@ -63,19 +63,31 @@ def fetch():
 
 
 def tile(s, x, y, w, h, val, label, colour, delay):
-    return (f'<g opacity="0">{fade(delay, 0.5)}{card(s, x, y, w, h, GRID, 0.16)}'
-            f'{t(x+14, y+h-28, val, s.num, colour, weight=700)}'
+    return (f'<g>{fade(delay, 0.5)}{card(s, x, y, w, h, GRID, 0.16)}'
+            f'{num(x+14, y+h-28, val, s.num, colour, delay + 0.35)}'
             f'{t(x+14, y+h-9, label, s.det, DIM, ls=1.3)}</g>')
 
 
+OTHER = "#3A3F48"
+
+
 def langbar(s, p, top, col, tot, y):
+    """One bar for the whole codebase: the named languages, then everything else in grey.
+
+    Segments are separated by a 2px gap of background rather than a stroke.
+    """
     x = float(s.pad)
-    for name, size in top:
+    segs = [(col[name], size) for name, size in top]
+    rest = tot - sum(size for _, size in top)
+    if rest > 0:
+        segs.append((OTHER, rest))
+    for i, (colour, size) in enumerate(segs):
         w = size / tot * s.inner
-        p.append(f'<rect x="{x:.1f}" y="{y}" width="0" height="14" fill="{col[name]}">'
-                 f'<animate attributeName="width" from="0" to="{w:.1f}" dur="0.9s" '
-                 f'begin="0.5s" fill="freeze"/></rect>')
+        vis = max(1.0, w - (2 if i < len(segs) - 1 else 0))
+        p.append(f'<rect x="{x:.1f}" y="{y}" width="{vis:.1f}" height="14" rx="2" fill="{colour}">'
+                 f'{anim("width", 0, f"{vis:.1f}", 0.5 + i * 0.06, 0.8)}</rect>')
         x += w
+    return rest
 
 
 # ------------------------------------------------------------------------ stats
@@ -92,7 +104,7 @@ def build_stats(s, d):
             lang[e["node"]["name"]] += e["size"]
             col[e["node"]["name"]] = e["node"]["color"] or "#8B949E"
     tot = sum(lang.values()) or 1
-    top = lang.most_common(4 if s.n else 6)
+    top = lang.most_common(4 if s.mode == "n" else 6)
 
     vals = [(f"{total:,}", "COMMITS 12MO" if s.n else "COMMITS / 12 MO", AMBER),
             (f"{pct}%", "PRIVATE" if s.n else "SHIPPED PRIVATELY", GREEN),
@@ -106,7 +118,7 @@ def build_stats(s, d):
         gy = 42 + 2 * (th + 10) + 30
         h = gy + 36 + ((len(top) + 1) // 2) * 22 + 8
         p = head(s, h, "GitHub activity for %s" % USER, "st")
-        p.append(sect(s, 26, "SIGNAL · 12 MONTHS"))
+        p.append(title(s, 26, "SIGNAL · 12 MONTHS"))
         for i, (v, l, c2) in enumerate(vals):
             p.append(tile(s, s.pad + (i % 2) * (tw + 10), 42 + (i // 2) * (th + 10),
                           tw, th, v, l, c2, 0.1 * i))
@@ -123,17 +135,22 @@ def build_stats(s, d):
     gy = 44 + th + 36
     h = gy + 58
     p = head(s, h, "GitHub activity for %s" % USER, "st")
-    p.append(sect(s, 28, "SIGNAL · LAST 12 MONTHS"))
+    p.append(title(s, 28, "SIGNAL · LAST 12 MONTHS"))
     for i, (v, l, c2) in enumerate(vals):
         p.append(tile(s, s.pad + i * (tw + 12), 44, tw, th, v, l, c2, 0.12 * i))
     p.append(t(s.pad, gy - 10, "LANGUAGE DISTRIBUTION", s.det, DIM, ls=1.6))
-    langbar(s, p, top, col, tot, gy)
+    rest = langbar(s, p, top, col, tot, gy)
     lx = s.pad
-    for name, size in top:
-        label = f"{name} {size*100/tot:.1f}%"
-        p.append(f'<circle cx="{lx+4}" cy="{gy+36}" r="4.2" fill="{col[name]}"/>')
+    legend = [(f"{name} {size*100/tot:.1f}%", col[name]) for name, size in top]
+    if rest > 0:
+        legend.append((f"other {rest*100/tot:.1f}%", OTHER))
+    for label, colour in legend:
+        w = 14 + len(label) * s.det * 0.605
+        if lx + w > s.W - s.pad:   # never let the legend run off the card
+            break
+        p.append(f'<circle cx="{lx+4}" cy="{gy+36}" r="4.2" fill="{colour}"/>')
         p.append(t(lx + 14, gy + 40, label, s.det, MUTE))
-        lx += 28 + len(label) * s.det * 0.605
+        lx += w + 14
     return "\n".join(p + tail(s, h)), h
 
 
@@ -162,10 +179,10 @@ def build_contrib(s, d):
     h = round(y0 + grid_h + (60 if s.n else 44))
 
     p = head(s, h, "Contribution heatmap for %s" % USER, "ct")
-    p.append(sect(s, 26 if s.n else 28,
-                  f"HEATMAP · {cal['totalContributions']:,} IN 12 MONTHS" if s.n
-                  else f"CONTRIBUTION HEATMAP · {cal['totalContributions']:,} IN 12 MONTHS"))
-    seen, shown, every = set(), 0, (3 if s.n else 1)
+    p.append(title(s, 26 if s.n else 28,
+                   f"HEATMAP · {cal['totalContributions']:,} IN 12 MONTHS" if s.n
+                   else f"CONTRIBUTION HEATMAP · {cal['totalContributions']:,} IN 12 MONTHS"))
+    seen, shown, every = set(), 0, (3 if s.mode == "n" else 1)
     for wi, w in enumerate(weeks):
         first = w["contributionDays"][0]["date"]
         if first[:7] not in seen and int(first[8:]) <= 7:
@@ -179,7 +196,7 @@ def build_contrib(s, d):
             p.append(t(x0 - 9, y0 + (i * 2 + 1) * (cell + gap) + 10, dl, s.det, DIM, anchor="end"))
     for wi, w in enumerate(weeks):
         x = x0 + wi * step
-        p.append(f'<g opacity="0">{fade(wi * 0.024, 0.35)}')
+        p.append(f'<g>{fade(wi * 0.024, 0.35, 0)}')
         for day in w["contributionDays"]:
             y = y0 + day["weekday"] * (cell + gap)
             p.append(f'<rect x="{x:.1f}" y="{y:.1f}" width="{cell:.1f}" height="{cell:.1f}" '
@@ -217,8 +234,9 @@ def build_velocity(s, d):
     base = top + (150 if s.n else 152)
     h = base + 56
     p = head(s, h, "Monthly contribution volume for %s" % USER, "vl")
-    p.append(sect(s, 26 if s.n else 28,
-                  "VELOCITY · PER MONTH" if s.n else "VELOCITY · CONTRIBUTIONS PER MONTH"))
+    p.append(title(s, 26 if s.n else 28,
+                   "VELOCITY · PER MONTH" if s.n else "VELOCITY · CONTRIBUTIONS PER MONTH"))
+    roomy = s.mode != "n"   # every month gets a label and a value except on the narrowest layout
 
     gx = s.pad + (34 if s.n else 46)
     gw = s.W - s.pad - gx
@@ -235,26 +253,23 @@ def build_velocity(s, d):
         bh = (val / peak) * (base - top)
         partial, is_peak = mon == this_month, val == peak
         extra = ' fill-opacity="0.35" stroke="#8A6A0A" stroke-dasharray="3 3"' if partial else ''
-        p.append(f'<rect x="{x:.1f}" y="{base}" width="{bw:.1f}" height="0" rx="3" '
+        p.append(f'<rect x="{x:.1f}" y="{base-bh:.1f}" width="{bw:.1f}" height="{bh:.1f}" rx="3" '
                  f'fill="{AMBER if is_peak else "#8A6A0A"}"{extra}>'
-                 f'<animate attributeName="height" from="0" to="{bh:.1f}" dur="0.7s" '
-                 f'begin="{0.2+i*0.05:.2f}s" fill="freeze"/>'
-                 f'<animate attributeName="y" from="{base}" to="{base-bh:.1f}" dur="0.7s" '
-                 f'begin="{0.2+i*0.05:.2f}s" fill="freeze"/>'
+                 f'{anim("height", 0, f"{bh:.1f}", 0.2 + i * 0.05, 0.7)}'
+                 f'{anim("y", base, f"{base-bh:.1f}", 0.2 + i * 0.05, 0.7)}'
                  f'{pulse(0.62, 1, 2.8, 1.4) if is_peak else ""}</rect>')
         if is_peak:
-            p.append(f'<g opacity="0">{fade(1.4, 0.4)}'
-                     f'{burst(x + bw / 2, base - bh, 22, 3.0, 1.6, AMBER)}</g>')
+            p.append(burst(x + bw / 2, base - bh, 22, 3.0, 1.6, AMBER))
         lab = datetime.date(int(mon[:4]), int(mon[5:7]), 1).strftime("%b")
         lw = len(lab) * s.det * 0.605
-        want = (not s.n) or i % 3 == 0 or is_peak
+        want = roomy or i % 3 == 0 or is_peak
         if want and (x + bw / 2 - lw / 2) > last_label[0] + 4:
             p.append(t(x + bw / 2, base + 19, lab, s.det, DIM, anchor="middle"))
             last_label[0] = x + bw / 2 + lw / 2
-        if is_peak or (not s.n and val):
+        if is_peak or (roomy and val):
             p.append(f'<text x="{x+bw/2:.1f}" y="{base-bh-8:.1f}" font-family="{MONO}" '
-                     f'font-size="{s.det}" fill="{AMBER if is_peak else DIM}" text-anchor="middle" '
-                     f'opacity="0">{fade(0.9+i*0.05, 0.4)}{val}</text>')
+                     f'font-size="{s.det}" fill="{AMBER if is_peak else DIM}" text-anchor="middle">'
+                     f'{fade(0.9+i*0.05, 0.4, 0)}{val}</text>')
         if partial:
             p.append(t(x + bw / 2, base + 34, "MTD", s.det, "#8A6A0A", anchor="middle"))
     p.append(f'<line x1="{gx}" y1="{base}" x2="{s.W-s.pad}" y2="{base}" stroke="{GRID}" stroke-opacity="0.2"/>')
@@ -303,7 +318,7 @@ def build_rhythm(s, d):
         base = gy + 100
     h = base + 52
     p = head(s, h, "Working rhythm for %s" % USER, "rh")
-    p.append(sect(s, 26 if s.n else 28, "WORKING RHYTHM"))
+    p.append(title(s, 26 if s.n else 28, "WORKING RHYTHM"))
     for i, (v, l, c2) in enumerate(vals):
         if s.n:
             p.append(tile(s, s.pad + (i % 2) * (tw + 10), 42 + (i // 2) * (th + 10), tw, th, v, l, c2, 0.1 * i))
@@ -315,17 +330,15 @@ def build_rhythm(s, d):
     for i in range(7):
         x = s.pad + i * slot + (slot - bw) / 2
         bh = (wd[i] / wpeak) * (base - gy - 6) if wpeak else 0
-        p.append(f'<rect x="{x:.1f}" y="{base}" width="{bw:.1f}" height="0" rx="3" '
+        p.append(f'<rect x="{x:.1f}" y="{base-bh:.1f}" width="{bw:.1f}" height="{bh:.1f}" rx="3" '
                  f'fill="{AMBER if i==heaviest else "#8A6A0A"}">'
-                 f'<animate attributeName="height" from="0" to="{bh:.1f}" dur="0.7s" '
-                 f'begin="{0.5+i*0.07:.2f}s" fill="freeze"/>'
-                 f'<animate attributeName="y" from="{base}" to="{base-bh:.1f}" dur="0.7s" '
-                 f'begin="{0.5+i*0.07:.2f}s" fill="freeze"/>'
+                 f'{anim("height", 0, f"{bh:.1f}", 0.5 + i * 0.07, 0.7)}'
+                 f'{anim("y", base, f"{base-bh:.1f}", 0.5 + i * 0.07, 0.7)}'
                  f'{pulse(0.62, 1, 2.8, 1.6) if i == heaviest else ""}</rect>')
         p.append(t(x + bw / 2, base + 19, names[i], s.det, DIM, anchor="middle"))
         p.append(f'<text x="{x+bw/2:.1f}" y="{base-bh-7:.1f}" font-family="{MONO}" '
-                 f'font-size="{s.det}" fill="{AMBER if i==heaviest else DIM}" text-anchor="middle" '
-                 f'opacity="0">{fade(1.2+i*0.07, 0.4)}{wd[i]}</text>')
+                 f'font-size="{s.det}" fill="{AMBER if i==heaviest else DIM}" text-anchor="middle">'
+                 f'{fade(1.2+i*0.07, 0.4, 0)}{wd[i]}</text>')
     p.append(f'<line x1="{s.pad}" y1="{base}" x2="{s.W-s.pad}" y2="{base}" stroke="{GRID}" stroke-opacity="0.2"/>')
     p.append(t(s.pad, base + 42, f"current streak · {current} days", s.det, DIM))
     return "\n".join(p + tail(s, h)), h
@@ -345,9 +358,10 @@ if __name__ == "__main__":
             "Add a classic PAT with `repo` scope as the STATS_TOKEN repository secret.")
     os.makedirs("assets", exist_ok=True)
     for name, fn in BUILDERS.items():
-        for suffix, narrow in (("", False), ("-narrow", True)):
-            svg, h = fn(S(narrow), data)
+        for suffix, mode in VARIANTS:
+            s = S(mode)
+            svg, h = fn(s, data)
             path = f"assets/{name}{suffix}.svg"
             with open(path, "w", encoding="utf-8") as f:
                 f.write(svg)
-            print(f"{path:32} {S(narrow).W}x{h}")
+            print(f"{path:32} {s.W}x{h}")
