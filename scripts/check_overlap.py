@@ -21,7 +21,8 @@ def box(el):
     size = float(el.get("font-size", 12))
     x, y = float(el.get("x", 0)), float(el.get("y", 0))
     ls = float(el.get("letter-spacing", 0) or 0)
-    w = len(txt) * (size * ADV + ls)
+    # a run with textLength is pinned to that width whatever the face
+    w = float(el.get("textLength") or len(txt) * (size * ADV + ls))
     a = el.get("text-anchor", "start")
     left = x - w if a == "end" else (x - w / 2 if a == "middle" else x)
     return (left, y - size * 0.78, left + w, y + size * 0.24, txt, size)
