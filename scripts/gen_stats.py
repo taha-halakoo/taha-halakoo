@@ -32,7 +32,6 @@ QUERY = """
       totalCount
       nodes {
         isPrivate
-        stargazerCount
         languages(first: 10, orderBy: {field: SIZE, direction: DESC}) {
           edges { size node { name color } }
         }
@@ -86,7 +85,6 @@ def build_stats(s, d):
     total = c["totalCommitContributions"] + c["restrictedContributionsCount"]
     pct = round(c["restrictedContributionsCount"] * 100 / total) if total else 0
     repos = d["repositories"]["totalCount"]
-    stars = sum(n["stargazerCount"] for n in d["repositories"]["nodes"])
 
     lang, col = collections.Counter(), {}
     for n in d["repositories"]["nodes"]:
@@ -99,7 +97,9 @@ def build_stats(s, d):
     vals = [(f"{total:,}", "COMMITS 12MO" if s.n else "COMMITS / 12 MO", AMBER),
             (f"{pct}%", "PRIVATE" if s.n else "SHIPPED PRIVATELY", GREEN),
             (f"{repos}", "REPOS" if s.n else "REPOSITORIES", TEXT),
-            (f"{stars}", "STARS" if s.n else "STARS EARNED", TEXT)]
+            # Not stars: on a mostly private account they would mostly be
+            # the owner's own, and a number nobody else contributed to is not signal.
+            (f"{len(lang)}", "LANGUAGES" if s.n else "LANGUAGES USED", TEXT)]
 
     if s.n:
         tw, th = (s.inner - 10) / 2, 72
@@ -287,11 +287,11 @@ def build_rhythm(s, d):
     pct = round(len(active) * 100 / len(days)) if days else 0
     heaviest = max(wd, key=lambda k: wd[k]) if wd else 0
 
-    vals = [(f"{longest}", "LONGEST STREAK" if s.n else "LONGEST STREAK / DAYS", AMBER),
+    vals = [(f"{longest}", "LONGEST STREAK" if s.n else "LONGEST RUN, DAYS", AMBER),
             (f"{best['contributionCount']}" if best else "0",
-             "BUSIEST DAY" if s.n else "BUSIEST SINGLE DAY", AMBER),
-            (f"{avg:.1f}", "AVG / DAY" if s.n else "AVG ON AN ACTIVE DAY", GREEN),
-            (f"{pct}%", "DAYS ACTIVE" if s.n else "OF DAYS WITH COMMITS", TEXT)]
+             "BUSIEST DAY", AMBER),
+            (f"{avg:.1f}", "AVG / DAY" if s.n else "AVG / ACTIVE DAY", GREEN),
+            (f"{pct}%", "DAYS ACTIVE" if s.n else "OF DAYS ACTIVE", TEXT)]
 
     if s.n:
         tw, th = (s.inner - 10) / 2, 72

@@ -12,4 +12,5 @@
 <path d="M34 414 v12" stroke="#FFC93C" stroke-opacity="0.4" stroke-width="1.5"/>
 <g opacity="0"><animate attributeName="opacity" from="0" to="1" begin="1.00s" dur="0.45s" fill="freeze"/><rect x="14.0" y="426.0" width="272.0" height="83.0" rx="7" fill="#0E1116" stroke="#3FB950" stroke-opacity="0.34"/><text x="28.0" y="447.0" font-family="ui-monospace,'SF Mono',Menlo,Consolas,monospace" font-size="15.5" fill="#3FB950">5 · VERIFY</text><text x="28.0" y="466.0" font-family="ui-monospace,'SF Mono',Menlo,Consolas,monospace" font-size="13" fill="#5F6672">add the check that would have</text><text x="28.0" y="483.0" font-family="ui-monospace,'SF Mono',Menlo,Consolas,monospace" font-size="13" fill="#5F6672">caught it</text><text x="28.0" y="506.0" font-family="ui-monospace,'SF Mono',Menlo,Consolas,monospace" font-size="13" fill="#8A7A4A">shutdown now verifies</text></g>
 <rect x="0" y="0" width="90" height="533" fill="url(#swhmt)" pointer-events="none"><animate attributeName="x" values="-90;300" dur="6.5s" repeatCount="indefinite"/></rect>
-<rect x="0.5" y="0.5" width="299" height="532" rx="12" fill="none" stroke="#FFC93C" stroke-opacity="0.16"/></g></svg>
+<rect x="0.5" y="0.5" width="299" height="532" rx="12" fill="none" stroke="#FFC93C" stroke-opacity="0.16"/>
+</g></svg>

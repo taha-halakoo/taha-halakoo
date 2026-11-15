@@ -2,24 +2,95 @@
 
 <picture>
   <source media="(max-width: 600px)" srcset="assets/header-narrow.svg">
-  <img src="assets/header.svg" alt="IronGap // Vault-OS — The Air-Gapped AI Appliance for Zero-Trust Environments" width="100%">
+  <img src="assets/header.svg" alt="Taha Halakooei — Founder & Chief Architect. IronGap Technologies: air-gapped AI for zero-trust environments. VEYMEER: from-scratch LLM inference engine." width="100%">
 </picture>
 
 <br>
 
-[![Company](https://img.shields.io/badge/IRONGAP-iron--gap.com-FFC93C?style=for-the-badge&labelColor=07070A)](https://www.iron-gap.com)
-[![LinkedIn](https://img.shields.io/badge/LINKEDIN-taha--halakooei-FFC93C?style=for-the-badge&labelColor=07070A&logo=linkedin&logoColor=FFC93C)](https://www.linkedin.com/in/taha-halakooei)
-[![Portfolio](https://img.shields.io/badge/PORTFOLIO-metronix.ir-FFC93C?style=for-the-badge&labelColor=07070A)](https://metronix.ir)
-[![Email](https://img.shields.io/badge/CONTACT-taha%40iron--gap.com-FFC93C?style=for-the-badge&labelColor=07070A&logo=maildotru&logoColor=FFC93C)](mailto:taha@iron-gap.com)
+<a href="https://www.iron-gap.com"><img src="assets/btn-irongap.svg" height="36" alt="IronGap: iron-gap.com"></a>
+<a href="https://www.linkedin.com/in/taha-halakooei"><img src="assets/btn-linkedin.svg" height="36" alt="LinkedIn: taha-halakooei"></a>
+<a href="mailto:taha@iron-gap.com"><img src="assets/btn-email.svg" height="36" alt="Email: taha@iron-gap.com"></a>
+<a href="https://metronix.ir"><img src="assets/btn-portfolio.svg" height="36" alt="Portfolio: metronix.ir"></a>
 
-<br>
+<br><br>
 
 <picture>
   <source media="(max-width: 600px)" srcset="assets/whoami-narrow.svg">
-  <img src="assets/whoami.svg" alt="Terminal introduction" width="100%">
+  <img src="assets/whoami.svg" alt="Terminal introduction: who I am, what I build, and the principle behind it" width="100%">
 </picture>
 
 </div>
+
+I build AI infrastructure for places where the network is not a given, and the engine that
+makes it fast once it is there. I work across the whole stack, from TPM-bound boot chains
+and hand-written CUDA kernels to cross-platform Flutter and React applications, and I back
+technical claims with measurements.
+
+---
+
+## Two companies, one stack
+
+**[IronGap Technologies](https://www.iron-gap.com)** decides *where* the model runs: on
+hardware you physically control, behind an air gap, for defence, healthcare and regulated
+enterprises. **VEYMEER** decides *how fast* it runs once it is there: a from-scratch LLM
+inference engine for consumer GPUs. They are sister companies, and the second plugs into
+the first.
+
+### Vault-OS · IronGap
+
+An enterprise air-gapped AI knowledge vault. Offline LLM and RAG, shipping on Windows.
+
+<div align="center">
+<picture>
+  <source media="(max-width: 600px)" srcset="assets/vault-narrow.svg">
+  <img src="assets/vault.svg" alt="Vault-OS architecture inside the air gap: clients on the local network, the Vault-OS core, a pluggable inference layer, a TPM-bound encrypted enclave holding PostgreSQL and pgvector, the fail-deadly trust root, and a Rust appliance operating system underneath" width="100%">
+</picture>
+</div>
+
+- **Native, without Docker.** Fastify, React 19 and PostgreSQL/pgvector, with the database
+  managed by the product itself inside an encrypted enclave and its schema repaired on
+  every boot.
+- **Fail-deadly security model.** AES-256-GCM sealed configuration with scrypt key
+  derivation, a TPM 2.0-bound enclave with hardware-tethered licensing, an ECDSA-signed,
+  SHA-256 hash-chained audit ledger, clock-integrity checks and NIST SP 800-88 secure
+  erasure.
+- **Pluggable inference.** Ollama, vLLM, TensorRT-LLM, anything OpenAI-compatible, and
+  VEYMEER, under a DAG workflow and agent engine with sandboxed execution.
+- **A bare-metal appliance.** A Rust-based OS with its own PID 1 init, initramfs builder,
+  desktop shell and compute fabric, disk provisioning with TPM-sealed LUKS2, and a QEMU
+  test harness.
+- **Clients everywhere the operator is.** A Flutter app for Android, iOS, Windows, macOS
+  and Linux with local-network discovery and certificate pinning, an Electron desktop
+  client, and installers with silent chained setup and conflict diagnostics.
+
+**[IronGap on GitHub →](https://github.com/IronGap-Technologies)**
+
+### VEYMEER
+
+The same model on the same GPU, several times faster, with identical output.
+
+<div align="center">
+<picture>
+  <source media="(max-width: 600px)" srcset="assets/veymeer-narrow.svg">
+  <img src="assets/veymeer.svg" alt="VEYMEER measured on an RTX 3050 laptop GPU running Qwen2.5-7B: 400 to 500 tokens per second on code editing, 12 to 15 times faster than standard decoding, time to first token cut from 1.9 seconds to 0.05 seconds by prompt caching, and output identical to standard decoding" width="100%">
+</picture>
+</div>
+
+Those numbers come from a laptop GPU, on purpose. The speculative decoding is lossless:
+the output is identical to standard decoding, so the only thing that changes is how long
+you wait.
+
+<div align="center">
+<picture>
+  <source media="(max-width: 600px)" srcset="assets/engine-narrow.svg">
+  <img src="assets/engine.svg" alt="VEYMEER engine, built from first principles in Rust, CUDA and Python: GGUF loader, BPE tokenizer, CUDA kernels compiled at runtime via NVRTC, KV cache, scheduler and an OpenAI-compatible API, with CUDA and WebGPU backends. STRADA, a desktop IDE, is built on it" width="100%">
+</picture>
+</div>
+
+Every box in that row is written here, from the GGUF loader to the API, with the CUDA
+kernels compiled at runtime via NVRTC and a WebGPU backend for AMD, Intel and Apple GPUs.
+**STRADA** is what it looks like with an editor on top: a desktop IDE with VS Code
+extension support, integrated debugging and an autonomous coding agent.
 
 ---
 
@@ -27,39 +98,51 @@
 
 I did not start with security. I started with a plant in Golestan that could not afford to
 have its systems go down, and a job keeping them up through the construction and
-commissioning of an iodine extraction facility. Two years of that teaches you something a
-course cannot: that the interesting failures are never the ones in the design document, and
-that "it works on my machine" is a sentence with real consequences when the machine is in a
-control room.
+commissioning of an iodine extraction facility. More than two years of that teaches you
+something a course cannot: that the interesting failures are never the ones in the design
+document, and that "it works on my machine" is a sentence with real consequences when the
+machine is in a control room.
 
 Then I started building software for environments where the network is not a given, and
 found the same lesson waiting. So I stopped treating isolation as a constraint to work
-around and started treating it as the thing worth building.
+around and started treating it as the thing worth building. In September 2026 the same
+instinct went one layer down, into the inference engine itself.
 
 <div align="center">
 <picture>
   <source media="(max-width: 600px)" srcset="assets/timeline-narrow.svg">
-  <img src="assets/timeline.svg" alt="Trajectory from Sampad through Golestan Axon and Yıldız Technical to founding IronGap" width="100%">
+  <img src="assets/timeline.svg" alt="Trajectory as a Gantt chart: Sampad 2013 to 2025, Golestan Axon since June 2024, Yıldız Technical since September 2025, IronGap since January 2026, VEYMEER since September 2026" width="100%">
 </picture>
 </div>
+
+None of those bars has ended except the first. The plant, the degree and both companies
+run at the same time.
 
 ---
 
 ## The range
 
 Most of what I do sits at the seams. Not the frontend, not the backend — the awkward joints
-where a TPM chip has to convince a database that a license is valid, or where a Flutter
-client has to find an appliance on a network with no DNS and no internet.
+where a TPM chip has to convince a database that a license is valid, where a Flutter
+client has to find an appliance on a network with no DNS and no internet, or where a
+kernel compiled at runtime has to produce the same token a reference implementation would.
 
 <div align="center">
 <picture>
   <source media="(max-width: 600px)" srcset="assets/depth-narrow.svg">
-  <img src="assets/depth.svg" alt="The six layers I work across, from silicon to interface" width="100%">
+  <img src="assets/depth.svg" alt="The six layers I work across, from interface down to silicon" width="100%">
 </picture>
 </div>
 
 I do not claim equal depth at every layer. I claim I can move between them without needing
 someone to translate, which on a small team is the thing that actually matters.
+
+<div align="center">
+<picture>
+  <source media="(max-width: 600px)" srcset="assets/reach-narrow.svg">
+  <img src="assets/reach.svg" alt="Where the work runs: Vault-OS on Windows and as a bare-metal appliance; Vault clients on Android, iOS, Windows, macOS and Linux; VEYMEER on NVIDIA, AMD, Intel and Apple GPUs; STRADA on desktop; BME Nexus on web, Android, iOS and desktop" width="100%">
+</picture>
+</div>
 
 ---
 
@@ -75,14 +158,16 @@ later.
 fail, be compromised, or be discontinued by someone else's business decision. Vault-OS runs
 PostgreSQL natively instead of in a container, not because containers are bad, but because
 a container runtime is one more thing between me and a guarantee I have to make in writing.
+VEYMEER is the same argument taken to its end: the engine is written from scratch.
 
 **I prefer claims that can be falsified.** "Military-grade" means nothing. "SHA-256
-hash-chained, RSA-signed, and here is the ledger" either verifies or it doesn't. When I
-write a number in a spec I want it to be checkable, and when I can't check it I'd rather
-not write it.
+hash-chained, ECDSA-signed, and here is the ledger" either verifies or it doesn't. The
+same goes for speed: "12–15× faster" comes with the GPU, the model, the task and the
+condition that the output is identical, because every one of those qualifiers is part of
+the claim. When I can't check a number I'd rather not write it.
 
-**I build for the operator, not the demo.** Nine clearance tiers and server-enforced
-auto-delete are unglamorous. They are also what someone actually needs at 2am when a
+**I build for the operator, not the demo.** Tiered clearance and server-enforced
+retention are unglamorous. They are also what someone actually needs at 2am when a
 contractor's access has to be revoked before the audit.
 
 **I read the standard.** NIST SP 800-88 exists, is specific about what erasure means, and
@@ -95,6 +180,106 @@ been thought about carefully by someone else first.
   <img src="assets/method.svg" alt="How I work a failure — reproduce, isolate, falsify, fix, verify" width="100%">
 </picture>
 </div>
+
+---
+
+## Also built
+
+<div align="center">
+<picture>
+  <source media="(max-width: 600px)" srcset="assets/portfolio-narrow.svg">
+  <img src="assets/portfolio.svg" alt="Map of work across secure infrastructure, inference and agents, platforms, and autonomy and industry" width="100%">
+</picture>
+</div>
+
+### Lumo
+
+Decentralised collision avoidance for autonomous drones, in Python and Rust. Sixty drones
+swapping sides through a single point is the worst case there is, and without help it ends
+in 717 collisions. A speed governor derived from turning physics, `v ≤ √(a·g)`, takes that
+to zero with every drone still reaching its goal, and without a central planner telling
+anyone where to go.
+
+<div align="center">
+<picture>
+  <source media="(max-width: 600px)" srcset="assets/swarm-narrow.svg">
+  <img src="assets/swarm.svg" alt="Lumo: in a 60-drone worst-case crossing, a speed governor derived from turning physics reduced collisions from 717 to zero, with every drone still reaching its goal" width="100%">
+</picture>
+</div>
+
+<table>
+<tr><td width="50%" valign="top">
+
+### YTU BME Nexus
+Department platform for Biomedical Engineering at Yıldız Technical.
+
+`React` `Supabase`
+
+Web, Android, iOS and desktop, in 13 languages, with row-level security throughout. GPA
+calculator, timetable, messaging, file sharing and a department knowledge base. Built for
+the department I actually study in, which is a useful constraint — the users find me in
+the corridor.
+
+</td><td width="50%" valign="top">
+
+### [Traces](https://github.com/taha-halakoo/Lumo-traces)
+Content pinned to physical coordinates, locked until you're within 20 m.
+
+`Fastify` `PostGIS` `pgvector` `Flutter`
+
+PostGIS geofencing with anti-spoofing checks, combined vector and spatial ranking, and an
+offline-first mobile client. The proximity constraint is enforced server-side — the client
+is never trusted with it.
+
+</td></tr>
+<tr><td width="50%" valign="top">
+
+### rremote
+Secure remote desktop over encrypted WebSockets.
+
+`Rust` `Tokio`
+
+An asynchronous server for screen sharing, remote input, terminal sessions, audio and
+camera streaming, with local-network discovery and QR-code pairing.
+
+</td><td width="50%" valign="top">
+
+### Aegis
+Hydrogen-electric VTOL cargo drone for medical and disaster-relief logistics. Concept phase.
+
+`Systems engineering` `Python`
+
+Concept of operations, traceable requirements, design decisions, an in-house aerodynamics
+model, and mass and power budgets.
+
+</td></tr>
+<tr><td width="50%" valign="top">
+
+### [Virtual Mouse](https://github.com/taha-halakoo/virtual-mouse)
+Hands-free pointer control from webcam hand tracking.
+
+`Python` `MediaPipe` `OpenCV`
+
+One-Euro filtering with relative delta tracking. A clutch gesture lets you reposition your
+arm without moving the cursor — the detail that makes it usable rather than a demo.
+
+</td><td width="50%" valign="top">
+
+### [StudyHub](https://github.com/taha-halakoo/studyhub)
+Modular productivity dashboard with real-time collaboration.
+
+`React` `TypeScript` `Supabase`
+
+Lazy-loaded feature modules and role-based access over Supabase Auth.
+
+</td></tr>
+</table>
+
+Also: **WidgetOS**, a platform for embeddable Notion widgets (Next.js, Drizzle, Stripe);
+the IronGap Founder Console with TOTP login, an MCP server that gives AI agents audited
+access to it, and a content pipeline that drafts posts from development activity and
+publishes only after approval; a multilingual B2B platform for Golestan Axon; and several
+production websites.
 
 ---
 
@@ -122,107 +307,13 @@ well.
 
 ---
 
-## Building
-
-<div align="center">
-<picture>
-  <source media="(max-width: 600px)" srcset="assets/portfolio-narrow.svg">
-  <img src="assets/portfolio.svg" alt="Map of work across security infrastructure, platforms, applied vision and industrial systems" width="100%">
-</picture>
-</div>
-
-<table>
-<tr><td width="50%" valign="top">
-
-### Vault-OS · IronGap
-Air-gapped AI appliance. `v1.0.9.1`, Windows shipping.
-
-`TPM 2.0` `pgvector` `vLLM` `TensorRT-LLM` `Node.js`
-
-Hardware-tethered licensing, zero-Docker native services, DAG agent runtime, hash-chained
-audit ledger, NIST SP 800-88 burn protocol.
-
-**[Architecture →](https://github.com/IronGap-Technologies)**
-
-</td><td width="50%" valign="top">
-
-### Vault-Ecosystem
-Companion clients for the appliance.
-
-`Flutter` `Dart` `Riverpod`
-
-Biometric-locked founder and staff consoles, an offline TOTP authenticator, and hotspot
-auto-discovery so devices find the appliance inside an isolated perimeter.
-
-</td></tr>
-<tr><td width="50%" valign="top">
-
-### [TRACES](https://github.com/taha-halakoo/Lumo-traces)
-Content pinned to physical coordinates, locked until you're within 20 m.
-
-`Fastify` `PostGIS` `pgvector` `Flutter`
-
-Hybrid vector + spatial ranking, offline-first client, realtime sync, Turborepo monorepo.
-The proximity constraint is enforced server-side — the client is never trusted with it.
-
-</td><td width="50%" valign="top">
-
-### [StudyHub OS](https://github.com/taha-halakoo/studyhub)
-Modular productivity dashboard with an AI assistant.
-
-`React` `TypeScript` `Supabase` `Zustand`
-
-Lazy-loaded feature modules, RBAC over Supabase Auth, realtime collaboration.
-
-</td></tr>
-<tr><td width="50%" valign="top">
-
-### [Virtual Mouse](https://github.com/taha-halakoo/virtual-mouse)
-Hands-free pointer control from hand tracking.
-
-`Python` `MediaPipe` `OpenCV`
-
-One-Euro filtering with relative delta tracking. A clutch gesture lets you reposition your
-arm without moving the cursor — the detail that makes it usable rather than a demo.
-
-</td><td width="50%" valign="top">
-
-### YTU BME Nexus
-Department platform for Biomedical Engineering at Yıldız Technical.
-
-`React` `Supabase`
-
-Built for the department I actually study in, which is a useful constraint — the users find
-me in the corridor.
-
-</td></tr>
-</table>
-
----
-
-## Currently
-
-Getting Vault-OS onto Linux and macOS, and the Ecosystem clients onto everything else.
-
-<div align="center">
-<picture>
-  <source media="(max-width: 600px)" srcset="assets/focus-narrow.svg">
-  <img src="assets/focus.svg" alt="Shipping status across Windows, Linux, macOS, Android and iOS" width="100%">
-</picture>
-</div>
-
-Open to conversations about sovereign AI infrastructure, secure systems, and anything at
-the seam between hardware and software.
-
----
-
 ## Signal
 
 <div align="center">
 
 <picture>
   <source media="(max-width: 600px)" srcset="assets/stats-narrow.svg">
-  <img src="assets/stats.svg" alt="GitHub activity — commits, private share, repositories, stars and language distribution" width="100%">
+  <img src="assets/stats.svg" alt="GitHub activity — commits, private share, repositories and language distribution" width="100%">
 </picture>
 
 <br>
@@ -241,9 +332,8 @@ the seam between hardware and software.
 
 </div>
 
-The shape of that last chart is the honest version of my CV. Nothing much until early 2026,
-then Vault-OS. I would rather show you the ramp, including the flat part at the start, than
-claim I have been doing this for a decade.
+Whatever shape that last chart has when you read this, it is the real one, flat stretches
+included. I would rather show you the ramp than claim I have been doing this for a decade.
 
 <div align="center">
 <picture>
@@ -252,15 +342,16 @@ claim I have been doing this for a decade.
 </picture>
 </div>
 
-I don't commit every day and I'm not going to pretend otherwise. A third of days, but
-roughly twelve commits on each of them — I work in long sessions rather than keeping a
+I don't commit every day and I'm not going to pretend otherwise. Fewer than half the days,
+but a dozen or so commits on each of them — I work in long sessions rather than keeping a
 streak alive, and I'd rather the graph said something true than something tidy.
 
 <div align="center">
 
-<sub>All three panels are generated daily by <a href="scripts/gen_stats.py">a script in this repo</a> rather than a
-third-party widget — the usual ones rate-limit, run out of quota, and eventually stop
-rendering. Fitting, for someone who builds things that don't phone home.</sub>
+<sub>Every panel on this page, down to the link buttons, is drawn by <a href="scripts/">scripts in this repo</a>
+and refreshed daily, rather than fetched from a third-party widget — the usual ones
+rate-limit, run out of quota, and eventually stop rendering. Fitting, for someone who
+builds things that don't phone home.</sub>
 
 </div>
 
@@ -268,7 +359,7 @@ rendering. Fitting, for someone who builds things that don't phone home.</sub>
 
 <div align="center">
 
-Founder & Chief Architect at **[IronGap Technologies](https://www.iron-gap.com)** · Istanbul, Türkiye
+Founder & Chief Architect at **[IronGap Technologies](https://www.iron-gap.com)** · Founder & Engine Architect at **VEYMEER** · Istanbul, Türkiye
 Biomedical Engineering at **Yıldız Technical University** · MATE R&D, Polaris Group
 
 [iron-gap.com](https://www.iron-gap.com) · [LinkedIn](https://www.linkedin.com/in/taha-halakooei) · [taha@iron-gap.com](mailto:taha@iron-gap.com)

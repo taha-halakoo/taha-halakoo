@@ -17,8 +17,7 @@ import xml.etree.ElementTree as ET
 COL_WIDE, COL_NARROW = 831.0, 293.0
 MIN_EFFECTIVE = 11.5
 GLOB = os.environ.get("SVG_GLOB", "assets/*.svg")
-ADV = 0.605
-GLOB = os.environ.get("SVG_GLOB", "assets/*.svg")  # monospace advance per em
+ADV = 0.605  # monospace advance per em
 
 fails = []
 for path in sorted(glob.glob(GLOB)):
@@ -34,7 +33,8 @@ for path in sorted(glob.glob(GLOB)):
         size = float(el.get("font-size", 12))
         x, y = float(el.get("x", 0)), float(el.get("y", 0))
         ls = float(el.get("letter-spacing", 0) or 0)
-        w = len(txt) * (size * ADV + ls)
+        # a run with textLength is pinned to that width whatever the face
+        w = float(el.get("textLength") or len(txt) * (size * ADV + ls))
         anchor = el.get("text-anchor", "start")
         left = x - w if anchor == "end" else (x - w / 2 if anchor == "middle" else x)
         right = left + w
