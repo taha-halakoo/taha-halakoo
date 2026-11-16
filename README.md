@@ -11,6 +11,7 @@
 <br>
 
 <a href="https://www.iron-gap.com"><img src="assets/btn-irongap.svg" height="36" alt="IronGap: iron-gap.com"></a>
+<a href="https://www.veymeer.com"><img src="assets/btn-veymeer.svg" height="36" alt="VEYMEER: veymeer.com"></a>
 <a href="https://www.linkedin.com/in/taha-halakooei"><img src="assets/btn-linkedin.svg" height="36" alt="LinkedIn: taha-halakooei"></a>
 <a href="mailto:taha@iron-gap.com"><img src="assets/btn-email.svg" height="36" alt="Email: taha@iron-gap.com"></a>
 <a href="https://metronix.ir"><img src="assets/btn-portfolio.svg" height="36" alt="Portfolio: metronix.ir"></a>
@@ -38,7 +39,7 @@ technical claims with measurements.
 
 **[IronGap Technologies](https://www.iron-gap.com)** decides *where* the model runs: on
 hardware you physically control, behind an air gap, for defence, healthcare and regulated
-enterprises. **VEYMEER** decides *how fast* it runs once it is there: a from-scratch LLM
+enterprises. **[VEYMEER](https://www.veymeer.com)** decides *how fast* it runs once it is there: a from-scratch LLM
 inference engine for consumer GPUs. They are sister companies, and the second plugs into
 the first.
 
@@ -106,6 +107,8 @@ Every box in that row is written here, from the GGUF loader to the API, with the
 kernels compiled at runtime via NVRTC and a WebGPU backend for AMD, Intel and Apple GPUs.
 **STRADA** is what it looks like with an editor on top: a desktop IDE with VS Code
 extension support, integrated debugging and an autonomous coding agent.
+
+**[veymeer.com →](https://www.veymeer.com)**
 
 ---
 
@@ -385,10 +388,10 @@ builds things that don't phone home.</sub>
 
 <div align="center">
 
-Founder & Chief Architect at **[IronGap Technologies](https://www.iron-gap.com)** · Founder & Engine Architect at **VEYMEER** · Istanbul, Türkiye
+Founder & Chief Architect at **[IronGap Technologies](https://www.iron-gap.com)** · Founder & Engine Architect at **[VEYMEER](https://www.veymeer.com)** · Istanbul, Türkiye
 Biomedical Engineering at **Yıldız Technical University** · MATE R&D, Polaris Group
 
-[iron-gap.com](https://www.iron-gap.com) · [LinkedIn](https://www.linkedin.com/in/taha-halakooei) · [taha@iron-gap.com](mailto:taha@iron-gap.com)
+[iron-gap.com](https://www.iron-gap.com) · [veymeer.com](https://www.veymeer.com) · [LinkedIn](https://www.linkedin.com/in/taha-halakooei) · [taha@iron-gap.com](mailto:taha@iron-gap.com)
 
 <br>
 

@@ -1431,28 +1431,29 @@ def reach(s):
 # Link buttons are drawn here rather than fetched from a badge service, for the
 # same reason the stats are: nothing on this page depends on someone else's uptime.
 
-BUTTONS = [("irongap", "IRONGAP", "iron-gap.com"), ("linkedin", "LINKEDIN", "taha-halakooei"),
-           ("email", "EMAIL", "taha@iron-gap.com"), ("portfolio", "PORTFOLIO", "metronix.ir")]
+BUTTONS = [("irongap", "IRONGAP", "iron-gap.com", AMBER), ("veymeer", "VEYMEER", "veymeer.com", ICE),
+           ("linkedin", "LINKEDIN", "taha-halakooei", AMBER), ("email", "EMAIL", "taha@iron-gap.com", AMBER),
+           ("portfolio", "PORTFOLIO", "metronix.ir", AMBER)]
 
 
-def button(label, value):
+def button(label, value, colour=AMBER):
     lw, vw = tw(label, 12.5, 1.2), tw(value, 13)
     w = round(14 + lw + 10 + vw + 12)
     h = 36
     return (f'<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 {w} {h}" width="{w}" height="{h}" '
             f'role="img" aria-label="{E(label.title())}: {E(value)}">'
             f'<defs><linearGradient id="b" x1="0" y1="0" x2="1" y2="0">'
-            f'<stop offset="0" stop-color="{AMBER}" stop-opacity="0"/>'
-            f'<stop offset="0.5" stop-color="{AMBER}" stop-opacity="0.22"/>'
-            f'<stop offset="1" stop-color="{AMBER}" stop-opacity="0"/></linearGradient>'
+            f'<stop offset="0" stop-color="{colour}" stop-opacity="0"/>'
+            f'<stop offset="0.5" stop-color="{colour}" stop-opacity="0.22"/>'
+            f'<stop offset="1" stop-color="{colour}" stop-opacity="0"/></linearGradient>'
             f'<clipPath id="c"><rect width="{w}" height="{h}" rx="8"/></clipPath></defs>'
             f'<g clip-path="url(#c)"><rect width="{w}" height="{h}" fill="{BG}"/>'
-            f'<rect width="4" height="{h}" fill="{AMBER}">{pulse(0.5, 1, 3.0)}</rect>'
+            f'<rect width="4" height="{h}" fill="{colour}">{pulse(0.5, 1, 3.0)}</rect>'
             f'{t(14, 23, label, 12.5, AMBER, ls=1.2, weight=700)}'
             f'{t(14 + lw + 10, 23, value, 13, TEXT)}'
             f'<rect x="{-60}" y="0" width="60" height="{h}" fill="url(#b)"><animate attributeName="x" '
             f'values="-60;{w};{w}" keyTimes="0;0.45;1" dur="5s" repeatCount="indefinite"/></rect>'
-            f'<rect x="0.5" y="0.5" width="{w-1}" height="{h-1}" rx="8" fill="none" stroke="{AMBER}" '
+            f'<rect x="0.5" y="0.5" width="{w-1}" height="{h-1}" rx="8" fill="none" stroke="{colour}" '
             f'stroke-opacity="0.4"/></g></svg>')
 
 
@@ -1470,8 +1471,8 @@ if __name__ == "__main__":
             with open(path, "w", encoding="utf-8") as f:
                 f.write(svg)
             print(f"{path:34} {s.W}x{h}")
-    for slug, label, value in BUTTONS:
+    for slug, label, value, colour in BUTTONS:
         path = f"{OUT}/btn-{slug}.svg"
         with open(path, "w", encoding="utf-8") as f:
-            f.write(button(label, value))
+            f.write(button(label, value, colour))
         print(path)
